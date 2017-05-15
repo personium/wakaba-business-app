@@ -1,0 +1,617 @@
+@charset "UTF-8";
+
+* {
+  font-family: -apple-system, 'Meiryo UI', 'メイリオ', meiryo, 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', '游ゴシック Medium', sans-serif;
+  /* box-sizing: border-box; */
+}
+
+/* リセット関連 */
+a {
+  color: #4c9bd2;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+}
+
+/**********************/
+/***レイアウト*********/
+/**********************/
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #FFFFFF;
+}
+
+/**********************/
+/***ヘッダー*********/
+/**********************/
+header {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+  margin: 0;
+  background-color: #31437A;
+  color: #ffffff;
+}
+/* ヘッダータイトル */
+h1 {
+  flex: 1 1 auto;
+  margin: 0 20px;
+  color: #FFFFFF;
+  font-size: 20px;
+}
+.login-user {
+  flex: 0 0 auto;
+  margin-right: 60px;
+  font-size: 18px;
+}
+.login-user img {
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 32px;
+    margin-right: 10px;
+}
+
+/**********************/
+/***コンテンツ*********/
+/**********************/
+.contents {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+
+/**********************/
+/***サイドナビ*********/
+/**********************/
+nav.side-nav {
+  flex: 0 0 auto;
+  width: 220px;
+  background-color: #f2f2f2;
+  font-size: 14px;
+}
+nav.side-nav li > a {
+  display: block;
+  padding: 20px;
+  border-bottom: 1px solid #ffffff;
+  color: #737E99;
+}
+nav.side-nav li > a:hover,
+nav.side-nav li > a:focus {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #f9f9f9;
+}
+nav.side-nav li.current > a {
+  border-left: 4px solid #ffbc07;
+  padding-left: 16px;
+  background-color: #fefefe;
+  cursor: default;
+}
+nav.side-nav li.current > a:hover,
+nav.side-nav li.current > a:focus {
+  text-decoration: none;
+  background-color: #fefefe;
+}
+
+/**********************/
+/***メイン領域*********/
+/**********************/
+main {
+  flex: 1 1 auto;
+  padding: 0 20px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  color: #737e99;
+  font-size: 15px;
+}
+
+footer {
+  margin: 20px 0;
+}
+footer .button-group button {
+  min-width: 122px;
+  padding: 8px 16px;
+}
+
+
+/* 共通パーツ */
+/* ページタイトル */
+h2 {
+  margin: 20px 0;
+  color: #31437a;
+  font-size: 18px;
+}
+/* ページ見出し */
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2a2a2a;
+  margin: 30px 0 7px;
+}
+/* 項目見出し */
+h4 {
+  color: #737e99;
+  font-size: 15px;
+  margin: 20px 0 10px;
+}
+h4::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* input checkbox radio */
+label {
+  font-weight: normal;
+  cursor: pointer;
+}
+/* 暫定 */
+label + input[type=checkbox],
+label + input[type=radio] {
+  margin-left: 10px;
+}
+
+
+
+
+.sub-info {
+  font-size: 13px;
+  margin-bottom: 20px;
+  color: #2a2a2a;
+}
+.item-label {
+  color: #737399;
+}
+span + .item-label {
+  margin-left: 20px;
+}
+
+/* ステップ */
+ul.step {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  color: #737e99;
+  font-size: 14px;
+}
+ul.step > li {
+  flex: 0 0 auto;
+  width: 200px;
+  padding: 20px 0;
+  margin-right: 6px;
+  border-bottom: 2px solid #416bbf;
+}
+ul.step > li.current ~ li {
+  border-bottom: 2px solid #d8e2ef;
+}
+ul.step h5 {
+  margin: 0;
+  color: #416bbf;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* form-style */
+.form-style {
+  margin: 10px 0 20px;
+  padding: 20px;
+  background-color: #edf3f9;
+}
+
+/* アイコン */
+.fa-user-icon {
+  font-size: 36px;
+}
+.colorFa-user{
+  color: #2a2a2a;
+}
+.numberOfPeople {
+  color: #2a2a2a;
+  font-size: 32px;
+  margin-left: 10px;
+}
+
+/* テーブル */
+table {
+  border-collapse: collapse;
+  border-top: 1px solid #d8e2ef;
+  border-bottom: 2px solid #d8e2ef;
+}
+table thead {
+  background-color: #d8e2ef;
+}
+table tbody {
+  background-color: #ffffff;
+}
+th,
+td {
+  padding: 15px 12px;
+  vertical-align: top;
+  font-size: 15px;
+}
+th {
+  color: #737E99;
+  font-weight: normal;
+}
+th + th {
+  border-left: 1px solid #ffffff;
+}
+td,
+tbody th {
+  border-top: 1px solid #d8e2ef;
+  border-bottom: 1px solid #d8e2ef;
+}
+.row-table {
+  border: 1px solid #d8e2ef;
+}
+.row-table th {
+  background-color: #d8e2ef;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.row-table tr:first-child th {
+  border-top: 0 none;
+}
+.row-table tr:last-child th {
+  border-bottom: 0 none;
+}
+
+/* button */
+/*通常*/
+button{
+  color: #646464;
+  padding: 6px 16px;
+  background-color: #D7D7D7;
+  border: 0;
+  border-radius: 4px;
+  outline: 0;
+  font-size: 14px;
+}
+button:hover,
+button:focus {
+  background-color: #E3E3E3;
+}
+button:active {
+  background-color: #B5B5B5;
+}
+
+/*強調*/
+button.highlight{
+  background-color: #4D6191;
+  color: #FFFFFF;
+}
+button.highlight:hover,
+button.highlight:focus {
+  background-color: #8391B2;
+}
+button.highlight:active {
+  background-color: #324371;
+}
+
+/* button-group */
+.button-group {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.button-group li {
+  flex: 0 0 auto;
+  margin: 0 5px;
+}
+.button-group li:first-child {
+  margin-left: 0;
+}
+.button-group li:last-child {
+  margin-right: 0;
+}
+.button-group button {
+  min-width: 100px;
+}
+
+
+/* テキストボックス */
+input[type="text"],
+input[type="search"],
+input[type="date"] {
+  border: 1px solid #d4d4d4;
+  padding: 4px 8px;
+  vertical-align: middle;
+}
+input[type=file] {
+  padding: 8px;
+  background-color: #ffffff;
+  border: 1px solid #d4d4d4;
+}
+
+textarea {
+  height: 80px;
+  padding: 4px 8px;
+  border: 1px solid #d4d4d4;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #c3c3c3;
+}
+
+input[type="date"] {
+  width: 170px;
+  line-height: inherit;
+}
+input[type="date"] + .calendar-button {
+  display: inline-block;
+  /* width: 32px; */
+  /* height: 32px; */
+  vertical-align: middle;
+  /* background-image: url("../img/calendar.png"); */
+  /* background-size: 32px; */
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
+  font-size: 24px;
+  color: #2a2a2a;
+}
+input[type="date"] + .calendar-button:hover,
+input[type="date"] + .calendar-button:focus {
+  text-decoration: none;
+}
+
+/* readonly */
+input[type=text][readonly],
+input[type=search][readonly],
+input[type=date][readonly],
+textarea[readonly] {
+  border: 1px solid #f3f3f3;
+  color: #2a2a2a;
+}
+input[type="date"][readonly] + .calendar-button {
+  display: none;
+}
+
+/* タブ */
+ul.tab {
+  display: flex;
+  flex-direction: row;
+  background-color: #edf3f9;
+  border-bottom: 3px solid #d8e2ef;
+  height: 50px;
+}
+ul.tab > li {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin: 7px 0 -3px 5px;
+  background-color: #d8e2ef;
+  border-bottom: 3px solid #d8e2ef;
+  color: #737E99;
+}
+ul.tab > li:not(.current):hover {
+  background-color: #E0E9F3;
+}
+ul.tab > li.current {
+  cursor: default;
+  background-color: #ffffff;
+  border-bottom: 3px solid #ffffff;
+  margin-top: 5px;
+}
+ul.tab > li > a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+  padding: 0 20px;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: inherit;
+}
+.tab-content {
+  padding: 20px 0;
+}
+
+/* セレクト */
+select {
+  padding: 4px;
+  font-size: 14px;
+}
+
+
+/* page02 */
+.fixed-width-form {
+  width: 650px;
+}
+.fixed-width-form input[type=text],
+.fixed-width-form input[type=file],
+.fixed-width-form textarea {
+  width: 100%;
+}
+
+/* page03 */
+table.no-border-table thead,
+table.no-border-table tbody {
+  background-color: transparent;
+}
+table.no-border-table th,
+table.no-border-table td {
+  padding: 4px 12px;
+  vertical-align: top;
+}
+table.no-border-table th + th {
+  border-left: 0 none;
+}
+table.no-border-table,
+table.no-border-table td,
+table.no-border-table tbody th {
+  border: 0 none !important;
+}
+table.no-border-table th:first-child,
+table.no-border-table td:first-child {
+  padding-left: 0;
+}
+
+.confirm-text {
+  color: #2a2a2a;
+}
+
+/* ページ固有 */
+.target-summary {
+  margin-bottom: 10px;
+}
+
+/* page0102 */
+#preview-image-text {
+  float: right;
+}
+#no-image-sample {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  height: 160px;
+  background-color: #edf3f9;
+  color: #737e99;
+}
+
+.explain {
+  color: #a3a3a3;
+}
+
+/* page0103 */
+.sample-image {
+  width: 360px;
+  height: 160px;
+  margin: 10px 0;
+  padding: 6px;
+  background-color: #edf3f9;
+}
+
+/* page0201 */
+.sortable-table {
+
+}
+.sortable::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  vertical-align: middle;
+  background-image: url("../img/sort.png");
+  background-size: 15px 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.tag {
+  display: inline-block;
+  width: 80px;
+  padding: 4px 10px;
+  text-align: center;
+  background-color: #e3e3e3;
+  color: #646464;
+}
+.lime {
+  background-color: #d6e5a9 !important;
+  color: #5e6b27 !important;
+}
+.gray {
+  background-color: #d8d9dc !important;
+  color: #2a2a2a !important;
+}
+
+/* page0202 */
+/* ステータスボックス */
+.current-status-boxes {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-bottom: 20px;
+  color: #a3a3a3;
+}
+.current-status-boxes > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #f2f2f2;
+  border-right: 2px solid #ffffff;
+  min-width: 80px;
+  height: 60px;
+}
+.current-status-boxes .status-number-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  color: #646464;
+  font-size: 13px;
+}
+.status-number {
+  font-size: 24px;
+  color: #A3A3A3;
+  margin-bottom: -4px;
+}
+
+.consent-text {
+  color: #44733f;
+}
+.rejection-text {
+  color: #b04037;
+}
+
+/* ぱんくず */
+.bread {
+  margin-bottom: 20px;
+}
+
+/* カロリースマイル用 */
+.meal-section {
+  padding: 0;
+  border-top: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+}
+.meal-section + .meal-section {
+  border-top: 0 none;
+}
+.daily-meal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -8px;
+  margin-bottom: 8px;
+}
+.meal {
+  flex: 0 0 auto;
+  width: 104px;
+  margin-left: 8px;
+  margin-bottom: 8px;
+}
+.picture img {
+  width: 104px;
+}
+.time,
+.comment {
+  color: #a2a2a2;
+}
+.time::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  background-image: url("../img/parts_ico_time.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
+}

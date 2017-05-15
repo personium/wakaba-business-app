@@ -1,0 +1,280 @@
+/* ・ｽu・ｽ・ｽ・ｽE・ｽU・ｽﾔの表・ｽ・ｽ・ｽ・ｽ・ｽﾙに対会ｿｽ・ｽ・ｽ・ｽ驍ｽ・ｽﾟ、・ｽﾜゑｿｽ・ｽ]・ｽ・ｽ・ｽ・ｽ・ｽS・ｽ・ｽ0・ｽﾉゑｿｽ・ｽ・ｽ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+margin: 0;
+padding: 0px 0px 0px 20% ;
+}
+
+* html body{
+    overflow: hidden;
+}
+
+/* CSS・ｽﾅフ・ｽ・ｽ・ｽ[・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽidiv・ｽ^・ｽO・ｽ・ｽid・ｽﾅ指・ｽ閧ｷ・ｽ・ｽ・ｽj */
+div#container {
+    width: 100%;
+    height: 100%;
+}
+
+div#header {
+  position: fixed !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #000000;
+  color: #ffffff;
+  z-index:1;
+}
+
+div#menu {
+    position: fixed !important;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    overflow: auto;
+    background-color: #dcdcdc;
+}
+
+div#main {
+    overflow: auto;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+}
+
+div#footer {
+    width: 100%;
+    height: 80px;
+    background-color: #EEEEEE;
+    clear: both;
+}
+
+.center{
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+}
+
+.boxContainer {
+	overflow: hidden;
+}
+
+.menu-tree-title {
+  border: 1px solid #ffffff;
+  background-color: #696969;
+  color: #ffffff;
+  height: 30px
+}
+
+.menu-tree-item-active {
+  border: 1px solid #ffffff;
+  background-color: #a9a9a9;
+  height: 40px
+}
+
+.menu-tree-item-passive {
+  border: 1px solid #ffffff;
+  background-color: #dcdcdc;
+  height: 40px
+}
+
+.menu-tree-item-passive a {
+  display:block;
+  width: 100%;
+}
+
+.step-active {
+  border: 1px solid #ffffff;
+  background-color: #e2ffc6;
+  height: 100px;
+  width: 25%;
+	float: left
+}
+
+.step-passive {
+  border: 1px solid #ffffff;
+  background-color: #dcdcdc;
+  height: 100px;
+  width: 25%;
+  float: left
+}
+
+.step-font {
+  color:#009933;
+  size:7
+}
+
+div.p-app {
+  float: left;
+  width: 208px;
+  font-family: Raleway;
+  margin-bottom: 30px;
+  color: #efd;
+}
+
+a.p-app-icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  background-color: rgba(128,200,128,0.9);
+}
+a.p-app-icon:hover {
+  background-color: rgba(128,200,128,0.9);
+  -webkit-box-shadow: 1px 8px 4px 4px rgba(200, 200, 200, 0.54);
+  -moz-box-shadow:    1px 8px 4px 4px rgba(200, 200, 200, 0.54);
+  box-shadow:         1px 8px 4px 4px rgba(200, 200, 200, 0.54);
+}
+
+img.p-app-icon {
+  width: 48px;
+  height: 48px;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+div.p-app-name {
+  text-align: center;
+  margin: 10px 0px 0px 0px;
+  /*text-shadow:    1px 4px 2px rgba(50, 50, 50, 0.54);*/
+  color: #333333;
+  font-size: 21px;
+}
+
+a:focus,a:hover,a{
+    outline:none;
+    text-decoration: none;
+}
+li,ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header-rightside .nav > li > a:focus,
+.header-rightside .nav > li > a:hover {
+    background: none;
+    text-decoration: none;
+}
+
+header {
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
+    display: inline-block !important;
+    line-height: 23px;
+    padding: 15px;
+    transition: all 0.5s ease 0s;
+    width: 100%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.navbar-default {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+.hidden-xs{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.user-header {
+    margin-bottom: 30px;
+}
+
+.user-dashboard {
+    padding: 0px 40px;
+    /*background: -webkit-linear-gradient(45deg,  #fafafa 5%,#fafafa 99%); /* Chrome10+,Safari5.1+ */
+    background: #ffffff;
+}
+
+.user-dashboard h1 {
+    color: #0e1a35;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0;
+    padding: 21px 0;
+}
+
+.service-header {
+    font-size: 21px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    color: #333333;
+}
+
+.shield-buttons {
+    display: none;
+}
+
+.image-prev {
+    width: auto;
+    height: 172px;
+    border: 1px solid #000;
+}
+
+.imgContain {
+    width: auto;
+    height: 100%;
+}
+
+/*Main CSS(Device)*/
+
+@media (max-width: 767px) {
+    div.p-app {
+      float: left;
+      width: 104px;
+      font-family: Raleway;
+      margin-bottom: 30px;
+      color: #efd;
+    }
+    a.p-app-icon {
+      width: 38px;
+      height: 38px;
+      display: block;
+      background-color: rgba(128,200,128,0.9);
+    }
+    img.p-app-icon {
+      width: 38px;
+      height: 38px;
+      -webkit-filter: invert(100%);
+      filter: invert(100%);
+    }
+    div.p-app-name {
+      text-align: center;
+      margin: 10px 0px 0px 0px;
+      /*text-shadow:    1px 4px 2px rgba(50, 50, 50, 0.54);*/
+      color: #333333;
+      font-size: 14px;
+    }
+    .user-dashboard {
+        padding: 0px 20px;
+        /*background: -webkit-linear-gradient(45deg,  #fafafa 5%,#fafafa 99%); /* Chrome10+,Safari5.1+ */
+        background: #ffffff;
+    }
+    .service-header {
+        font-size: 14px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        color: #333333;
+    }
+
+}
+
+textarea.message_text {
+  height: 100px;
+  width: 100%;
+  font-size: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}

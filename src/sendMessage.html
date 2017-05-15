@@ -1,0 +1,129 @@
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>わかば市情報バンク</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,200" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="./css/pc.css" rel="stylesheet">
+  <script src="./js/sample.js"></script>
+  <script src="./js/is-common.js"></script>
+  <script src="./js/sendMessage.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          sm.initTarget();
+      });
+  </script>
+
+</head>
+<body>
+  <header>
+    <h1>わかば市情報バンク</h1>
+    <div class="login-user">
+        <img id="loginUserIcon">
+        <span id=loginUserName></span>
+    </div>
+  </header>
+  <div class="contents">
+    <nav class="side-nav">
+      <ul>
+        <li class="current">
+          <a href="./imageSearch.html">新規依頼</a>
+        </li>
+        <li>
+          <a href="./reqStatus.html">依頼状況 / データ確認</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <form>
+        <!-- step -->
+        <ul class="step">
+          <li>
+            <h5>Step1</h5>
+            <div>依頼対象の設定</div>
+          </li>
+          <li class="current">
+            <h5>Step2</h5>
+            <div>依頼内容の入力</div>
+          </li>
+          <li>
+            <h5>Step3</h5>
+            <div>確認</div>
+          </li>
+        </ul>
+        <!-- /step -->
+        <section class="fixed-width-form">
+          <h2>依頼内容</h2>
+          <div>
+            <h4>タイトル<span class="explain">（30文字以内）</span></h4>
+            <input id="iMassageTitle" type="text" value="" placeholder="タイトルを入力してください。">
+            <div>
+            <h4>イメージ画像<span class="explain">（形式： jpg, png）</span>
+                <a href="./doc/sample.pdf" id="preview-image-text">表示サンプル</a>
+            </h4>
+            <input type="file" id="attachImgFile"><br>
+<!--            <div id="no-image-sample">
+              No Image
+            </div>
+-->
+            <figure id="no-image-sample">
+                <img style="margin: auto;" id="idImgFile" src="#" alt="image"/>
+            </figure>
+            </div>
+
+            <h4>本文<span class="explain">（200文字以内）</span></h4>
+            <textarea id="iMassageBody" type="text" value="" placeholder="提供依頼内容の本文を入力してください。"></textarea>
+
+            <h4>利用目的<span class="explain">（200文字以内）</span></h4>
+            <textarea id="iPurpose" type="text" value="" placeholder="提供依頼内容の利用目的を入力してください。"></textarea>
+
+            <h4>対象データ</h4>
+            <table class="row-table" style="width: 100%;">
+              <tr>
+                <th>
+                  一般属性
+                </th>
+                <td>
+                  性別、年齢、地域
+                </td>
+              </tr>
+              <tr>
+                <th id="targetItem">
+                </th>
+                <td id="targetData">
+                </td>
+              </tr>
+            </table>
+
+            <h4>募集期間</h4>
+            <div>
+              <input type="date" readonly="true" id="termStart">
+              <span>～</span>
+              <input type="date" id="termEnd">
+            </div>
+
+          </div>
+        </section>
+        <!-- メインセクション -->
+        <footer>
+          <ul class="button-group">
+            <li>
+              <button formaction="./imageSearch.html">戻る</button>
+            </li>
+            <li>
+              <button type="button" class="highlight" id="b-send-message">依頼内容確認</button>
+            </li>
+          </ul>
+        </footer>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

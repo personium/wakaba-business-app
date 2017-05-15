@@ -1,0 +1,75 @@
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>わかば市情報バンク</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,200" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="./css/pc.css" rel="stylesheet">
+  <script src="./js/sample.js"></script>
+  <script src="./js/is-common.js"></script>
+</head>
+<body>
+  <header>
+    <h1>わかば市情報バンク</h1>
+    <div class="login-user">
+      <img id="loginUserIcon">
+      <span id=loginUserName></span>
+    </div>
+  </header>
+  <div class="contents">
+    <nav class="side-nav">
+      <ul>
+        <li class="current">
+          <a>新規依頼</a>
+        </li>
+        <li>
+          <a href="./reqStatus.html">依頼状況 / データ確認</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <form>
+        <!-- step -->
+        <ul class="step">
+          <li>
+            <h5>Step1</h5>
+            <div>依頼対象の設定</div>
+          </li>
+          <li>
+            <h5>Step2</h5>
+            <div>依頼内容の入力</div>
+          </li>
+          <li class="current">
+            <h5>Step3</h5>
+            <div>確認</div>
+          </li>
+        </ul>
+        <!-- /step -->
+        <section>
+          <h2>発行完了</h2>
+          <div>
+            <div>データ提供依頼が発行されました。</div>
+          </div>
+        </section>
+        <footer>
+          <ul class="button-group">
+            <li>
+              <button formaction="./reqStatus.html">内容を確認する</button>
+            </li>
+            <li>
+              <button formaction="./imageSearch.html">発行を続ける</button>
+            </li>
+          </ul>
+        </footer>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

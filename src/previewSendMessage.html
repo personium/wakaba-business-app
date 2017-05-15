@@ -1,0 +1,172 @@
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>わかば市情報バンク</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,200" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="./css/pc.css" rel="stylesheet">
+  <script src="./js/sample.js"></script>
+  <script src="./js/is-common.js"></script>
+  <script src="./js/previewSendMessage.js"></script>
+
+</head>
+<body>
+  <header>
+    <h1>わかば市情報バンク</h1>
+    <div class="login-user">
+        <img id="loginUserIcon">
+        <span id=loginUserName></span>
+    </div>
+  </header>
+  <div class="contents">
+    <nav class="side-nav">
+      <ul>
+        <li class="current">
+          <a href="./imageSearch.html">新規依頼</a>
+        </li>
+        <li>
+          <a href="./reqStatus.html">依頼状況 / データ確認</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <form>
+        <!-- step -->
+        <ul class="step">
+          <li>
+            <h5>Step1</h5>
+            <div>依頼対象の設定</div>
+          </li>
+          <li>
+            <h5>Step2</h5>
+            <div>依頼内容の入力</div>
+          </li>
+          <li class="current">
+            <h5>Step3</h5>
+            <div>確認</div>
+          </li>
+        </ul>
+        <!-- /step -->
+        <section class="fixed-width-form">
+          <h2>依頼内容確認</h2>
+          <div>
+            <div class="form-style">
+              <div class="target-summary">
+                <span class="fa fa-user colorFa-user fa-user-icon"></span>
+                <span class="numberOfPeople" id="targetNumberOfPeople"></span>
+                <span>人の対象者</span>
+              </div>
+              <table class="no-border-table">
+                <thead>
+                  <tr>
+                    <th>
+                      検索項目
+                    </th>
+                    <th>
+                      条件
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      対象情報
+                    </th>
+                    <td id="target">
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                  <tr>
+                    <th>
+                      年齢
+                    </th>
+                    <td id="targetAge">
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                  <tr>
+                    <th>
+                      性別
+                    </th>
+                    <td id="targetSex">
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                  <tr>
+                    <th>
+                      地域
+                    </th>
+                    <td id="targetArea">
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                </tbody>
+              </table>
+            </div>
+            <!-- /form-style -->
+            <h4>タイトル<span class="explain">（30文字以内）</span></h4>
+            <input id="iMassageTitle" type="text" value="" placeholder="タイトルを入力してください。" readonly="true">
+            <div>
+            <h4>イメージ画像<span class="explain">（形式： jpg, png）</span>
+            </h4>
+            <div class="confirm-text" id="imageName"></div>
+            <figure id="no-image-sample"><img id="image" src="#" alt="preview"/></figure>
+            </div>
+
+            <h4>本文<span class="explain">（200文字以内）</span></h4>
+            <textarea id="iMassageBody" type="text" value="" placeholder="提供依頼内容の本文を入力してください。" readonly="true"></textarea>
+
+            <h4>利用目的<span class="explain">（200文字以内）</span></h4>
+            <textarea id="iPurpose" type="text" value="" placeholder="提供依頼内容の利用目的を入力してください。" readonly="true"></textarea>
+
+            <h4>対象データ</h4>
+            <table class="row-table" style="width: 100%;">
+              <tr>
+                <th>
+                  一般属性
+                </th>
+                <td>
+                  性別、年齢、地域
+                </td>
+              </tr>
+              <tr>
+                <th id="targetItem">
+                </th>
+                <td id="targetData">
+                </td>
+              </tr>
+            </table>
+
+            <h4>募集期間</h4>
+            <div>
+              <input type="date" readonly="true" id="termStart" value="" >
+              <span>～</span>
+              <input type="date" readonly="true" id="termEnd" value="" >
+              <a href="#" class="fa fa-calendar calendar-button"></a>
+            </div>
+
+          </div>
+        </section>
+        <!-- メインセクション -->
+        <footer>
+          <ul class="button-group">
+            <li>
+              <button onclick="history.back()" type="button">戻る</button>
+            </li>
+            <li>
+              <button class="highlight" id="b-send-message" formaction="sendMessageResult.html" type="button">送信</button>
+            </li>
+          </ul>
+        </footer>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

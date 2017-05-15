@@ -1,0 +1,28 @@
+td {
+    padding-bottom: 5px;
+    text-align:right;
+}
+
+.widthImg {
+    width:30%;
+}
+
+.widthComm {
+    width:40%;
+}
+
+.heightTd {
+    height:100px;
+}
+
+.photoTable {
+    width:500px;
+    margin-top:20px;
+    table-layout: fixed;
+}
+
+@media (max-width: 767px) {
+    .photoTable {
+        width: 100%;
+    }
+}
