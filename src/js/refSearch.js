@@ -399,7 +399,7 @@ rs.createDispImage = function(cellUrl, no) {
               imageName = imageSrc.match(".+/(.+?)([\?#;].*)?$")[1];
           }
           var shokujiDate = dataList[i].shokuji_date;
-          var dateId = shokujiDate.replace(/\//g, "");
+          var dateId = shokujiDate.replace(/\/|\-/g, "");
           var shokujiTime = dataList[i].time;
           var timeId = shokujiTime.replace(/:/g, "");
           var dispTimeS = shokujiTime.split(':');
@@ -409,14 +409,14 @@ rs.createDispImage = function(cellUrl, no) {
           var html = '';
           if (nowDate !== shokujiDate) {
               nowDate = shokujiDate;
-              html = '<section class="meal-section"><h4>' + nowDate.replace(/\//g, ".") + '</h4><div class="daily-meal" id="td' + dateId + '"></div></section>';
+              html = '<section class="meal-section"><h4>' + nowDate.replace(/\/|\-/g, ".") + '</h4><div class="daily-meal" id="td' + no + dateId + '"></div></section>';
 
               $('#' + id).append(html);
           }
 
           html = '<div class="meal">';
           html += '<div class="picture">';
-          html += '<img id="im' + dateId + timeId + noId + '" alt="食べ物">';
+          html += '<img id="im' + no + dateId + timeId + noId + '" alt="食べ物">';
           html += '</div>';
           html += '<div class="time">' + dispTime + '</div>';
           var comm = dataList[i].shokuji_comment;
@@ -426,8 +426,8 @@ rs.createDispImage = function(cellUrl, no) {
           html += '<div class="comment">' + comm + '</div>';
           html += '</div>';
 
-          $("#td" + dateId).append(html);
-          rs.setPhoto(cellUrl, extData.access_token, dateId, timeId, noId, imageName);
+          $("#td" + no + dateId).append(html);
+          rs.setPhoto(cellUrl, extData.access_token, no, dateId, timeId, noId, imageName);
       }
     }).fail(function(data) {
       html = '<section class="meal-section">';
@@ -443,7 +443,7 @@ rs.createDispImage = function(cellUrl, no) {
   });
 };
 
-rs.setPhoto = function(cellUrl, extToken, dateId, timeId, noId, imageName) {
+rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName) {
     var ext = imageName.split('.')[1];
     var contentType = "image/jpeg";
     switch (ext) {
@@ -470,7 +470,7 @@ rs.setPhoto = function(cellUrl, extToken, dateId, timeId, noId, imageName) {
         }
 
         reader.onload = function(event) {
-            $("#im" + dateId + timeId + noId).attr('src',event.target.result);
+            $("#im" + arrNo + dateId + timeId + noId).attr('src',event.target.result);
         }
         reader.readAsDataURL(file, "UTF-8");
     }
