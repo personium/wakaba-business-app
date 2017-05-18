@@ -250,85 +250,86 @@ $(document).ready(function() {
               var nLine = newLine.filter(function(item, index) {
                 if (item.Body.indexOf("キャンセル") >= 0) return true;
               });
-              if (pLine.length > 0) {
+              // 0:対象外 1:承認 2:キャンセル
+              var statusType = 0;
+              if (pLine.length > 0 && nLine.length > 0) {
+                var pNewTime = pLine[pLine.length - 1].__updated;
+                var nNewTime = nLine[nLine.length - 1].__updated;
+                if (pNewTime > nNewTime) {
+                  statusType = 1;
+                } else {
+                  statusType = 2;
+                }
+              } else if (pLine.length > 0) {
+                statusType = 1;
+              } else if (nLine.length > 0) {
+                statusType = 2;
+              }
+              if (statusType == 1) {
                 var pNewTime = pLine[pLine.length - 1].__updated;
                 acceptCnt = acceptCnt + 1;
                 var searchData = [];
-                var dispData = false;
-
-                // 表示判定
-                if (nLine.length > 0) {
-                  var nNewTime = nLine[nLine.length - 1].__updated;
-                  if (pNewTime > nNewTime) {
-                    dispData = true;
-                  } else {
-                    rejectCnt = rejectCnt + 1;
-                    acceptCnt = acceptCnt - 1;
-                  }
-                } else {
-                  dispData = true;
-                }
 
                 // リスト追加
-                if (dispData) {
-                  var extToken = data.access_token;
-                  var userInfo = rs.getUserInfo(extToken, cellUrl).done(function(userInfo) {
-                  });
-                  var acceptDate = rs.getRecievedMessageAPI(cellUrl).done(function(acceptDate) {
-                  });
-                  $.when( userInfo, acceptDate ).done(function ( userInfo, acceptDate ) {
-                    console.log(userInfo);
-                    var arr = {};
-                    arr['No'] = $("#searchResult").children().length + 1;
-                    arr['Address'] = userInfo[0].d.results[0].Address;
-                    arr['CellURL'] = userInfo[0].d.results[0].CellURL + '/';
-                    console.log(arr.CellURL);
-                    if (userInfo[0].d.results[0].Sex == 1 ){
-                      var sex = "男性";
-                    } else {
-                      var sex = "女性";
-                    }
-                    arr['Sex'] = sex;
-                    var birthday = userInfo[0].d.results[0].Birthday;
-                    var today = new Date();
-                    today = today.getFullYear()*10000+today.getMonth()*100+100+today.getDate();
-                    birthday = parseInt(birthday.replace(/-/g,''));
-                    arr['Age'] = Math.floor((today-birthday)/10000);
+                var extToken = data.access_token;
+                var userInfo = rs.getUserInfo(extToken, cellUrl).done(function(userInfo) {
+                });
+                var acceptDate = rs.getRecievedMessageAPI(cellUrl).done(function(acceptDate) {
+                });
+                $.when( userInfo, acceptDate ).done(function ( userInfo, acceptDate ) {
+                  console.log(userInfo);
+                  var arr = {};
+                  arr['No'] = $("#searchResult").children().length + 1;
+                  arr['Address'] = userInfo[0].d.results[0].Address;
+                  arr['CellURL'] = userInfo[0].d.results[0].CellURL + '/';
+                  console.log(arr.CellURL);
+                  if (userInfo[0].d.results[0].Sex == 1 ){
+                    var sex = "男性";
+                  } else {
+                    var sex = "女性";
+                  }
+                  arr['Sex'] = sex;
+                  var birthday = userInfo[0].d.results[0].Birthday;
+                  var today = new Date();
+                  today = today.getFullYear()*10000+today.getMonth()*100+100+today.getDate();
+                  birthday = parseInt(birthday.replace(/-/g,''));
+                  arr['Age'] = Math.floor((today-birthday)/10000);
 
-                    var ts = parseInt(acceptDate[0].d.results[0].__published.replace("/Date(","").replace(")/",""));
-                    var d = new Date(ts);
-                    var year  = d.getFullYear();
-                    var month = toDoubleDigits(d.getMonth() + 1);
-                    var day  = toDoubleDigits(d.getDate());
-                    var hour = toDoubleDigits(d.getHours());
-                    var minutes = toDoubleDigits(d.getMinutes());
-                    date = year + '/' + month + '/' + day + ' ' + hour + ':' + minutes;
-                    arr['AcceptDate'] = date;
-                    //var html = '<tr><td width="20%" align="center"><a class="allToggle" href="javascript:void(0)" onClick="rs.moveDispImage(\'' + arr.CellURL + '\');return false;">' + ("00" + arr.No).slice(-3) + '</a></td>';
-                    //html = html + '<td width="10%" align="center">' + arr.Age + '</td>'
-                    //html = html + '<td width="10%" align="center">' + arr.Sex + '</td>'
-                    //html = html + '<td width="20%" align="center">' + arr.Address + '</td>'
-                    //html = html + '<td width="20%" align="center">' + arr.AcceptDate + '</td></tr>';
-                    var arrNo = ("00" + arr.No).slice(-3);
-                    var html = '<tr>';
-                    html += '<td><a href="#detail' + arrNo + '" class="switch-trigger">' + arrNo + '</a></td>';
-                    html += '<td>' + arr.Sex + '</td>';
-                    html += '<td>' + arr.Age + '歳</td>';
-                    html += '<td>' + arr.Address + '</td>';
-                    html += '<td>' + arr.AcceptDate + '</td>';
-                    html += '</tr>';
-                    $('#searchResult').append(html);
-                    rs.createDispImage(arr.CellURL, arrNo);
-                  });
-                  var toDoubleDigits = function(num) {
-                    num += "";
-                    if (num.length === 1) {
-                      num = "0" + num;
-                    }
-                   return num;
-                  };
-                  dispFlag = true;
-                }
+                  var ts = parseInt(acceptDate[0].d.results[0].__published.replace("/Date(","").replace(")/",""));
+                  var d = new Date(ts);
+                  var year  = d.getFullYear();
+                  var month = toDoubleDigits(d.getMonth() + 1);
+                  var day  = toDoubleDigits(d.getDate());
+                  var hour = toDoubleDigits(d.getHours());
+                  var minutes = toDoubleDigits(d.getMinutes());
+                  date = year + '/' + month + '/' + day + ' ' + hour + ':' + minutes;
+                  arr['AcceptDate'] = date;
+                  //var html = '<tr><td width="20%" align="center"><a class="allToggle" href="javascript:void(0)" onClick="rs.moveDispImage(\'' + arr.CellURL + '\');return false;">' + ("00" + arr.No).slice(-3) + '</a></td>';
+                  //html = html + '<td width="10%" align="center">' + arr.Age + '</td>'
+                  //html = html + '<td width="10%" align="center">' + arr.Sex + '</td>'
+                  //html = html + '<td width="20%" align="center">' + arr.Address + '</td>'
+                  //html = html + '<td width="20%" align="center">' + arr.AcceptDate + '</td></tr>';
+                  var arrNo = ("00" + arr.No).slice(-3);
+                  var html = '<tr>';
+                  html += '<td><a href="#detail' + arrNo + '" class="switch-trigger">' + arrNo + '</a></td>';
+                  html += '<td>' + arr.Sex + '</td>';
+                  html += '<td>' + arr.Age + '歳</td>';
+                  html += '<td>' + arr.Address + '</td>';
+                  html += '<td>' + arr.AcceptDate + '</td>';
+                  html += '</tr>';
+                  $('#searchResult').append(html);
+                  rs.createDispImage(arr.CellURL, arrNo);
+                });
+                var toDoubleDigits = function(num) {
+                  num += "";
+                  if (num.length === 1) {
+                    num = "0" + num;
+                  }
+                 return num;
+                };
+                dispFlag = true;
+              } else if (statusType == 2) {
+                  rejectCnt = rejectCnt + 1;
               }
             }
           }
