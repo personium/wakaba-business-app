@@ -15,17 +15,19 @@ ISCommon.setIdleTime = function() {
     // Create Session Expired Modal
     ISCommon.createSessionExpired();
 
-    ISCommon.refreshTokenAPI().done(function(data) {
-        ISCommon.token = data.access_token;
-        ISCommon.refToken = data.refresh_token;
-        ISCommon.expires = data.expires_in;
-        ISCommon.refExpires = data.refresh_token_expires_in;
-        sessionStorage.setItem("ISToken", data.access_token);
-        sessionStorage.setItem("ISRefToken", data.refresh_token);
-        sessionStorage.setItem("ISExpires", data.expires_in);
-        sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
-    }).fail(function(data) {
-        $('#modal-session-expired').modal('show');
+    ISCommon.appGetTargetToken().done(function(appToken) {
+        ISCommon.refreshTokenAPI(appToken.access_token).done(function(data) {
+            ISCommon.token = data.access_token;
+            ISCommon.refToken = data.refresh_token;
+            ISCommon.expires = data.expires_in;
+            ISCommon.refExpires = data.refresh_token_expires_in;
+            sessionStorage.setItem("ISToken", data.access_token);
+            sessionStorage.setItem("ISRefToken", data.refresh_token);
+            sessionStorage.setItem("ISExpires", data.expires_in);
+            sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
+        }).fail(function(data) {
+            $('#modal-session-expired').modal('show');
+        });
     });
 
     setInterval(ISCommon.checkIdleTime, 3300000);
@@ -73,15 +75,17 @@ ISCommon.checkIdleTime = function() {
 };
 
 ISCommon.refreshToken = function() {
-    ISCommon.refreshTokenAPI().done(function(data) {
-        ISCommon.token = data.access_token;
-        ISCommon.refToken = data.refresh_token;
-        ISCommon.expires = data.expires_in;
-        ISCommon.refExpires = data.refresh_token_expires_in;
-        sessionStorage.setItem("ISToken", data.access_token);
-        sessionStorage.setItem("ISRefToken", data.refresh_token);
-        sessionStorage.setItem("ISExpires", data.expires_in);
-        sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
+    ISCommon.appGetTargetToken().done(function(appToken) {
+        ISCommon.refreshTokenAPI(appToken.access_token).done(function(data) {
+            ISCommon.token = data.access_token;
+            ISCommon.refToken = data.refresh_token;
+            ISCommon.expires = data.expires_in;
+            ISCommon.refExpires = data.refresh_token_expires_in;
+            sessionStorage.setItem("ISToken", data.access_token);
+            sessionStorage.setItem("ISRefToken", data.refresh_token);
+            sessionStorage.setItem("ISExpires", data.expires_in);
+            sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
+        });
     });
 };
 
@@ -110,7 +114,7 @@ ISCommon.getProfile = function(url) {
   })
 };
 
-ISCommon.refreshTokenAPI = function() {
+ISCommon.refreshTokenAPI = function(appCellToken) {
     return $.ajax({
         type: "POST",
         url: ISCommon.cellUrl + '__token',
@@ -118,11 +122,29 @@ ISCommon.refreshTokenAPI = function() {
         dataType: 'json',
         data: {
                grant_type: "refresh_token",
-               refresh_token: ISCommon.refToken
+               refresh_token: ISCommon.refToken,
+               client_id: "https://demo.personium.io/hn-ll-app/",
+               client_secret: appCellToken
         },
         headers: {'Accept':'application/json'}
     })
 };
+
+ISCommon.appGetTargetToken = function() {
+  return $.ajax({
+                type: "POST",
+                url: 'https://demo.personium.io/hn-ll-app/__token',
+                processData: true,
+		dataType: 'json',
+                data: {
+                        grant_type: "password",
+			username: "tokenAcc",
+			password: "personiumtoken",
+                        p_target: ISCommon.cellUrl
+                },
+		headers: {'Accept':'application/json'}
+         });
+}
 
 ISCommon.getTargetToken = function(extCellUrl) {
   return $.ajax({
