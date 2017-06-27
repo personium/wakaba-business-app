@@ -113,7 +113,7 @@ ISCommon.getProfile = function(url) {
 ISCommon.refreshTokenAPI = function() {
     return $.ajax({
         type: "POST",
-        url: ISCommon.cellUrl + '__auth',
+        url: ISCommon.cellUrl + '__token',
         processData: true,
         dataType: 'json',
         data: {
@@ -127,7 +127,7 @@ ISCommon.refreshTokenAPI = function() {
 ISCommon.getTargetToken = function(extCellUrl) {
   return $.ajax({
                 type: "POST",
-                url: ISCommon.cellUrl + '__auth',
+                url: ISCommon.cellUrl + '__token',
                 processData: true,
 		dataType: 'json',
                 data: {
