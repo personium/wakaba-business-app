@@ -302,6 +302,7 @@ sm.initTarget = function() {
     }
 
     var messageBody = {};
+    messageBody.BoxBound = true;
     messageBody.To = sendTo;
     messageBody.Type = "req.relation.build";
     messageBody.RequestRelation = cellUrl + "__relation/__/" + name;
