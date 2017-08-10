@@ -1,22 +1,47 @@
 var is = {};
 
-is.getName = function(path) {
-  var collectionName = path;
-  var recordsCount = 0;
-  if (collectionName != undefined) {
-    recordsCount = collectionName.length;
-    var lastIndex = collectionName.lastIndexOf("/");
-    if (recordsCount - lastIndex === 1) {
-      collectionName = path.substring(0, recordsCount - 1);
-      recordsCount = collectionName.length;
-      lastIndex = collectionName.lastIndexOf("/");
-    }
-    collectionName = path.substring(lastIndex + 1, recordsCount);
-  }
-  return collectionName;
-};
-
 $(document).ready(function() {
+    i18next
+    .use(i18nextXHRBackend)
+    .use(i18nextBrowserLanguageDetector)
+    .init({
+        fallbackLng: 'en',
+        ns: ['common', 'glossary'],
+        defaultNS: 'common',
+        debug: true,
+        backend: {
+            // load from i18next-gitbook repo
+            loadPath: './locales/{{lng}}/{{ns}}.json',
+            crossDomain: true
+        }
+    }, function(err, t) {
+        initJqueryI18next();
+        
+        is.additionalCallback();
+        
+        updateContent();
+    });
+});
+
+/*
+ * Need to move to a function to avoid conflicting with the i18nextBrowserLanguageDetector initialization.
+ */
+function initJqueryI18next() {
+    // for options see
+    // https://github.com/i18next/jquery-i18next#initialize-the-plugin
+    jqueryI18next.init(i18next, $, {
+        useOptionsAttr: true
+    });
+}
+
+function updateContent() {
+    // start localizing, details:
+    // https://github.com/i18next/jquery-i18next#usage-of-selector-function
+    $('title').localize();
+    $('[data-i18n]').localize();
+}
+
+is.additionalCallback = function() {
   var appUrlMatch = location.href.split("#");
   var appUrlSplit = appUrlMatch[0].split("/");
   is.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
@@ -175,7 +200,7 @@ $(document).ready(function() {
   $('#exeSend').on('click', function () {
     location.href = "./sendMessage.html";
   });
-});
+};
 
 is.checkParam = function() {
   var msg = "";
