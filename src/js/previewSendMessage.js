@@ -9,7 +9,7 @@ $(document).ready(function() {
       var filter = "";
       // イメージファイル初期化
       $("#idImgFile").attr('src', sm.notImage);
-      ISCommon.dispUserName(ISCommon.cellUrl);
+      Common.dispUserName(Common.cellUrl);
 
       var messageBody = sessionStorage.getItem("MessageBody");
       var body = JSON.parse(messageBody);
@@ -146,10 +146,10 @@ $(document).ready(function() {
   });
 
   function sendMessage() {
-    cellUrl = ISCommon.cellUrl;
+    cellUrl = Common.cellUrl;
     sendMessageUrl = cellUrl + "__message/send";
     sendTo = sessionStorage.getItem("SendToCell");
-    token = ISCommon.token;
+    token = Common.token;
     var name = "ShokujiViewer";
     if (dataType !== "1") {
       name = "StressViewer"

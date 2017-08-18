@@ -1,62 +1,68 @@
- <!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>わかば市情報バンク</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
-    <link href='./css/main.css' rel='stylesheet' type='text/css'>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="glossary:title"></title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
 
-    <link href='./css/MyThumbnail.css' rel='stylesheet' type='text/css'>
-    <link href='./css/genki.css' rel='stylesheet' type='text/css'>
-    <script src="./js/common.js"></script>
-    <script src="./js/jquery.MyThumbnail.js"></script>
+  <link href='./css/main.css' rel='stylesheet' type='text/css'>
+  <link href='./css/MyThumbnail.css' rel='stylesheet' type='text/css'>
+  <link href='./css/genki.css' rel='stylesheet' type='text/css'>
 
-  </head>
-  <body>
-    <!-- ヘッダ -->
-    <div id="container">
-      <hr/>
-      <div id="header">
-        <div class="row">
-          <div class="col-md-7 col-xs-12" align="left"><H4>わかば市情報バンク</H4></div>
-          <div class="col-md-3 col-xs-12" align="left">
-            <p id=loginUserName></p>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.4.3/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/2.0.0/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="./js/jquery.MyThumbnail.js"></script>
+
+  <script src="./js/common.js"></script>
+</head>
+<body>
+  <!-- header -->
+  <div id="container">
+    <hr/>
+    <div id="header">
+      <div class="row">
+        <div class="col-md-7 col-xs-12" align="left"><H4 data-i18n="glossary:title"></H4></div>
+        <div class="col-md-3 col-xs-12" align="left">
+          <p id=loginUserName></p>
+        </div>
+        <div class="col-md-2 col-xs-12" align="right"><H5>
+          <a href="#" onClick="window.close(); return false;" style="color:#ffffff">閉じる</a>
+        </H5></div>
+      </div>
+    </div>
+    <!-- side menu -->
+    <div id="menu">
+          <div class="menu-tree-title">データ提供依頼</div>
+          <div class="menu-tree-item-passive"><a href="./imageSearch.html">新規依頼</a></div>
+          <div class="menu-tree-item-active">依頼状況/データ確認</div>
+          <div class="menu-tree-item-passive" style="height: 600px"></div>
+    </div>
+    <!-- panel -->
+    <div id="main">
+
+      <div style="font-size:24px">
+        LifeBeat参照
+      </div>
+
+      <div class="main_box">
+          <div class="col-md-12 col-xs-12" align="center">
+              <div class="main_area" id="dvMainArea" style="display:none;">
+              </div>
+              <div id="errorMsg" style="display:none;">
+              </div>
           </div>
-          <div class="col-md-2 col-xs-12" align="right"><H5>
-            <a href="#" onClick="window.close(); return false;" style="color:#ffffff">閉じる</a>
-          </H5></div>
-        </div>
       </div>
-      <!-- サイドバー -->
-      <div id="menu">
-            <div class="menu-tree-title">データ提供依頼</div>
-            <div class="menu-tree-item-passive"><a href="./imageSearch.html">新規依頼</a></div>
-            <div class="menu-tree-item-active">依頼状況/データ確認</div>
-            <div class="menu-tree-item-passive" style="height: 600px"></div>
-      </div>
-      <!-- センターコンテンツ -->
-      <div id="main">
 
-        <div style="font-size:24px">
-          LifeBeat参照
-        </div>
-
-        <div class="main_box">
-            <div class="col-md-12 col-xs-12" align="center">
-                <div class="main_area" id="dvMainArea" style="display:none;">
-                </div>
-                <div id="errorMsg" style="display:none;">
-                </div>
-            </div>
-        </div>
-
-      </div>
+    </div>
 
 　  </div>
-  </body>
+</body>
 </html>

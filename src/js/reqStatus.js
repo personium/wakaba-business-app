@@ -65,16 +65,9 @@ $(document).ready(function() {
        }
     }
     var cellUrl = sessionStorage.getItem("ISCellUrl");
-    ISCommon.dispUserName(cellUrl);
+    Common.dispUserName(cellUrl);
     Common.setIdleTime();
 });
-
-ISCommon.dispUserName = function(cellUrl) {
-    ISCommon.getProfile(cellUrl).done(function(prof) {
-        $('img#loginUserIcon').attr({"src":prof.Image});
-        $('#loginUserName').html(prof.DisplayName);
-    });
-};
 
 rq.moveDispImage = function(cellUrl) {
     sessionStorage.setItem("RSImageCellUrl", cellUrl);

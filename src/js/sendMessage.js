@@ -16,7 +16,7 @@ sm.initTarget = function() {
         $("#idImgFile").attr('src', sm.notImage);
 			}
 
-      ISCommon.dispUserName(ISCommon.cellUrl);
+      Common.dispUserName(Common.cellUrl);
 
       var type = sessionStorage.getItem("SearchData");
       var areas = sessionStorage.getItem("SearchArea").split(",");
@@ -234,7 +234,7 @@ sm.initTarget = function() {
         var nowMonth = nowDate.getMonth() + 1;
         var nowDay = ("0" + nowDate.getDate()).slice(-2);
         sessionStorage.setItem("ImageFileName", file.name);
-        imgFilePath = ISCommon.target + "/AttachImage/" + nowYear + nowMonth + nowDay + "_" + file.name;
+        imgFilePath = Common.target + "/AttachImage/" + nowYear + nowMonth + nowDay + "_" + file.name;
         putImageFile(imgFilePath, file.name, file).done(function(response) {
             console.log(response);
             sendMessage(imgFilePath);
@@ -291,10 +291,10 @@ sm.initTarget = function() {
   });
 
   function sendMessage(imgFilePath) {
-    cellUrl = ISCommon.cellUrl;
+    cellUrl = Common.cellUrl;
     sendMessageUrl = cellUrl + "__message/send";
     sendTo = sessionStorage.getItem("SendToCell");
-    token = ISCommon.token;
+    token = Common.token;
     var type = sessionStorage.getItem("SearchData");
     var name = "ShokujiViewer";
     if (type !== "1") {
@@ -467,7 +467,7 @@ sm.initTarget = function() {
         url: imgPath,
         data: file,
         processData: false,
-        headers: {'Authorization': 'Bearer ' + ISCommon.token,'Content-Type': contentType},
+        headers: {'Authorization': 'Bearer ' + Common.token,'Content-Type': contentType},
     });
   }
  });

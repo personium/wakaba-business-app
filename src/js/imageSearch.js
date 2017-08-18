@@ -1,47 +1,6 @@
 var is = {};
 
-$(document).ready(function() {
-    i18next
-    .use(i18nextXHRBackend)
-    .use(i18nextBrowserLanguageDetector)
-    .init({
-        fallbackLng: 'en',
-        ns: ['common', 'glossary'],
-        defaultNS: 'common',
-        debug: true,
-        backend: {
-            // load from i18next-gitbook repo
-            loadPath: './locales/{{lng}}/{{ns}}.json',
-            crossDomain: true
-        }
-    }, function(err, t) {
-        initJqueryI18next();
-        
-        is.additionalCallback();
-        
-        updateContent();
-    });
-});
-
-/*
- * Need to move to a function to avoid conflicting with the i18nextBrowserLanguageDetector initialization.
- */
-function initJqueryI18next() {
-    // for options see
-    // https://github.com/i18next/jquery-i18next#initialize-the-plugin
-    jqueryI18next.init(i18next, $, {
-        useOptionsAttr: true
-    });
-}
-
-function updateContent() {
-    // start localizing, details:
-    // https://github.com/i18next/jquery-i18next#usage-of-selector-function
-    $('title').localize();
-    $('[data-i18n]').localize();
-}
-
-is.additionalCallback = function() {
+additionalCallback = function() {
   var appUrlMatch = location.href.split("#");
   var appUrlSplit = appUrlMatch[0].split("/");
   is.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
@@ -56,24 +15,24 @@ is.additionalCallback = function() {
     var id = param[0];
     switch (id) {
       case "target":
-      ISCommon.target = param[1];
+      Common.target = param[1];
       sessionStorage.setItem("ISTarget", param[1]);
       var urlSplit = param[1].split("/");
-      ISCommon.cellUrl = urlSplit[0] + "//" + urlSplit[2] + "/" + urlSplit[3] + "/";
-      sessionStorage.setItem("ISCellUrl", ISCommon.cellUrl);
-      var split = ISCommon.target.split("/");
+      Common.cellUrl = urlSplit[0] + "//" + urlSplit[2] + "/" + urlSplit[3] + "/";
+      sessionStorage.setItem("ISCellUrl", Common.cellUrl);
+      var split = Common.target.split("/");
       is.boxName = split[split.length - 1];
       case "token":
-      ISCommon.token = param[1];
+      Common.token = param[1];
       sessionStorage.setItem("ISToken", param[1]);
       case "ref":
-      ISCommon.refToken = param[1];
+      Common.refToken = param[1];
       sessionStorage.setItem("ISRefToken", param[1]);
       case "expires":
-      ISCommon.expires = param[1];
+      Common.expires = param[1];
       sessionStorage.setItem("ISExpires", param[1]);
       case "refexpires":
-      ISCommon.refExpires = param[1];
+      Common.refExpires = param[1];
       sessionStorage.setItem("ISRefExpires", param[1]);
     }
   }
@@ -102,10 +61,10 @@ is.additionalCallback = function() {
     }
   }
 
-  ISCommon.setIdleTime();
+  Common.setIdleTime();
 
   //初期表示
-  ISCommon.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
+  Common.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
     sessionStorage.setItem("ISExtToken", data.access_token);
     $(document.body).css("cursor", "wait");
     is.getDefaultSearchUserInfo(data.access_token).done(function(res) {
@@ -127,14 +86,14 @@ is.additionalCallback = function() {
       $('#errorMsg').css("display", "block");
     }).always(function() {
         $(document.body).css("cursor", "auto");
-        ISCommon.dispUserName(ISCommon.cellUrl);
+        Common.dispUserName(Common.cellUrl);
     });
   });
 
   $('#exeSearch').on('click', function () {
     if (is.checkSearchParam()) {
         $('#resultPanel').css("display", "none");
-        ISCommon.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
+        Common.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
           sessionStorage.setItem("ISExtToken", data.access_token);
           $(document.body).css("cursor", "wait");
           is.getSearchUserInfo(data.access_token).done(function(res) {
@@ -169,7 +128,7 @@ is.additionalCallback = function() {
     is.relAllCheckAge();
     is.relAllCheckSex();
     is.relAllCheckArea();
-    ISCommon.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
+    Common.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
       sessionStorage.setItem("ISExtToken", data.access_token);
       $(document.body).css("cursor", "wait");
       is.getDefaultSearchUserInfo(data.access_token).done(function(res) {
@@ -204,15 +163,15 @@ is.additionalCallback = function() {
 
 is.checkParam = function() {
   var msg = "";
-  if (ISCommon.target === null) {
+  if (Common.target === null) {
     msg = '対象セルが設定されていません。';
-  } else if (ISCommon.token === null) {
+  } else if (Common.token === null) {
     msg = 'トークンが設定されていません。';
-  } else if (ISCommon.refToken === null) {
+  } else if (Common.refToken === null) {
     msg = 'リフレッシュトークンが設定されていません。';
-  } else if (ISCommon.expires === null) {
+  } else if (Common.expires === null) {
     msg = 'トークンの有効期限が設定されていません。';
-  } else if (ISCommon.refExpires === null) {
+  } else if (Common.refExpires === null) {
     msg = 'リフレッシュトークンの有効期限が設定されていません。';
   }
 
