@@ -6,7 +6,7 @@ $(document).ready(function() {
     .use(i18nextBrowserLanguageDetector)
     .init({
         fallbackLng: 'en',
-        ns: ['common', 'glossary'],
+        ns: ['common', 'glossary', 'candidateFilter'],
         defaultNS: 'common',
         debug: true,
         backend: {
@@ -192,4 +192,37 @@ Common.getProfile = function(url) {
     dataType: 'json',
     headers: {'Accept':'application/json'}
   })
+};
+
+Common.checkParam = function() {
+    var msg_key = "";
+    if (Common.target === null) {
+        msg_key = "msg.error.targetCellNotSelected";
+    } else if (Common.token === null) {
+        msg_key = "msg.error.tokenMissing";
+    } else if (Common.refToken === null) {
+        msg_key = "msg.error.refreshTokenMissing";
+    } else if (Common.expires === null) {
+        msg_key = "msg.error.tokenExpiryDateMissing";
+    } else if (Common.refExpires === null) {
+        msg_key = "msg.error.refreshTokenExpiryDateMissing";
+    }
+
+    if (msg_key.length > 0) {
+        Common.displayMessageByKey(msg_key);
+        $("#exeSearch").prop('disabled', true);
+        return false;
+    }
+
+    return true;
+};
+
+Common.displayMessageByKey = function(msg_key) {
+    if (msg_key) {
+        $('#errorMsg').attr("data-i18n", msg_key)
+            .localize()
+            .show();
+    } else {
+        $('#errorMsg').hide();
+    }
 };

@@ -1,0 +1,28 @@
+{
+    "candidates": "Candidates",
+    "selectCandidates": "Select candidates",
+    "searchResult": "candidate",
+    "searchResult_few": "Not engouh candidates.",
+    "searchResult_plural": "candidates",
+    "searchResult_none": "Cannot find any candidates.",
+    "category": "Categories",
+    "condition": "Conditions",
+    "target": "Data Store",
+    "age": "Age",
+    "selectAll": "Select All",
+    "unselectAll": "Unselect All",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "location": "Location",
+    "search": "Search",
+    "reset": "Reset",
+    "msg": {
+        "info": {
+            "description": "Please specify the search conditions and search for your candidates."
+        },
+        "error": {
+            "noSearchPermission": "No search permission."
+        }
+    }
+}

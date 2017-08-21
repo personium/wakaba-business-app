@@ -48,22 +48,22 @@
         <ul class="step">
           <li class="current">
             <h5>Step1</h5>
-            <div>依頼対象の設定</div>
+            <div data-i18n="candidateFilter:selectCandidates"></div>
           </li>
           <li>
             <h5>Step2</h5>
-            <div>依頼内容の入力</div>
+            <div data-i18n="createSurvey"></div>
           </li>
           <li>
             <h5>Step3</h5>
-            <div>確認</div>
+            <div data-i18n="confirm"></div>
           </li>
         </ul>
         <!-- /step -->
         <section>
-          <h2 id="messageTitle">依頼対象</h2>
+          <h2 id="messageTitle" data-i18n="candidateFilter:candidates"></h2>
           <div>
-            <div>条件を選択し、対象者を検索してください。</div>
+            <div data-i18n="candidateFilter:msg.info.description"></div>
             <div class="form-style">
               <div class="target-summary">
                 <span class="fa fa-user colorFa-user fa-user-icon"></span>
@@ -73,19 +73,13 @@
               <table style="width: 100%;">
                 <thead>
                   <tr>
-                    <th>
-                        検索項目
-                    </th>
-                    <th>
-                        条件
-                    </th>
+                    <th data-i18n="candidateFilter:category"></th>
+                    <th data-i18n="candidateFilter:condition"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th>
-                        対象情報
-                    </th>
+                    <th data-i18n="candidateFilter:target"></th>
                     <td>
                       <select id="inputData">
                         <option value="1">CalorieSmile（食事データ）</option>
@@ -95,9 +89,7 @@
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th>
-                        年齢
-                    </th>
+                    <th data-i18n="candidateFilter:age"></th>
                     <td>
                       <div class="inputAge">
                         <input type="checkbox" value="10" name="inputAge" id="inputAge10">
@@ -122,30 +114,26 @@
                         <label for="inputAge100">100歳以上</label>
                       </div>
                       <div>
-                        <button onclick="is.allCheckAge();return false;">全選択</button>
-                        <button onclick="is.relAllCheckAge();return false;">全解除</button>
+                        <button onclick="is.allCheckAge();return false;" data-i18n="candidateFilter:selectAll"></button>
+                        <button onclick="is.relAllCheckAge();return false;" data-i18n="candidateFilter:unselectAll"></button>
                       </div>
                     </td>
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th>
-                        性別
-                    </th>
+                    <th data-i18n="candidateFilter:gender"></th>
                     <td>
                       <div class="inputSex">
                         <input type="checkbox" value="1" name="inputSex" id="inputSexM">
-                        <label for="inputSexM">男性</label>
+                        <label for="inputSexM" data-i18n="candidateFilter:male"></label>
                         <input type="checkbox" value="2" name="inputSex" id="inputSexF">
-                        <label for="inputSexF">女性</label>
+                        <label for="inputSexF" data-i18n="candidateFilter:female"></label>
                       </div>
                     </td>
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th>
-                        地域
-                    </th>
+                    <th data-i18n="candidateFilter:location"></th>
                     <td>
                       <div class="inputArea">
                         <input type="checkbox" value="中央区" name="inputArea" id="inputArea0">
@@ -160,8 +148,8 @@
                         <label for="inputArea4">北区</label>
                       </div>
                       <div>
-                        <button onclick="is.allCheckArea();return false;">全選択</button>
-                        <button onclick="is.relAllCheckArea();return false;">全解除</button>
+                        <button onclick="is.allCheckArea();return false;" data-i18n="candidateFilter:selectAll"></button>
+                        <button onclick="is.relAllCheckArea();return false;" data-i18n="candidateFilter:unselectAll"></button>
                       </div>
                     </td>
                   </tr>
@@ -170,14 +158,10 @@
               </table>
               <ul class="button-group">
                 <li>
-                  <button type="button" class="highlight" id="exeSearch">
-                      検索
-                  </button>
+                  <button type="button" class="highlight" id="exeSearch" data-i18n="candidateFilter:search"></button>
                 </li>
                 <li>
-                  <button type="button" id="exeReset">
-                      条件リセット
-                  </button>
+                  <button type="button" id="exeReset" data-i18n="candidateFilter:reset"></button>
                 </li>
               </ul>
               <!-- /button-group -->

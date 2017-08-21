@@ -1,0 +1,27 @@
+{
+    "candidates": "依頼対象",
+    "selectCandidates": "$t(candidateFilter:candidates)の設定",
+    "searchResult": "人の対象者",
+    "searchResult_few": "該当人数が少なすぎます。",
+    "searchResult_none": "該当する保持者はいません。",
+    "category": "検索項目",
+    "condition": "条件",
+    "target": "対象情報",
+    "age": "年齢",
+    "selectAll": "全選択",
+    "unselectAll": "全解除",
+    "gender": "性別",
+    "male": "男性",
+    "female": "女性",
+    "location": "地域",
+    "search": "検索",
+    "reset": "条件リセット",
+    "msg": {
+        "info": {
+            "description": "条件を選択し、対象者を検索してください。"
+        },
+        "error": {
+            "noSearchPermission": "検索権限がありません。"
+        }
+    }
+}

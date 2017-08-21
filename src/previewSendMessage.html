@@ -48,20 +48,20 @@
         <ul class="step">
           <li>
             <h5>Step1</h5>
-            <div>依頼対象の設定</div>
+            <div data-i18n="candidateFilter:selectCandidates"></div>
           </li>
           <li>
             <h5>Step2</h5>
-            <div>依頼内容の入力</div>
+            <div data-i18n="createSurvey"></div>
           </li>
           <li class="current">
             <h5>Step3</h5>
-            <div>確認</div>
+            <div data-i18n="confirm"></div>
           </li>
         </ul>
         <!-- /step -->
         <section class="fixed-width-form">
-          <h2>依頼内容確認</h2>
+          <h2 data-i18n="confirmSurveyContents" data-i18n-options='{ "context": "title" }'></h2>
           <div>
             <div class="form-style">
               <div class="target-summary">
@@ -72,43 +72,31 @@
               <table class="no-border-table">
                 <thead>
                   <tr>
-                    <th>
-                      検索項目
-                    </th>
-                    <th>
-                      条件
-                    </th>
+                    <th data-i18n="candidateFilter:category"></th>
+                    <th data-i18n="candidateFilter:condition"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th>
-                      対象情報
-                    </th>
+                    <th data-i18n="candidateFilter:target"></th>
                     <td id="target">
                     </td>
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th>
-                      年齢
-                    </th>
+                    <th data-i18n="candidateFilter:age"></th>
                     <td id="targetAge">
                     </td>
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th>
-                      性別
-                    </th>
+                    <th data-i18n="candidateFilter:gender"></th>
                     <td id="targetSex">
                     </td>
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th>
-                      地域
-                    </th>
+                    <th data-i18n="candidateFilter:location"></th>
                     <td id="targetArea">
                     </td>
                   </tr>

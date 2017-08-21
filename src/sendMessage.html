@@ -53,20 +53,20 @@
         <ul class="step">
           <li>
             <h5>Step1</h5>
-            <div>依頼対象の設定</div>
+            <div data-i18n="candidateFilter:selectCandidates"></div>
           </li>
           <li class="current">
             <h5>Step2</h5>
-            <div>依頼内容の入力</div>
+            <div data-i18n="createSurvey"></div>
           </li>
           <li>
             <h5>Step3</h5>
-            <div>確認</div>
+            <div data-i18n="confirm"></div>
           </li>
         </ul>
         <!-- /step -->
         <section class="fixed-width-form">
-          <h2>依頼内容</h2>
+          <h2 data-i18n="surveyContents"></h2>
           <div>
             <h4>タイトル<span class="explain">（30文字以内）</span></h4>
             <input id="iMassageTitle" type="text" value="" placeholder="タイトルを入力してください。">
@@ -124,7 +124,7 @@
               <button formaction="./imageSearch.html">戻る</button>
             </li>
             <li>
-              <button type="button" class="highlight" id="b-send-message">依頼内容確認</button>
+              <button type="button" class="highlight" id="b-send-message" data-i18n="confirmSurveyContents" data-i18n-options='{ "context": "button" }'></button>
             </li>
           </ul>
         </footer>

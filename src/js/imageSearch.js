@@ -37,7 +37,7 @@ additionalCallback = function() {
     }
   }
 
-  if (is.checkParam()) {
+  if (Common.checkParam()) {
     if (sessionStorage.getItem("SearchData") != null) {
       $('#inputData').val(sessionStorage.getItem("SearchData"));
     }
@@ -63,27 +63,24 @@ additionalCallback = function() {
 
   Common.setIdleTime();
 
-  //初期表示
+  //Initial rendering
   Common.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
     sessionStorage.setItem("ISExtToken", data.access_token);
     $(document.body).css("cursor", "wait");
     is.getDefaultSearchUserInfo(data.access_token).done(function(res) {
       var cnt = res.d.__count;
       if (cnt > 10) {
-        $('#searchResult').html(cnt);
-        $('#resultText').html("人の対象者");
-        $('#exeSend').css("display", "none");
+          is.displaySearchResult(cnt);
+          $('#exeSend').hide();
       } else if (cnt > 0) {
-        $('#searchResult').html("該当人数が少なすぎます。");
-        $('#exeSend').css("display", "none");
+          is.displaySearchResultFew();
       } else {
-        $('#searchResult').html("該当する保持者はいません。");
-        $('#exeSend').css("display", "none");
+          is.displaySearchResultNone();
       }
       $('#resultPanel').css("display", "block");
+      $('#errorMsg').hide();
     }).fail(function(data) {
-      $('#errorMsg').html("検索権限がありません。");
-      $('#errorMsg').css("display", "block");
+      Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
     }).always(function() {
         $(document.body).css("cursor", "auto");
         Common.dispUserName(Common.cellUrl);
@@ -99,23 +96,17 @@ additionalCallback = function() {
           is.getSearchUserInfo(data.access_token).done(function(res) {
             var cnt = res.d.__count;
             if (cnt > 10) {
-              $('#searchResult').html(cnt);
-              $('#resultText').html("人の対象者");
-              $('#exeSend').css("display", "block");
-              $('#errorMsg').css("display", "none");
+              is.displaySearchResult(cnt);
+              $('#exeSend').show();
             } else if (cnt > 0) {
-              $('#searchResult').html("該当人数が少なすぎます。");
-              $('#exeSend').css("display", "none");
-              $('#errorMsg').css("display", "none");
+                is.displaySearchResultFew();
             } else {
-              $('#searchResult').html("該当する保持者はいません。");
-              $('#exeSend').css("display", "none");
-              $('#errorMsg').css("display", "none");
+                is.displaySearchResultNone();
             }
             $('#resultPanel').css("display", "block");
+            $('#errorMsg').hide();
           }).fail(function(data) {
-            $('#errorMsg').html("検索権限がありません。");
-            $('#errorMsg').css("display", "block");
+            Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
           }).always(function() {
             $(document.body).css("cursor", "auto");
           });
@@ -134,22 +125,17 @@ additionalCallback = function() {
       is.getDefaultSearchUserInfo(data.access_token).done(function(res) {
         var cnt = res.d.__count;
         if (cnt > 10) {
-          $('#searchResult').html(cnt);
-          $('#exeSend').css("display", "none");
-          $('#errorMsg').css("display", "none");
+            is.displaySearchResult(cnt);
+            $('#exeSend').hide();
         } else if (cnt > 0) {
-          $('#searchResult').html("該当人数が少なすぎます。");
-          $('#exeSend').css("display", "none");
-          $('#errorMsg').css("display", "none");
+            is.displaySearchResultFew();
         } else {
-          $('#searchResult').html("該当する保持者はいません。");
-          $('#exeSend').css("display", "none");
-          $('#errorMsg').css("display", "none");
+            is.displaySearchResultNone();
         }
         $('#resultPanel').css("display", "block");
+        $('#errorMsg').hide();
       }).fail(function(data) {
-        $('#errorMsg').html("検索権限がありません。");
-        $('#errorMsg').css("display", "block");
+        Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
       }).always(function() {
         $(document.body).css("cursor", "auto");
       });
@@ -159,30 +145,6 @@ additionalCallback = function() {
   $('#exeSend').on('click', function () {
     location.href = "./sendMessage.html";
   });
-};
-
-is.checkParam = function() {
-  var msg = "";
-  if (Common.target === null) {
-    msg = '対象セルが設定されていません。';
-  } else if (Common.token === null) {
-    msg = 'トークンが設定されていません。';
-  } else if (Common.refToken === null) {
-    msg = 'リフレッシュトークンが設定されていません。';
-  } else if (Common.expires === null) {
-    msg = 'トークンの有効期限が設定されていません。';
-  } else if (Common.refExpires === null) {
-    msg = 'リフレッシュトークンの有効期限が設定されていません。';
-  }
-
-  if (msg.length > 0) {
-    $('#errorMsg').html(msg);
-    $('#errorMsg').css("display", "block");
-    $("#exeSearch").prop('disabled', true);
-    return false;
-  }
-
-  return true;
 };
 
 is.checkAreaLength = function() {
@@ -369,4 +331,29 @@ is.getDefaultSearchUserInfo = function(extToken) {
       'Accept':'application/json'
     }
   });
+};
+
+is.displaySearchResult = function(candidateCount) {
+    $('#searchResult').html(candidateCount);
+    $('#resultText')
+        .attr("data-i18n", "candidateFilter:searchResult")
+        .localize({
+            count: parseInt(candidateCount)
+        }); // convert to integer explicitly to make use of the pluralize function
+};
+
+is.displaySearchResultFew = function() {
+    $('#searchResult')
+        .attr("data-i18n", "candidateFilter:searchResult_few")
+        .localize();
+
+    $('#exeSend').hide();
+};
+
+is.displaySearchResultNone = function() {
+    $('#searchResult')
+        .attr("data-i18n", "candidateFilter:searchResult_none")
+        .localize();
+
+    $('#exeSend').hide();
 };

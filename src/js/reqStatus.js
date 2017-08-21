@@ -53,7 +53,7 @@ $(document).ready(function() {
         }
     }
 
-    if (rq.checkParam()) {
+    if (Common.checkParam()) {
        if (sessionStorage.getItem("SearchAge") != null) {
            $('#inputAge').val(sessionStorage.getItem("SearchAge"));
        }
@@ -72,30 +72,6 @@ $(document).ready(function() {
 rq.moveDispImage = function(cellUrl) {
     sessionStorage.setItem("RSImageCellUrl", cellUrl);
     location.href = "./imageView.html";
-};
-
-rq.checkParam = function() {
-    var msg = "";
-    if (Common.target === null) {
-        msg = '対象セルが設定されていません。';
-    } else if (Common.token === null) {
-        msg = 'トークンが設定されていません。';
-    } else if (Common.refToken === null) {
-        msg = 'リフレッシュトークンが設定されていません。';
-    } else if (Common.expires === null) {
-        msg = 'トークンの有効期限が設定されていません。';
-    } else if (Common.refExpires === null) {
-        msg = 'リフレッシュトークンの有効期限が設定されていません。';
-    }
-
-    if (msg.length > 0) {
-        $('#errorMsg').html(msg);
-        $('#errorMsg').css("display", "block");
-        $("#exeSearch").prop('disabled', true);
-        return false;
-    }
-
-    return true;
 };
 
 rq.checkAreaLength = function() {

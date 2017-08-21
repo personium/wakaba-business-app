@@ -52,7 +52,7 @@ $(document).ready(function() {
     }
   }
 
-  if (rs.checkParam()) {
+  if (Common.checkParam()) {
 
   }
   Common.setIdleTime();
@@ -346,8 +346,7 @@ $(document).ready(function() {
       });
       $('#resultPanel').css("display", "block");
     }).fail(function(data) {
-      $('#errorMsg').html("検索権限がありません。");
-      $('#errorMsg').css("display", "block");
+        Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
     }).always(function() {
       $(document.body).css("cursor", "auto");
     });
@@ -476,30 +475,6 @@ rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName
         reader.readAsDataURL(file, "UTF-8");
     }
     oReq.send();
-};
-
-rs.checkParam = function() {
-  var msg = "";
-  if (Common.target === null) {
-    msg = '対象セルが設定されていません。';
-  } else if (Common.token === null) {
-    msg = 'トークンが設定されていません。';
-  } else if (Common.refToken === null) {
-    msg = 'リフレッシュトークンが設定されていません。';
-  } else if (Common.expires === null) {
-    msg = 'トークンの有効期限が設定されていません。';
-  } else if (Common.refExpires === null) {
-    msg = 'リフレッシュトークンの有効期限が設定されていません。';
-  }
-
-  if (msg.length > 0) {
-    $('#errorMsg').html(msg);
-    $('#errorMsg').css("display", "block");
-    $("#exeSearch").prop('disabled', true);
-    return false;
-  }
-
-  return true;
 };
 
 rs.checkAreaLength = function() {
