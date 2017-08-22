@@ -3,7 +3,7 @@ sm.notImage = "https://demo.personium.io/HomeApplication/__/icons/no_app_image.p
 sm.imgBinaryFile = null;
 sendCount = 0;
 
-sm.initTarget = function() {
+additionalCallback = function() {
 //検索結果を表示し、メール送信先を作成する
 　$(function () {
       var filter = "";
@@ -35,7 +35,7 @@ sm.initTarget = function() {
         $("#iMassageTitle").attr("value","お食事写真提供のお願い");
         $("#iMassageBody").html("新商品企画のために、お食事データの提供をお願いします。");
         $("#iPurpose").html("新商品企画のため");
-        $("#targetItem").html('CalorieSmile（食事データ）');
+        $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
         $("#targetData").html('食事記録（写真）、撮影日時、コメント');
         break;
         case "2":
@@ -55,7 +55,7 @@ sm.initTarget = function() {
         $("#iMassageTitle").attr("value","お食事写真提供のお願い");
         $("#iMassageBody").html("新商品企画のために、お食事データの提供をお願いします。");
         $("#iPurpose").html("新商品企画のため");
-        $("#targetItem").html('CalorieSmile（食事データ）');
+        $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
         $("#targetData").html('食事記録（写真）、撮影日時、コメント');
         break;
       }

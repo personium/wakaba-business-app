@@ -34,8 +34,8 @@ additionalCallback = function() {
       switch (dataType) {
         case "1":
         var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
-        $("#target").html('食事データ');
-        $("#targetItem").html('CalorieSmile（食事データ）');
+        $("#target").attr("data-i18n", "glossary:nutritionData").localize();
+        $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
         $("#targetData").html('食事記録（写真）、撮影日時、コメント');
         break;
         case "2":
@@ -46,8 +46,8 @@ additionalCallback = function() {
         break;
         default:
         var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
-        $("#target").html('食事データ');
-        $("#targetItem").html('CalorieSmile（食事データ）');
+        $("#target").attr("data-i18n", "glossary:nutritionData").localize();
+        $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
         $("#targetData").html('食事記録（写真）、撮影日時、コメント');
         break;
       }

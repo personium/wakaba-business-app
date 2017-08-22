@@ -16,7 +16,7 @@ iv.getName = function(path) {
   return collectionName;
 };
 
-  $(document).ready(function(getImageUrl){
+additionalCallback = function() {
     var appUrlMatch = location.href.split("#");
     var appUrlSplit = appUrlMatch[0].split("/");
     iv.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
@@ -73,7 +73,7 @@ iv.getName = function(path) {
     var imageUrl = sessionStorage.getItem("RSImageCellUrl") + "io_personium_demo_hn-app-genki/";
     var token = Common.token;
     console.log(token);
-    //画像ディレクトリの情報取得
+    // retrieve image's directory info
     $.ajax({
       type: "GET",
       dataType: "json",
@@ -112,12 +112,12 @@ iv.getName = function(path) {
                 html = '<table border="1" class="photoTable" style="margin-left:auto; margin-right:auto;" id="td' + dateId + '"><tr>';
                 html += '<td style="text-align:left" colspan="3">' + nowDate + '</td>';
                 html += '</tr><tr>';
-                html += '<td style="text-align:left;">写真</td>';
-                html += '<td style="text-align:left">日時</td>';
-                html += '<td style="text-align:left">コメント</td>';
+                html += '<td style="text-align:left;" data-i18n="glossary:photo"></td>';
+                html += '<td style="text-align:left" data-i18n="glossary:date"></td>';
+                html += '<td style="text-align:left" data-i18n="glossary:comment"></td>';
                 html += '</tr></table>';
 
-                $('#dvMainArea').append(html);
+                $('#dvMainArea').append(html).localize();
             }
 
             html = '<tr>';
@@ -136,14 +136,12 @@ iv.getName = function(path) {
         if (dataList.length > 0) {
             $('#dvMainArea').css("display", "block");
         } else {
-            $('#errorMsg').html('データがありません。');
-            $('#errorMsg').css("display", "block");
+            Common.displayMessageByKey("msg.error.dataNotFound");
         }
     }).fail(function(data) {
-        $('#errorMsg').html('データがありません。');
-        $('#errorMsg').css("display", "block");
+        Common.displayMessageByKey("msg.error.failedToRetrieveData");
     });
-});
+};
 
 iv.dispUserName = function(cellUrl) {
     iv.getProfile(cellUrl).done(function(prof) {

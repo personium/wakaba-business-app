@@ -147,18 +147,6 @@ additionalCallback = function() {
   });
 };
 
-is.checkAreaLength = function() {
-  var area = $('#inputArea').val();
-  if (area.length === 1) {
-    $("#exeSearch").prop('disabled', true);
-    $('#errorMsg').html("地域の条件には2文字以上の文字を入力して下さい。");
-    $('#errorMsg').css("display", "block");
-  } else {
-    $("#exeSearch").prop('disabled', false);
-    $('#errorMsg').css("display", "none");
-  }
-};
-
 is.allCheckAge = function() {
     $("input[name='inputAge']").prop('checked', true);
 };
@@ -185,21 +173,18 @@ is.relAllCheckSex = function() {
 
 is.checkSearchParam = function() {
     if ($('.inputAge :checked').length <= 0) {
-        $('#errorMsg').html("年齢を指定して下さい。");
-        $('#errorMsg').css("display", "block");
-        $('#exeSend').css("display", "none");
+        Common.displayMessageByKey("candidateFilter:msg.info.specifyAge");
+        $('#exeSend').hide();
         return false;
     }
     if ($('.inputSex :checked').length <= 0) {
-        $('#errorMsg').html("性別を指定して下さい。");
-        $('#errorMsg').css("display", "block");
-        $('#exeSend').css("display", "none");
+        Common.displayMessageByKey("candidateFilter:msg.info.specifyGender");
+        $('#exeSend').hide();
         return false;
     }
     if ($('.inputArea :checked').length <= 0) {
-        $('#errorMsg').html("地域を指定して下さい。");
-        $('#errorMsg').css("display", "block");
-        $('#exeSend').css("display", "none");
+        Common.displayMessageByKey("candidateFilter:msg.info.specifyLocation");
+        $('#exeSend').hide();
         return false;
     }
 
@@ -210,9 +195,6 @@ is.getSearchUserInfo = function(extToken) {
   var filter = "";
 
   var data = $('#inputData').val();
-  //var age = $('#inputAge').val();
-  var sex = $('#inputSex').val();
-  var area = $('#inputArea').val();
   if (data > 0) {
     sessionStorage.setItem("SearchData", data);
   }

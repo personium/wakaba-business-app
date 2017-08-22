@@ -48,7 +48,10 @@
     "step1Next": "Next",
     "msg": {
         "info": {
-            "description": "Please specify the search conditions and search for your candidates."
+            "description": "Please specify the search conditions and search for your candidates.",
+            "specifyAge": "Please specify at least one age group.",
+            "specifyGender": "Please specify at least one gender.",
+            "specifyLocation": "Please specify at least one location."
         },
         "error": {
             "noSearchPermission": "No search permission."

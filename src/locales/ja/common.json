@@ -43,5 +43,26 @@
             "dataNotFound": "データがありません。",
             "failedToRefreshToken": "リフレッシュトークンの更新に失敗しました。<br>画面をリロードしてください。"
         }
+    },
+    "label": {
+        "title": {
+            "message": "タイトル<span class=\"explain\">（30文字以内）</span>",
+            "placeholder": "タイトルを入力してください。"
+        },
+        "image": "イメージ画像<span class=\"explain\">（形式： jpg, png）</span>",
+        "imageWithLink": "イメージ画像<span class=\"explain\">（形式： jpg, png）</span><a href=\"./doc/sample.pdf\" id=\"preview-image-text\" target=\"_blank\">表示サンプル</a>",
+        "messageBody": {
+            "message": "本文<span class=\"explain\">（200文字以内）</span>",
+            "placeholder": "提供依頼内容の本文を入力してください。"
+        },
+        "purpose": {
+            "message": "利用目的<span class=\"explain\">（200文字以内）</span>",
+            "placeholder": "提供依頼内容の利用目的を入力してください。"
+        },
+        "survey": {
+            "targetData": "対象データ",
+            "generalParameters": "一般属性",
+            "period": "募集期間"
+        }
     }
 }

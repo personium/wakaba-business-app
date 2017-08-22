@@ -127,7 +127,7 @@ $(document).ready(function() {
       
       switch (type) {
         case "1":
-          var typeStr = "CalorieSmile（食事データ）";
+          var typeStr = "glossary:pdsCalorieSmile";
           var offerStr = "食事記録（写真）、撮影日時、コメント";
           break;
         case "2":
@@ -179,7 +179,7 @@ $(document).ready(function() {
     }
     $("#targetArea").html(areaStr);
 
-    $("#targetData,#targetAttribute").html(typeStr);
+    $("#targetData,#targetAttribute").attr("data-i18n", typeStr).localize();
     $("#targetOffer").html(offerStr);
 
     // 依頼内容
@@ -469,18 +469,6 @@ rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName
         reader.readAsDataURL(file, "UTF-8");
     }
     oReq.send();
-};
-
-rs.checkAreaLength = function() {
-  var area = $('#inputArea').val();
-  if (area.length === 1) {
-    $("#exeSearch").prop('disabled', true);
-    $('#errorMsg').html("地域の条件には2文字以上の文字を入力して下さい。");
-    $('#errorMsg').css("display", "block");
-  } else {
-    $("#exeSearch").prop('disabled', false);
-    $('#errorMsg').css("display", "none");
-  }
 };
 
 rs.getProfile = function(url) {

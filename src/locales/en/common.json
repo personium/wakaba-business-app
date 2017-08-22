@@ -43,5 +43,26 @@
             "dataNotFound": "Data not found.",
             "failedToRefreshToken": "Failed to refresh token.<br>Please reload page."
         }
+    },
+    "label": {
+        "title": {
+            "message": "Title<span class=\"explain\"> (within 30 characters)</span>",
+            "placeholder": "Please enter a title."
+        },
+        "image": "Image<span class=\"explain\"> (format: jpg, png)</span>",
+        "imageWithLink": "Image<span class=\"explain\"> (format: jpg, png)</span><a href=\"./doc/sample.pdf\" id=\"preview-image-text\" target=\"_blank\">Example</a>",
+        "messageBody": {
+            "message": "Message<span class=\"explain\"> (within 200 characters)</span>",
+            "placeholder": "Please explain what your want."
+        },
+        "purpose": {
+            "message": "Purpose<span class=\"explain\"> (within 200 characters)</span>",
+            "placeholder": "Please write the reason of this survey."
+        },
+        "survey": {
+            "targetData": "Survey Data",
+            "generalParameters": "Common Data",
+            "period": "Survey Period"
+        }
     }
 }

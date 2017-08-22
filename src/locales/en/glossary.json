@@ -1,6 +1,11 @@
 {
     "title": "Wakaba Municipal Info Bank",
-    "pdsCalorieSmile": "Calorie Smile (Nutrition Data)",
+    "pdsCalorieSmile": "Calorie Smile ($t(glossary:nutritionData))",
+    "nutritionData": "Nutrition Data",
+    "photosOfMeals": "Photos of Meals",
+    "photo": "Photo",
+    "date": "Date",
+    "comment": "Comment",
     "pdsLifeBeat": "Life Beat (Stress Data)",
     "sessionExpiredDialog": {
         "title": "Session Expired",

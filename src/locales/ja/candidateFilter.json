@@ -47,7 +47,10 @@
     "step1Next": "提供依頼",    
     "msg": {
         "info": {
-            "description": "条件を選択し、対象者を検索してください。"
+            "description": "条件を選択し、対象者を検索してください。",
+            "specifyAge": "$t(candidateFilter:age.label)を指定して下さい。",
+            "specifyGender": "$t(candidateFilter:gender.label)を指定して下さい。",
+            "specifyLocation": "$t(candidateFilter:location.label)を指定して下さい。"
         },
         "error": {
             "noSearchPermission": "検索権限がありません。"

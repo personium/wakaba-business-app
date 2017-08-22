@@ -74,18 +74,6 @@ rq.moveDispImage = function(cellUrl) {
     location.href = "./imageView.html";
 };
 
-rq.checkAreaLength = function() {
-    var area = $('#inputArea').val();
-    if (area.length === 1) {
-        $("#exeSearch").prop('disabled', true);
-        $('#errorMsg').html("地域の条件には2文字以上の文字を入力して下さい。");
-        $('#errorMsg').css("display", "block");
-    } else {
-        $("#exeSearch").prop('disabled', false);
-        $('#errorMsg').css("display", "none");
-    }
-};
-
 rq.getProfile = function(url) {
     return $.ajax({
 	type: "GET",
