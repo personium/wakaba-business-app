@@ -82,36 +82,36 @@
                     <th data-i18n="candidateFilter:target"></th>
                     <td>
                       <select id="inputData">
-                        <option value="1">CalorieSmile（食事データ）</option>
-                        <option value="2">ストレスデータ</option>
+                        <option value="1" data-i18n="glossary:pdsCalorieSmile"></option>
+                        <option value="2" data-i18n="glossary:pdsLifeBeat"></option>
                       </select>
                     </td>
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th data-i18n="candidateFilter:age"></th>
+                    <th data-i18n="candidateFilter:age.label"></th>
                     <td>
                       <div class="inputAge">
                         <input type="checkbox" value="10" name="inputAge" id="inputAge10">
-                        <label for="inputAge10">10代</label>
+                        <label for="inputAge10" data-i18n="candidateFilter:age.options.10s"></label>
                         <input type="checkbox" value="20" name="inputAge" id="inputAge20">
-                        <label for="inputAge20">20代</label>
+                        <label for="inputAge20" data-i18n="candidateFilter:age.options.20s"></label>
                         <input type="checkbox" value="30" name="inputAge" id="inputAge30">
-                        <label for="inputAge30">30代</label>
+                        <label for="inputAge30" data-i18n="candidateFilter:age.options.30s"></label>
                         <input type="checkbox" value="40" name="inputAge" id="inputAge40">
-                        <label for="inputAge40">40代</label>
+                        <label for="inputAge40" data-i18n="candidateFilter:age.options.40s"></label>
                         <input type="checkbox" value="50" name="inputAge" id="inputAge50">
-                        <label for="inputAge50">50代</label>
+                        <label for="inputAge50" data-i18n="candidateFilter:age.options.50s"></label>
                         <input type="checkbox" value="60" name="inputAge" id="inputAge60">
-                        <label for="inputAge60">60代</label>
+                        <label for="inputAge60" data-i18n="candidateFilter:age.options.60s"></label>
                         <input type="checkbox" value="70" name="inputAge" id="inputAge70">
-                        <label for="inputAge70">70代</label>
+                        <label for="inputAge70" data-i18n="candidateFilter:age.options.70s"></label>
                         <input type="checkbox" value="80" name="inputAge" id="inputAge80">
-                        <label for="inputAge80">80代</label>
+                        <label for="inputAge80" data-i18n="candidateFilter:age.options.80s"></label>
                         <input type="checkbox" value="90" name="inputAge" id="inputAge90">
-                        <label for="inputAge90">90代</label>
+                        <label for="inputAge90" data-i18n="candidateFilter:age.options.90s"></label>
                         <input type="checkbox" value="100" name="inputAge" id="inputAge100">
-                        <label for="inputAge100">100歳以上</label>
+                        <label for="inputAge100" data-i18n="candidateFilter:age.options.100s"></label>
                       </div>
                       <div>
                         <button onclick="is.allCheckAge();return false;" data-i18n="candidateFilter:selectAll"></button>
@@ -121,31 +121,32 @@
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th data-i18n="candidateFilter:gender"></th>
+                    <th data-i18n="candidateFilter:gender.label"></th>
                     <td>
                       <div class="inputSex">
                         <input type="checkbox" value="1" name="inputSex" id="inputSexM">
-                        <label for="inputSexM" data-i18n="candidateFilter:male"></label>
+                        <label for="inputSexM" data-i18n="candidateFilter:gender.options.male"></label>
                         <input type="checkbox" value="2" name="inputSex" id="inputSexF">
-                        <label for="inputSexF" data-i18n="candidateFilter:female"></label>
+                        <label for="inputSexF" data-i18n="candidateFilter:gender.options.female"></label>
                       </div>
                     </td>
                   </tr>
                   <!-- /1line -->
                   <tr>
-                    <th data-i18n="candidateFilter:location"></th>
+                    <th data-i18n="candidateFilter:location.label"></th>
                     <td>
                       <div class="inputArea">
+                        <!-- Demo WebDAVs store location in Japanese -->
                         <input type="checkbox" value="中央区" name="inputArea" id="inputArea0">
-                        <label for="inputArea0">中央区</label>
+                        <label for="inputArea0" data-i18n="candidateFilter:location.options.area0"></label>
                         <input type="checkbox" value="東区" name="inputArea" id="inputArea1">
-                        <label for="inputArea1">東区</label>
+                        <label for="inputArea1" data-i18n="candidateFilter:location.options.area1"></label>
                         <input type="checkbox" value="西区" name="inputArea" id="inputArea2">
-                        <label for="inputArea2">西区</label>
+                        <label for="inputArea2" data-i18n="candidateFilter:location.options.area2"></label>
                         <input type="checkbox" value="南区" name="inputArea" id="inputArea3">
-                        <label for="inputArea3">南区</label>
+                        <label for="inputArea3" data-i18n="candidateFilter:location.options.area3"></label>
                         <input type="checkbox" value="北区" name="inputArea" id="inputArea4">
-                        <label for="inputArea4">北区</label>
+                        <label for="inputArea4" data-i18n="candidateFilter:location.options.area4"></label>
                       </div>
                       <div>
                         <button onclick="is.allCheckArea();return false;" data-i18n="candidateFilter:selectAll"></button>
@@ -169,14 +170,12 @@
             <!-- /form-style -->
           </div>
         </section>
-        <!-- メインセクション -->
+        <!-- main section -->
         <footer>
           <ul class="button-group">
             <li>
               <div id="resultPanel" style="display:none;">
-                <button type="button" class="highlight" id="exeSend">
-                    提供依頼
-                </button>
+                <button type="button" class="highlight" id="exeSend" data-i18n="candidateFilter:step1Next"></button>
                 <div id="errorMsg">
                 </div>
               </div>

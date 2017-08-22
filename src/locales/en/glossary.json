@@ -1,3 +1,9 @@
 {
-    "title": "Wakaba Municipal Info Bank"
+    "title": "Wakaba Municipal Info Bank",
+    "pdsCalorieSmile": "Calorie Smile (Nutrition Data)",
+    "pdsLifeBeat": "Life Beat (Stress Data)",
+    "sessionExpiredDialog": {
+        "title": "Session Expired",
+        "action": "Please restart the application."
+    }
 }

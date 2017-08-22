@@ -8,15 +8,44 @@
     "category": "Categories",
     "condition": "Conditions",
     "target": "Data Store",
-    "age": "Age",
+    "searchParameters": "$t(candidateFilter:age.label), $t(candidateFilter:gender.label), $t(candidateFilter:location.label)",
+    "age": {
+        "label": "Age",
+        "options": {
+            "10s": "10s",
+            "20s": "20s",
+            "30s": "30s",
+            "40s": "40s",
+            "50s": "50s",
+            "60s": "60s",
+            "70s": "70s",
+            "80s": "80s",
+            "90s": "90s",
+            "100s": "100 years or older"
+        }
+    },
     "selectAll": "Select All",
     "unselectAll": "Unselect All",
-    "gender": "Gender",
-    "male": "Male",
-    "female": "Female",
-    "location": "Location",
+    "gender": {
+        "label": "Gender",
+        "options": {
+            "male": "Male",
+            "female": "Female"
+        }
+    },
+    "location": {
+        "label": "Location",
+        "options": {
+            "area0": "Central",
+            "area1": "East District",
+            "area2": "West District",
+            "area3": "South District",
+            "area4": "North District"
+        }
+    },
     "search": "Search",
     "reset": "Reset",
+    "step1Next": "Next",
     "msg": {
         "info": {
             "description": "Please specify the search conditions and search for your candidates."

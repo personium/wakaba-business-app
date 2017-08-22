@@ -231,12 +231,6 @@ $(document).ready(function() {
         var acceptCnt = 0;
         var rejectCnt = 0;
         if (cnt > 0) {
-          //var html = '<td width="20%" align="center">No</td>';
-          //html = html + '<td width="20%" align="center">年齢</td>';
-          //html = html + '<td width="20%" align="center">性別</td>';
-          //html = html + '<td width="20%" align="center">地域</td>';
-          //html = html + '<td width="20%" align="center">承諾日</td></tr>';
-          //$('#searchResult').append(html);
           for (var i in results) {
             console.log(results[i].CellURL);
             var cellUrl = results[i].CellURL + '/';

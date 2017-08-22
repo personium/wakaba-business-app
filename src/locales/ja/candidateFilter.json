@@ -7,15 +7,44 @@
     "category": "検索項目",
     "condition": "条件",
     "target": "対象情報",
-    "age": "年齢",
+    "searchParameters": "性別、年齢、地域",
+    "age": {
+        "label": "年齢",
+        "options": {
+            "10s": "10代",
+            "20s": "20代",
+            "30s": "30代",
+            "40s": "40代",
+            "50s": "50代",
+            "60s": "60代",
+            "70s": "70代",
+            "80s": "80代",
+            "90s": "90代",
+            "100s": "100歳以上"
+        }
+    },
     "selectAll": "全選択",
     "unselectAll": "全解除",
-    "gender": "性別",
-    "male": "男性",
-    "female": "女性",
-    "location": "地域",
+    "gender": {
+        "label": "性別",
+        "options": {
+            "male": "男性",
+            "female": "女性"
+        }
+    },
+    "location": {
+        "label": "地域",
+        "options": {
+            "area0": "中央区",
+            "area1": "東区",
+            "area2": "西区",
+            "area3": "南区",
+            "area4": "北区"
+        }
+    },
     "search": "検索",
     "reset": "条件リセット",
+    "step1Next": "提供依頼",    
     "msg": {
         "info": {
             "description": "条件を選択し、対象者を検索してください。"

@@ -3,7 +3,7 @@ sm.notImage = "https://demo.personium.io/HomeApplication/__/icons/no_app_image.p
 sm.imgBinaryFile = null;
 sendCount = 0;
 
-$(document).ready(function() {
+additionalCallback = function() {
 //入力内容を表示する
 　$(function () {
       var filter = "";
@@ -66,10 +66,10 @@ $(document).ready(function() {
         if (i > 0) dispSex += ",";
         switch (sexs[i]) {
           case "1":
-            dispSex += "男性";
+            dispSex += i18next.t("candidateFilter:gender.options.male");
             break;
           case "2":
-            dispSex += "女性";
+            dispSex += i18next.t("candidateFilter:gender.options.female");
             break;
         }
       }
@@ -268,4 +268,4 @@ $(document).ready(function() {
   }
 
  });
-});
+};

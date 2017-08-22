@@ -1,3 +1,6 @@
+/*
+ * Need to ask Sakamoto-san what are these for.
+ */
 $(function(){
   // tab
   // 1page1tabまで（暫定）

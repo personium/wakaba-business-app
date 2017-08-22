@@ -55,7 +55,7 @@ Common.LASTACTIVITY = new Date().getTime();
 // This method checks idle time
 Common.setIdleTime = function() {
     // Create Session Expired Modal
-    Common.createSessionExpired();
+    Common.appendSessionExpiredDialog();
 
     Common.appGetTargetToken().done(function(appToken) {
         Common.refreshTokenAPI(appToken.access_token).done(function(data) {
@@ -82,32 +82,41 @@ Common.setIdleTime = function() {
     document.onkeypress = function() {
       Common.LASTACTIVITY = new Date().getTime();
     };
-}
-Common.createSessionExpired = function() {
-    html = '<div id="modal-session-expired" class="modal fade" role="dialog" data-backdrop="static">';
-    html += '<div class="modal-dialog">';
-    html += '<div class="modal-content">';
-    html += '<div class="modal-header login-header">';
-    html += '<h4 class="modal-title">Session out</h4>';
-    html += '</div>';
-    html += '<div class="modal-body">';
-    html += 'セッションが切れました。アプリを再起動して下さい。';
-    html += '</div>';
-    html += '<div class="modal-footer">';
-    html += '<button type="button" class="btn btn-primary" id="b-session-relogin-ok" >Close</button>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-
-    modal = $(html);
-    $(document.body).append(modal);
-
-    // append event
-    $('#b-session-relogin-ok').on('click', function () {
-        open(location, '_self').close();
-    });
 };
+
+Common.appendSessionExpiredDialog = function() {
+    // Session Expiration
+    var html = [
+        '<div id="modal-session-expired" class="modal fade" role="dialog" data-backdrop="static">',
+            '<div class="modal-dialog">',
+                '<div class="modal-content">',
+                    '<div class="modal-header login-header">',
+                        '<h4 class="modal-title">',
+                            i18next.t("sessionExpiredDialog.title"),
+                        '</h4>',
+                    '</div>',
+                    '<div class="modal-body">',
+                        i18next.t("sessionExpiredDialog.message"),
+                    '</div>',
+                    '<div class="modal-footer">',
+                        '<button type="button" class="btn btn-primary" id="b-session-relogin-ok" >OK</button>',
+                    '</div>',
+               '</div>',
+           '</div>',
+        '</div>'
+    ].join("");
+    var modal = $(html);
+    $(document.body).append(modal);
+    $('#b-session-relogin-ok').on('click', function() { Common.closeTab(); });
+};
+
+/*
+ * clean up data and close tab
+ */
+Common.closeTab = function() {
+    window.close();
+};
+
 Common.checkIdleTime = function() {
   if (new Date().getTime() > Common.LASTACTIVITY + Common.IDLE_TIMEOUT) {
     $('#modal-session-expired').modal('show');

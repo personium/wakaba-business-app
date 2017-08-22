@@ -16,13 +16,16 @@
     "surveyContents": "依頼内容",
     "confirmSurveyContents_title": "依頼内容確認",
     "confirmSurveyContents_button": "依頼内容確認",
-    "expiredSession": "セッションの期限が切れています。<br>ログインし直して下さい。",
     "readRequestTitle": "$t(glossary:readRequestTarget)_閲覧許可依頼",
     "readRequestBody": "$t(glossary:readRequestTarget)の閲覧許可をお願いします。",
     "readResponseTitle": "$t(glossary:readRequestTarget)_登録依頼返信",
     "readResponseApprovedBody": "承認しました。",
     "readResponseDeclinedBody": "拒否しました。",
     "me": "自分",
+    "sessionExpiredDialog": {
+        "title": "$t(glossary:sessionExpiredDialog.title)",
+        "message": "セッションの期限が切れています。<br>$t(glossary:sessionExpiredDialog.action)"
+    },
     "msg": {
         "info": {
             "collaboratingData": "データ連携中です...",

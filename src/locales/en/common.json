@@ -16,13 +16,16 @@
     "surveyContents": "Survey Template",
     "confirmSurveyContents_title": "Survey Contents",
     "confirmSurveyContents_button": "Confirm",
-    "expiredSession": "Expiration date of the session has expired.<br>Please login again.",
     "readRequestTitle": "$t(glossary:readRequestTarget)_Read Permission Request",
     "readRequestBody": "Please grant read permission for your $t(glossary:readRequestTarget).",
     "readResponseTitle": "$t(glossary:readRequestTarget)_Read Permission Reply",
     "readResponseApprovedBody": "Read permission is granted.",
     "readResponseDeclinedBody": "Read permission is not granted.",
     "me": "Me",
+    "sessionExpiredDialog": {
+        "title": "$t(glossary:sessionExpiredDialog.title)",
+        "message": "Session has expired.<br>$t(glossary:sessionExpiredDialog.action)"
+    },
     "msg": {
         "info": {
             "collaboratingData": "Synchronizing data ...",

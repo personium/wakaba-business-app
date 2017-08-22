@@ -1,3 +1,9 @@
 {
-    "title": "わかば市情報バンク"
+    "title": "わかば市情報バンク",
+    "pdsCalorieSmile": "Calorie Smile（食事データ）",
+    "pdsLifeBeat": "ストレスデータ",
+    "sessionExpiredDialog": {
+        "title": "セッション期限切れ",
+        "action": "アプリを再起動して下さい。"
+    }
 }
