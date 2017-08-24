@@ -36,7 +36,9 @@ additionalCallback = function() {
         var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
         $("#target").attr("data-i18n", "glossary:nutritionData").localize();
         $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
-        $("#targetData").html('食事記録（写真）、撮影日時、コメント');
+        $("#targetData")
+                .attr("data-i18n", "glossary:survey.targetData.calorieSmile")
+                .localize();
         break;
         case "2":
         var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-neurosky%27,Services)';
@@ -48,7 +50,9 @@ additionalCallback = function() {
         var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
         $("#target").attr("data-i18n", "glossary:nutritionData").localize();
         $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
-        $("#targetData").html('食事記録（写真）、撮影日時、コメント');
+        $("#targetData")
+                .attr("data-i18n", "glossary:survey.targetData.calorieSmile")
+                .localize();
         break;
       }
 

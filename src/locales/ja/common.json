@@ -6,6 +6,7 @@
     "reLogin": "再ログイン",
     "close": "閉じる",
     "back": "戻る",
+    "send": "送信",
     "newRequest": "新規依頼",
     "requestStatus": "依頼状況",
     "confirmData": "データ確認",
@@ -17,6 +18,12 @@
     "surveyContents": "依頼内容",
     "confirmSurveyContents_title": "依頼内容確認",
     "confirmSurveyContents_button": "依頼内容確認",
+    "requestSent": {
+        "title": "発行完了",
+        "message": "$t(requestData)が発行されました。",
+        "checkRequestStatus": "$t(requestStatus)を確認する",
+        "sendMoreRequest": "発行を続ける"
+    },
     "readRequestTitle": "$t(glossary:readRequestTarget)_閲覧許可依頼",
     "readRequestBody": "$t(glossary:readRequestTarget)の閲覧許可をお願いします。",
     "readResponseTitle": "$t(glossary:readRequestTarget)_登録依頼返信",

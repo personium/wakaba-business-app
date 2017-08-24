@@ -121,14 +121,14 @@ $(document).ready(function() {
     if ( bodyarr.Type == null ) {
       var type = 1;
       var typeStr = "CalorieSmile";
-      var offerStr = "食事記録（写真）、撮影日時、コメント";
+      var offerStr = "glossary:survey.targetData.calorieSmile";
     } else {
       var type = bodyarr.Type;
       
       switch (type) {
         case "1":
           var typeStr = "glossary:pdsCalorieSmile";
-          var offerStr = "食事記録（写真）、撮影日時、コメント";
+          var offerStr = "glossary:survey.targetData.calorieSmile";
           break;
         case "2":
           var typeStr = "ストレスデータ";
@@ -180,7 +180,7 @@ $(document).ready(function() {
     $("#targetArea").html(areaStr);
 
     $("#targetData,#targetAttribute").attr("data-i18n", typeStr).localize();
-    $("#targetOffer").html(offerStr);
+    $("#targetOffer").attr("data-i18n", offerStr).localize();
 
     // 依頼内容
     // タイトル

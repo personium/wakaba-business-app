@@ -12,7 +12,26 @@
         "action": "アプリを再起動して下さい。"
     },
     "survey": {
-        "targetData": "対象データ",
+        "title": {
+            "calorieSmile": "お食事写真提供のお願い"
+        },
+        "messageBody": {
+            "value": {
+                "calorieSmile": "新商品企画のために、お食事データの提供をお願いします。"
+            }
+        },
+        "purpose": {
+            "placeholder": {
+                "storeB": "○○スーパーの・・・"
+            },
+            "value": {
+                "default": "新商品企画のため"
+            }
+        },
+        "targetData": {
+            "title": "対象データ",
+            "calorieSmile": "食事記録（写真）、撮影日時、コメント"
+        },
         "generalParameters": "一般属性",
         "period": "募集期間",
         "tilde": "～",

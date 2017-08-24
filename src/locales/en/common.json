@@ -6,6 +6,7 @@
     "reLogin": "Re-Login",
     "close": "Close",
     "back": "Back",
+    "send": "Send",
     "newRequest": "New request",
     "requestStatus": "Request status",
     "confirmData": "Confirm data",
@@ -17,6 +18,12 @@
     "surveyContents": "Survey Template",
     "confirmSurveyContents_title": "Survey Contents",
     "confirmSurveyContents_button": "Confirm",
+    "requestSent": {
+        "title": "Request Sent",
+        "message": "Request for data enquiry is sent.",
+        "checkRequestStatus": "Check request status",
+        "sendMoreRequest": "Send more"
+    },
     "readRequestTitle": "$t(glossary:readRequestTarget)_Read Permission Request",
     "readRequestBody": "Please grant read permission for your $t(glossary:readRequestTarget).",
     "readResponseTitle": "$t(glossary:readRequestTarget)_Read Permission Reply",

@@ -12,7 +12,26 @@
         "action": "Please restart the application."
     },
     "survey": {
-        "targetData": "Survey Data",
+        "title": {
+            "calorieSmile": "Please provide photos of meals"
+        },
+        "messageBody": {
+            "value": {
+                "calorieSmile": "For new product planning, we would like you to provide your food diaries."
+            }
+        },
+        "purpose": {
+            "placeholder": {
+                "storeB": "Store B ..."
+            },
+            "value": {
+                "default": "For new product planning."
+            }
+        },
+        "targetData": {
+            "title": "Survey Data",
+            "calorieSmile": "Food diary (photo), date & time taken, comments"
+        },
         "generalParameters": "Common Data",
         "period": "Survey Period",
         "tilde": "~",
