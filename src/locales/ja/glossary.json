@@ -10,5 +10,12 @@
     "sessionExpiredDialog": {
         "title": "セッション期限切れ",
         "action": "アプリを再起動して下さい。"
+    },
+    "survey": {
+        "targetData": "対象データ",
+        "generalParameters": "一般属性",
+        "period": "募集期間",
+        "tilde": "～",
+        "surveyPeriod": "{{startDate}} $t(glossary:survey.tilde) {{endDate}}"
     }
 }

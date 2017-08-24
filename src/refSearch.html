@@ -51,7 +51,7 @@
           <h3><span id="refSearchTitle"></span></h3>
           <div class="sub-info">
             <span class="item-label">募集期間：</span>
-            <span id ="refSearchTerm">2017/01/10 ～ 2017/03/31</span>
+            <span id ="refSearchTerm" data-i18n="glossary:surveyPeriod" data-i18n-options='{ "startDate": "2017/01/10", "endDate": "2017/03/31" }'></span>
             <span class="item-label">発行日：</span>
             <span id="refSearchSentDate"></span>
           </div>
@@ -150,10 +150,10 @@
             <h4 data-i18n="[html]label.purpose.message"></h4>
             <textarea id="iPurpose" type="text" data-i18n="[placeholder]label.purpose.placeholder" readonly="true"></textarea>
 
-            <h4 data-i18n="label.survey.targetData"></h4>
+            <h4 data-i18n="glossary:survey.targetData"></h4>
             <table class="row-table" style="width: 100%;">
               <tr>
-                <th data-i18n="label.survey.generalParameters"></th>
+                <th data-i18n="glossary:survey.generalParameters"></th>
                 <td data-i18n="candidateFilter:searchParameters"></td>
               </tr>
               <tr>
@@ -166,10 +166,10 @@
               </tr>
             </table>
 
-            <h4 data-i18n="label.survey.period"></h4>
+            <h4 data-i18n="glossary:survey.period"></h4>
             <div>
               <input id="inputTermS" type="date" value="" readonly="true">
-              <span>～</span>
+              <span data-i18n="glossary:survey.tilde"></span>
               <input id="inputTermE" type="date" value="" readonly="true">
               <a href="#" class="calendar-button"></a>
             </div>

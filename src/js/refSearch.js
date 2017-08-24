@@ -108,7 +108,7 @@ $(document).ready(function() {
     var bodyarr = JSON.parse(body);
     var sTerm = bodyarr.TermStart;
     var eTerm = bodyarr.TermEnd;
-    $("#refSearchTerm").html(sTerm + " ～ " + eTerm);
+    $("#refSearchTerm").attr("data-i18n","glossary:survey.surveyPeriod").localize({ startDate: sTerm, endDate: eTerm });
     if (sTerm) {
       $("#inputTermS").val(sTerm.replace(/\//g, "-"));
     }

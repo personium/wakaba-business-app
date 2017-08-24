@@ -5,6 +5,7 @@
     "decline": "拒否",
     "reLogin": "再ログイン",
     "close": "閉じる",
+    "back": "戻る",
     "newRequest": "新規依頼",
     "requestStatus": "依頼状況",
     "confirmData": "データ確認",
@@ -58,11 +59,6 @@
         "purpose": {
             "message": "利用目的<span class=\"explain\">（200文字以内）</span>",
             "placeholder": "提供依頼内容の利用目的を入力してください。"
-        },
-        "survey": {
-            "targetData": "対象データ",
-            "generalParameters": "一般属性",
-            "period": "募集期間"
         }
     }
 }

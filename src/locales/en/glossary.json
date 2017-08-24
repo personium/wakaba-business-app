@@ -10,5 +10,12 @@
     "sessionExpiredDialog": {
         "title": "Session Expired",
         "action": "Please restart the application."
+    },
+    "survey": {
+        "targetData": "Survey Data",
+        "generalParameters": "Common Data",
+        "period": "Survey Period",
+        "tilde": "~",
+        "surveyPeriod": "{{startDate}} $t(glossary:survey.tilde) {{endDate}}"
     }
 }

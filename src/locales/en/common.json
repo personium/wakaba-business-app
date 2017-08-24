@@ -5,6 +5,7 @@
     "decline": "Decline",
     "reLogin": "Re-Login",
     "close": "Close",
+    "back": "Back",
     "newRequest": "New request",
     "requestStatus": "Request status",
     "confirmData": "Confirm data",
@@ -58,11 +59,6 @@
         "purpose": {
             "message": "Purpose<span class=\"explain\"> (within 200 characters)</span>",
             "placeholder": "Please write the reason of this survey."
-        },
-        "survey": {
-            "targetData": "Survey Data",
-            "generalParameters": "Common Data",
-            "period": "Survey Period"
         }
     }
 }

@@ -83,10 +83,10 @@
             <h4 data-i18n="[html]label.purpose.message"></h4>
             <textarea id="iPurpose" type="text" value="" data-i18n="[placeholder]label.purpose.placeholder"></textarea>
 
-            <h4 data-i18n="label.survey.targetData"></h4>
+            <h4 data-i18n="glossary:survey.targetData"></h4>
             <table class="row-table" style="width: 100%;">
               <tr>
-                <th data-i18n="label.survey.generalParameters"></th>
+                <th data-i18n="glossary:survey.generalParameters"></th>
                 <td data-i18n="candidateFilter:searchParameters"></td>
               </tr>
               <tr>
@@ -97,20 +97,20 @@
               </tr>
             </table>
 
-            <h4 data-i18n="label.survey.period"></h4>
+            <h4 data-i18n="glossary:survey.period"></h4>
             <div>
               <input type="date" readonly="true" id="termStart">
-              <span>～</span>
+              <span data-i18n="glossary:survey.tilde"></span>
               <input type="date" id="termEnd">
             </div>
 
           </div>
         </section>
-        <!-- メインセクション -->
+        <!-- main section -->
         <footer>
           <ul class="button-group">
             <li>
-              <button formaction="./imageSearch.html">戻る</button>
+              <button formaction="./imageSearch.html" data-i18n="back"></button>
             </li>
             <li>
               <button type="button" class="highlight" id="b-send-message" data-i18n="confirmSurveyContents" data-i18n-options='{ "context": "button" }'></button>
