@@ -28,48 +28,25 @@ additionalCallback = function() {
         var extToken = sessionStorage.getItem("ISExtToken");
         var termEnd = sessionStorage.getItem("TermEnd");
 
+        var urlPre = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27';
+        var cellName;
+        var urlSuff = '%27,Services)';
         switch (type) {
         case "1":
-            var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
-            $("#iMassageTitle").attr("value", i18next.t("glossary:survey.title.calorieSmile"));
-            $("#iPurpose")
-                .attr("data-i18n", "[placeholder]glossary:survey.purpose.placeholder.storeB")
-                .val(i18next.t("glossary:survey.purpose.value.default"))
-                .localize();
-            $("#iMassageBody").val(i18next.t("glossary:survey.messageBody.value.calorieSmile"));
-            $("#targetItem")
-                .attr("data-i18n", "glossary:pdsCalorieSmile")
-                .localize();
-            $("#targetData")
-                .attr("data-i18n", "glossary:survey.targetData.calorieSmile")
-                .localize();
+            cellName = 'hn-app-genki';
+            fillInSurveyCalorieSmile();
             break;
         case "2":
-            var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-neurosky%27,Services)';
-            $("#iMassageTitle").attr("placeholder","ストレスデータ提供のお願い");
-            $("#iPurpose").attr("placeholder","○○病院の・・・");
-            $("#iMassageTitle").attr("value","ストレスデータ提供のお願い");
-            $("#iMassageBody").html("新商品企画のために、ストレスデータの提供をお願いします。");
-            $("#iPurpose").html("新商品企画のため");
-            $("#targetItem").html('ストレスデータ');
-            $("#targetData").html('ストレスデータ、コメント');
+            cellName = 'hn-app-neurosky';
+            fillInSurveyLifeBeat();
             break;
         default:
-            var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
-            $("#iMassageTitle").attr("value", i18next.t("glossary:survey.title.calorieSmile"));
-            $("#iPurpose")
-                .attr("data-i18n", "[placeholder]glossary:survey.purpose.placeholder.storeB")
-                .val(i18next.t("glossary:survey.purpose.value.default"))
-                .localize();
-            $("#iMassageBody").val(i18next.t("glossary:survey.messageBody.value.calorieSmile"));
-            $("#targetItem")
-                .attr("data-i18n", "glossary:pdsCalorieSmile")
-                .localize();
-            $("#targetData")
-                .attr("data-i18n", "glossary:survey.targetData.calorieSmile")
-                .localize();
+            cellName = 'hn-app-genki';
+            fillInSurveyCalorieSmile();
             break;
         }
+
+        var url = [urlPre, cellName, urlSuff].join("");
 
         var nowDate = new Date();
         var nowYear = nowDate.getFullYear();
@@ -249,6 +226,36 @@ additionalCallback = function() {
              }
           });
         });
+
+        function fillInSurveyCalorieSmile() {
+            $("#iMassageTitle").attr("value", i18next.t("glossary:survey.title.calorieSmile"));
+            $("#iMassageBody").val(i18next.t("glossary:survey.messageBody.value.calorieSmile"));
+            $("#iPurpose")
+                .attr("data-i18n", "[placeholder]glossary:survey.purpose.placeholder.storeB")
+                .val(i18next.t("glossary:survey.purpose.value.default"))
+                .localize();
+            $("#targetItem")
+                .attr("data-i18n", "glossary:pdsCalorieSmile")
+                .localize();
+            $("#targetData")
+                .attr("data-i18n", "glossary:survey.targetData.calorieSmile")
+                .localize();
+        };
+
+        function fillInSurveyLifeBeat() {
+            $("#iMassageTitle").attr("value", i18next.t("glossary:survey.title.lifeBeat"));
+            $("#iMassageBody").val(i18next.t("glossary:survey.messageBody.value.lifeBeat"));
+            $("#iPurpose")
+                .attr("data-i18n","[placeholder]glossary:survey.purpose.placeholder.hospitalC")
+                .val(i18next.t("glossary:survey.purpose.value.default"))
+                .localize();
+            $("#targetItem")
+                .attr("data-i18n", "glossary:pdsLifeBeat")
+                .localize();
+            $("#targetData")
+                .attr("data-i18n", "glossary:survey.targetData.lifeBeat")
+                .localize();
+        };
 
         function sendMessage(imgFilePath) {
           cellUrl = Common.cellUrl;

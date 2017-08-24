@@ -13,16 +13,19 @@
     },
     "survey": {
         "title": {
-            "calorieSmile": "お食事写真提供のお願い"
+            "calorieSmile": "お食事写真提供のお願い",
+            "lifeBeat": "ストレスデータ提供のお願い"
         },
         "messageBody": {
             "value": {
-                "calorieSmile": "新商品企画のために、お食事データの提供をお願いします。"
+                "calorieSmile": "新商品企画のために、お食事データの提供をお願いします。",
+                "lifeBeat": "新商品企画のために、ストレスデータの提供をお願いします。"
             }
         },
         "purpose": {
             "placeholder": {
-                "storeB": "○○スーパーの・・・"
+                "storeB": "○○スーパーの・・・",
+                "hospitalC": "○○病院の・・・"
             },
             "value": {
                 "default": "新商品企画のため"
@@ -30,7 +33,8 @@
         },
         "targetData": {
             "title": "対象データ",
-            "calorieSmile": "食事記録（写真）、撮影日時、コメント"
+            "calorieSmile": "食事記録（写真）、撮影日時、コメント",
+            "lifeBeat": "ストレスデータ、コメント"
         },
         "generalParameters": "一般属性",
         "period": "募集期間",

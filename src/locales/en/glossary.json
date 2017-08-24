@@ -13,16 +13,19 @@
     },
     "survey": {
         "title": {
-            "calorieSmile": "Please provide photos of meals"
+            "calorieSmile": "Request for food diary",
+            "lifeBeat": "Request for stress data"
         },
         "messageBody": {
             "value": {
-                "calorieSmile": "For new product planning, we would like you to provide your food diaries."
+                "calorieSmile": "For new product planning, we would like you to provide your food diaries.",
+                "lifeBeat": "For new product planning, we would like you to provide your stress data."
             }
         },
         "purpose": {
             "placeholder": {
-                "storeB": "Store B ..."
+                "storeB": "Store B ...",
+                "hospitalC": "Hospital C ..."
             },
             "value": {
                 "default": "For new product planning."
@@ -30,7 +33,8 @@
         },
         "targetData": {
             "title": "Survey Data",
-            "calorieSmile": "Food diary (photo), date & time taken, comments"
+            "calorieSmile": "Food diary (photo), date & time taken, comments",
+            "lifeBeat": "Stress data, comments"
         },
         "generalParameters": "Common Data",
         "period": "Survey Period",

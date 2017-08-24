@@ -131,8 +131,8 @@ $(document).ready(function() {
           var offerStr = "glossary:survey.targetData.calorieSmile";
           break;
         case "2":
-          var typeStr = "ストレスデータ";
-          var offerStr = "ストレスデータ、コメント";
+          var typeStr = "glossary:pdsLifeBeat";
+          var offerStr = "glossary:survey.targetData.lifeBeat";
           break;
       }
     }
@@ -486,69 +486,6 @@ rs.getSearchUserInfo = function(extToken) {
 var data = sessionStorage.getItem("appType");
 console.log(data);
 
-/*
-  var filter = "";
-
-  var data = $('#inputData').val();
-  var age = $('#inputAge').val();
-  var sex = $('#inputSex').val();
-  var area = $('#inputArea').val();
-  if (data > 0) {
-    sessionStorage.setItem("SearchData", data);
-  }
-  if (age > 0) {
-    sessionStorage.setItem("SearchAge", age);
-
-    var nowDate = new Date();
-    var nowYear = nowDate.getFullYear();
-    var enYear = nowYear - age;
-    var enMonth = nowDate.getMonth() + 1;
-    enMonth = ("0" + enMonth).slice(-2);
-    var enDay = ("0" + nowDate.getDate()).slice(-2);
-
-    var enBirth = enYear + "-" + enMonth + "-" + enDay;
-    var stDate = new Date(enYear, nowDate.getMonth(), nowDate.getDate());
-    stDate.setFullYear(stDate.getFullYear() - 10);
-    stDate.setDate(stDate.getDate() + 1);
-    var stMonth = stDate.getMonth() + 1;
-    stMonth = ("0" + stMonth).slice(-2);
-    var stDay = ("0" + stDate.getDate()).slice(-2);
-    var stBirth = stDate.getFullYear() + "-" + stMonth + "-" + stDay;
-
-    sessionStorage.setItem("SearchStBirth", stBirth);
-    sessionStorage.setItem("SearchEnBirth", enBirth);
-
-    if (age < 100) {
-      filter = "Birth+ge+%27" + stBirth + "%27+and+Birth+le+%27" + enBirth + "%27";
-    } else {
-      filter = "Birth+le+%27" + enBirth + "%27";
-    }
-  } else {
-    sessionStorage.removeItem("SearchAge");
-    sessionStorage.removeItem("SearchStBirth");
-    sessionStorage.removeItem("SearchEnBirth");
-  }
-  if (sex !== "0") {
-    sessionStorage.setItem("SearchSex", sex);
-    if (filter.length > 0) {
-      filter += "+and+";
-    }
-    filter += "Sex+eq+" + sex;
-  } else {
-    sessionStorage.removeItem("SearchSex");
-    //sessionStorage.setItem("SearchSex", null);
-  }
-  if (area.length > 0) {
-    sessionStorage.setItem("SearchArea", area);
-    if (filter.length > 0) {
-      filter += "+and+";
-    }
-    filter += "substringof%28%27" + area + "%27,Address%29";
-  } else {
-    sessionStorage.removeItem("SearchArea");
-    //sessionStorage.setItem("SearchArea", null);
-  }
-*/
   switch (data) {
     case "1":
     $('#selectData').text('食事データの提供に同意頂いた方')
@@ -562,11 +499,6 @@ console.log(data);
   }
   console.log(url);
 
-/*
-  if (filter.length > 0) {
-    url += '+and+' + filter;
-  }
-*/
   return $.ajax({
     type: "GET",
     url: url,

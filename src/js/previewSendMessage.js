@@ -4,57 +4,63 @@ sm.imgBinaryFile = null;
 sendCount = 0;
 
 additionalCallback = function() {
-//入力内容を表示する
-　$(function () {
-      var filter = "";
-      // イメージファイル初期化
-      $("#idImgFile").attr('src', sm.notImage);
-      Common.dispUserName(Common.cellUrl);
+    // display survey info
+    $(function () {
+        var filter = "";
+        // initialization of image file
+        $("#idImgFile").attr('src', sm.notImage);
+        Common.dispUserName(Common.cellUrl);
 
-      var messageBody = sessionStorage.getItem("MessageBody");
-      var body = JSON.parse(messageBody);
-      var title = body.Title;
-      var pBody = body.Body.replace( /"\"/g ,"" );
-      pBody = pBody.substr( 1 );
-      pBody = pBody.substr( 0, pBody.length-1 );
-      pBody = JSON.parse(pBody);
+        var messageBody = sessionStorage.getItem("MessageBody");
+        var body = JSON.parse(messageBody);
+        var title = body.Title;
+        var pBody = body.Body.replace( /"\"/g ,"" );
+        pBody = pBody.substr( 1 );
+        pBody = pBody.substr( 0, pBody.length-1 );
+        pBody = JSON.parse(pBody);
 
-      var message = pBody.Body;
-      var purpose = pBody.Text;
-      var dataType = pBody.Type;
-      var sexs = pBody.SearchSex.split(",");
-      var ages = pBody.SearchAge.split(",");
-      var areas = pBody.SearchArea;
-      var sendCount = pBody.sendCount;
-      var imgUrl = pBody.ImgUrl;
-      var termStart = pBody.TermStart.replace( /\//g,"-" );
-      var termEnd = pBody.TermEnd.replace( /\//g,"-" );
-      sessionStorage.setItem("TermEnd", termEnd);
+        var message = pBody.Body;
+        var purpose = pBody.Text;
+        var dataType = pBody.Type;
+        var sexs = pBody.SearchSex.split(",");
+        var ages = pBody.SearchAge.split(",");
+        var areas = pBody.SearchArea;
+        var sendCount = pBody.sendCount;
+        var imgUrl = pBody.ImgUrl;
+        var termStart = pBody.TermStart.replace( /\//g,"-" );
+        var termEnd = pBody.TermEnd.replace( /\//g,"-" );
+        sessionStorage.setItem("TermEnd", termEnd);
 
-      switch (dataType) {
+        switch (dataType) {
         case "1":
-        var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
-        $("#target").attr("data-i18n", "glossary:nutritionData").localize();
-        $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
-        $("#targetData")
+            var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
+            $("#target").attr("data-i18n", "glossary:nutritionData").localize();
+            $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
+            $("#targetData")
                 .attr("data-i18n", "glossary:survey.targetData.calorieSmile")
                 .localize();
-        break;
+            break;
         case "2":
-        var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-neurosky%27,Services)';
-        $("#target").html('ストレスデータ');
-        $("#targetItem").html('ストレスデータ');
-        $("#targetData").html('ストレスデータ、コメント');
-        break;
+            var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-neurosky%27,Services)';
+            $("#target")
+                .attr("data-i18n", "glossary:pdsLifeBeat")
+                .localize();
+            $("#targetItem")
+                .attr("data-i18n", "glossary:pdsLifeBeat")
+                .localize();
+            $("#targetData")
+                .attr("data-i18n", "glossary:survey.targetData.lifeBeat")
+                .localize();
+            break;
         default:
-        var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
-        $("#target").attr("data-i18n", "glossary:nutritionData").localize();
-        $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
-        $("#targetData")
+            var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$inlinecount=allpages&$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
+            $("#target").attr("data-i18n", "glossary:nutritionData").localize();
+            $("#targetItem").attr("data-i18n", "glossary:pdsCalorieSmile").localize();
+            $("#targetData")
                 .attr("data-i18n", "glossary:survey.targetData.calorieSmile")
                 .localize();
-        break;
-      }
+            break;
+        }
 
       $("#targetNumberOfPeople").html(sendCount);
       $("#targetArea").html(areas);
