@@ -7,6 +7,8 @@
     "date": "日時",
     "comment": "コメント",
     "pdsLifeBeat": "ストレスデータ",
+    "backToList": "一覧へ",
+    "requestDetails": "依頼詳細",
     "sessionExpiredDialog": {
         "title": "セッション期限切れ",
         "action": "アプリを再起動して下さい。"
@@ -38,6 +40,7 @@
         },
         "generalParameters": "一般属性",
         "period": "募集期間",
+        "periodWithColon": "$t(glossary:survey.period)：",
         "tilde": "～",
         "surveyPeriod": "{{startDate}} $t(glossary:survey.tilde) {{endDate}}"
     }

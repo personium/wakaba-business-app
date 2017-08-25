@@ -43,14 +43,14 @@
     <main>
       <section>
         <h2>
-          <a href="./reqStatus.html">一覧へ</a>
+          <a href="./reqStatus.html" data-i18n="glossary:backToList"></a>
           <span>＞</span>
-          <span>依頼詳細</span>
+          <span data-i18n="glossary:requestDetails"></span>
         </h2>
         <div>
           <h3><span id="refSearchTitle"></span></h3>
           <div class="sub-info">
-            <span class="item-label">募集期間：</span>
+            <span class="item-label" data-i18n="glossary:survey.periodWithColon"></span>
             <span id ="refSearchTerm" data-i18n="glossary:surveyPeriod" data-i18n-options='{ "startDate": "2017/01/10", "endDate": "2017/03/31" }'></span>
             <span class="item-label">発行日：</span>
             <span id="refSearchSentDate"></span>
@@ -138,17 +138,17 @@
             <!-- /form-style -->
 
             <h4 data-i18n="[html]label.title.message"></h4>
-            <input id="iMassageTitle" type="text" value="" data-i18n="[placeholder]label.title.placeholder" readonly="true">
+            <input id="iMassageTitle" maxlength="30" type="text" value="" data-i18n="[placeholder]label.title.placeholder" readonly="true">
 
             <h4 data-i18n="[html]label.image"></h4>
             <div id="imgName" class="confirm-text"></div>
             <div><img id="imgPreview" src="" class="sample-image" alt="preview"></div>
 
             <h4 data-i18n="[html]label.messageBody.message"></h4>
-            <textarea id="iBody" type="text" data-i18n="[placeholder]label.messageBody.placeholder" readonly="true"></textarea>
+            <textarea id="iBody" maxlength="200" type="text" data-i18n="[placeholder]label.messageBody.placeholder" readonly="true"></textarea>
 
             <h4 data-i18n="[html]label.purpose.message"></h4>
-            <textarea id="iPurpose" type="text" data-i18n="[placeholder]label.purpose.placeholder" readonly="true"></textarea>
+            <textarea id="iPurpose" maxlength="200" type="text" data-i18n="[placeholder]label.purpose.placeholder" readonly="true"></textarea>
 
             <h4 data-i18n="glossary:survey.targetData.title"></h4>
             <table class="row-table" style="width: 100%;">

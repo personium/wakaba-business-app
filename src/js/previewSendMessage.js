@@ -114,47 +114,6 @@ additionalCallback = function() {
     sendMessage();
   });
 
-//入力内容チェック
-  $(function() {
-    $("#iMassageTitle").blur(function() {
-       if ( !isColCheckTitle($(this).val()) ) {
-          $(this).focus();
-       }
-    });
-  });
-
-  $(function() {
-    $("#iPurpose").blur(function() {
-       if ( !isColCheckPurpose($(this).val()) ) {
-          $(this).focus();
-       }
-    });
-  });
-
-  $(function() {
-    $("#iTerm1").blur(function() {
-       if ( !isNumericYear($(this).val()) ) {
-          $(this).focus();
-       }
-    });
-  });
-
-  $(function() {
-    $("#iTerm2").blur(function() {
-       if ( !isNumericMonth($(this).val()) ) {
-          $(this).focus();
-       }
-    });
-  });
-
-  $(function() {
-    $("#iTerm3").blur(function() {
-       if ( !isNumericDay($(this).val()) ) {
-          $(this).focus();
-       }
-    });
-  });
-
   function sendMessage() {
     cellUrl = Common.cellUrl;
     sendMessageUrl = cellUrl + "__message/send";
@@ -195,86 +154,6 @@ additionalCallback = function() {
       history.back();
     });
 	
-  }
-
-  function isColCheckTitle(value) {
-    if ( value == null )
-    return;
-    if( value.length > 30 ) {
-      alert("30文字以内で入力してください");
-      return false;
-    }
-    return true;
-  }
-
-  function isColCheckPurpose(value) {
-    if ( value == null )
-    return;
-    if( value.length > 200 ) {
-      alert("200文字以内で入力してください");
-      return false;
-    }
-    return true;
-  }
-
-  function isNumeric(value) {
-    if ( value == null )
-    return;
-    if( value.match( /[^0-9.,-]+/ ) ) {
-      alert("半角数字で入力して下さい。");
-      return false;
-    }
-    return true;
-  }
-
-  function isNumericYear(value) {
-    if ( value == null )
-    return;
-    if( value.match( /[^0-9.,-]+/ ) ) {
-      alert("半角数字で入力して下さい。");
-      return false;
-    }
-    if ( parseInt(value) < 1970  ) {
-      alert("有効な日付を入力してください。");
-      return false;
-    }
-    return true;
-  }
-
-  function isNumericMonth(value) {
-    if ( value == null )
-    return;
-    if( value.match( /[^0-9.,-]+/ ) ) {
-      alert("半角数字で入力して下さい。");
-      return false;
-    }
-    if ( parseInt(value) > 12  ) {
-      alert("有効な日付を入力してください。");
-      return false;
-    }
-    if ( value.length !== 2  ) {
-      alert("月は2桁で入力してください。");
-      return false;
-    }
-    return true;
-  }
-
-  function isNumericDay(value) {
-    if ( value == null )
-    return;
-    if( value.match( /[^0-9.,-]+/ ) ) {
-      alert("半角数字で入力して下さい。");
-      return false;
-    }
-    if ( parseInt(value) > 31  ) {
-      alert("有効な日付を入力してください。");
-      return false;
-    }
-    if ( value.length !== 2  ) {
-      alert("日付は2桁で入力してください。");
-      return false;
-    }
-    return true;
   }
 
  });
