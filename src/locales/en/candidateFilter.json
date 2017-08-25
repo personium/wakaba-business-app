@@ -2,7 +2,7 @@
     "candidates": "Candidates",
     "selectCandidates": "Select candidates",
     "searchResult": "candidate",
-    "searchResult_few": "Not engouh candidates.",
+    "searchResult_few": "Not enough candidates.",
     "searchResult_plural": "candidates",
     "searchResult_none": "Cannot find any candidates.",
     "category": "Categories",

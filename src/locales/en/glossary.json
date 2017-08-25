@@ -15,8 +15,10 @@
     },
     "survey": {
         "title": {
-            "calorieSmile": "Request for food diary",
-            "lifeBeat": "Request for stress data"
+            "noTitle": "(No subject)",
+            "calorieSmile": "Food Diary Survey",
+            "lifeBeat": "Stress Data Survey",
+            "dummy": "Online Shopping Patterns Survey"
         },
         "messageBody": {
             "value": {
@@ -41,6 +43,29 @@
         "generalParameters": "Common Data",
         "period": "Survey Period",
         "periodWithColon": "$t(glossary:survey.period):",
+        "dateOfIssue": "Date of Issue",
+        "status": {
+            "title": "Status",
+            "collecting": "In prog.",
+            "finished": "Fin."
+        },
+        "replyStatus": {
+            "approved": "Approved",
+            "denied": "Denied",
+            "unanswered": "Unanswered"
+        },
+        "requestName": "Request Name",
+        "candidate": "Candidate(s)",
+        "dateOfIssueWithColon": "Date of Issue:",
+        "deadline": "Application Deadline",
+        "surveyContents": {
+            "title": "Survey Template"
+        },
+        "collectedData": {
+            "title": "Collected Data",
+            "message": "List of data approved by the candidates."
+        },
+        "consentDate": "Consent Date",
         "tilde": "~",
         "surveyPeriod": "{{startDate}} $t(glossary:survey.tilde) {{endDate}}"
     }

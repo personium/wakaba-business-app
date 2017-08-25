@@ -15,7 +15,6 @@
     "accessTo": "{{value}}参照",
     "createSurvey": "依頼内容の入力",
     "confirm": "確認",
-    "surveyContents": "依頼内容",
     "confirmSurveyContents_title": "依頼内容確認",
     "confirmSurveyContents_button": "依頼内容確認",
     "requestSent": {
@@ -49,7 +48,8 @@
             "refreshTokenExpiryDateMissing": "リフレッシュ$t(msg.error.tokenExpiryDateMissing)",
             "failedToRetrieveData": "データの取得に失敗しました。",
             "dataNotFound": "データがありません。",
-            "failedToRefreshToken": "リフレッシュトークンの更新に失敗しました。<br>画面をリロードしてください。"
+            "failedToRefreshToken": "リフレッシュトークンの更新に失敗しました。<br>画面をリロードしてください。",
+            "failedToReceiveApproval": "提供に同意されている保持者が見つかりません。"
         }
     },
     "label": {

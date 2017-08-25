@@ -321,13 +321,15 @@ is.displaySearchResult = function(candidateCount) {
         .attr("data-i18n", "candidateFilter:searchResult")
         .localize({
             count: parseInt(candidateCount)
-        }); // convert to integer explicitly to make use of the pluralize function
+        })
+        .show(); // convert to integer explicitly to make use of the pluralize function
 };
 
 is.displaySearchResultFew = function() {
     $('#searchResult')
         .attr("data-i18n", "candidateFilter:searchResult_few")
         .localize();
+    $('#resultText').hide();
 
     $('#exeSend').hide();
 };
@@ -336,6 +338,7 @@ is.displaySearchResultNone = function() {
     $('#searchResult')
         .attr("data-i18n", "candidateFilter:searchResult_none")
         .localize();
+    $('#resultText').hide();
 
     $('#exeSend').hide();
 };

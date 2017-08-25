@@ -62,33 +62,16 @@ additionalCallback = function() {
           $('#termEnd').val(term);
         }
 
-        var dispSex = "";
-        for (var i in sexs) {
-          if (i > 0) dispSex += ",";
-          switch (sexs[i]) {
-            case "1":
-              dispSex += "男性";
-              break;
-            case "2":
-              dispSex += "女性";
-              break;
-          }
-        }
-
-        var dispAge = "";
         filter = "(";
         for (var i in ages) {
           var age = ages[i];
           if (i > 0) {
             filter += "+or+";
-            dispAge += ",";
           }
           if (age < 100) {
             filter += "(Birthday+ge+%27" + stBirths[i] + "%27+and+Birthday+le+%27" + enBirths[i] + "%27)";
-            dispAge += age + "代";
           } else {
             filter += "(Birthday+le+%27" + enBirths[i] + "%27)";
-            dispAge += age + "歳以上";
           }
         }
 
@@ -101,16 +84,13 @@ additionalCallback = function() {
           filter += "(Sex+eq+" + sex + ")";
         }
 
-        var dispArea = "";
         filter += ")+and+(";
         for (var i in areas) {
           var area = areas[i];
           if (i > 0) {
               filter += "+or+";
-              dispArea += ",";
           }
           filter += "(substringof%28%27" + area + "%27,Address%29)";
-          dispArea += area;
         }
         filter += ")";
 
@@ -130,13 +110,8 @@ additionalCallback = function() {
           for ( var i = 0; i < response.d.results.length; i ++ ) {
             sendTo = sendTo + response.d.results[i].CellURL + ",";
           }
-          $('#searchItem').html(
-          "年齢：" + dispAge + "<br>" +
-          "性別：" + dispSex + "<br>" +
-          "地域：" + dispArea
-          );
+
           sendCount = response.d.results.length;
-          $('#searchResult').html(sendCount + " 人の該当者にデータ提供依頼を送信します。")
           sendTo = sendTo.substr( 0, sendTo.length-1 );
           if ( sendTo.length !== 0 ) {
             sessionStorage.setItem("SendToCell", sendTo);
@@ -177,7 +152,7 @@ additionalCallback = function() {
                   sendMessage(imgFilePath);
               }).fail(function(response) {
                   console.log(response);
-                  alert("メッセージの送信に失敗しました");
+                  alert(i18next.t("msg.error.failedToSendMessage"));
               });
               //testPhotoSave();
           } else {

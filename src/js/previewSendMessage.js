@@ -150,7 +150,7 @@ additionalCallback = function() {
       }
     }).fail(function(response){
       console.log(response);
-      alert("メッセージの送信に失敗しました");
+      alert(i18next.t("msg.error.failedToSendMessage"));
       history.back();
     });
 	

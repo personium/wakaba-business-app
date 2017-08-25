@@ -157,13 +157,12 @@ $(document).ready(function() {
       if (i !== 0) {
         sexStr += "、";
       }
-      //$(':checkbox[name="inputSex"][value=' + sex[i] + ']').prop('checked',true);
       switch (sex[i]) {
         case "1":
-          sexStr += "男性";
+          sexStr += i18next.t("candidateFilter:gender.options.male");
           break;
         case "2":
-          sexStr += "女性";
+          sexStr += i18next.t("candidateFilter:gender.options.female");
           break;
       }
     }
@@ -278,9 +277,9 @@ $(document).ready(function() {
                   arr['CellURL'] = userInfo[0].d.results[0].CellURL + '/';
                   console.log(arr.CellURL);
                   if (userInfo[0].d.results[0].Sex == 1 ){
-                    var sex = "男性";
+                    var sex = "candidateFilter:gender.options.male";
                   } else {
-                    var sex = "女性";
+                    var sex = "candidateFilter:gender.options.female";
                   }
                   arr['Sex'] = sex;
                   var birthday = userInfo[0].d.results[0].Birthday;
@@ -298,20 +297,17 @@ $(document).ready(function() {
                   var minutes = toDoubleDigits(d.getMinutes());
                   date = year + '/' + month + '/' + day + ' ' + hour + ':' + minutes;
                   arr['AcceptDate'] = date;
-                  //var html = '<tr><td width="20%" align="center"><a class="allToggle" href="javascript:void(0)" onClick="rs.moveDispImage(\'' + arr.CellURL + '\');return false;">' + ("00" + arr.No).slice(-3) + '</a></td>';
-                  //html = html + '<td width="10%" align="center">' + arr.Age + '</td>'
-                  //html = html + '<td width="10%" align="center">' + arr.Sex + '</td>'
-                  //html = html + '<td width="20%" align="center">' + arr.Address + '</td>'
-                  //html = html + '<td width="20%" align="center">' + arr.AcceptDate + '</td></tr>';
                   var arrNo = ("00" + arr.No).slice(-3);
                   var html = '<tr>';
                   html += '<td><a href="#detail' + arrNo + '" class="switch-trigger">' + arrNo + '</a></td>';
-                  html += '<td>' + arr.Sex + '</td>';
-                  html += '<td>' + arr.Age + '歳</td>';
+                  html += '<td data-i18n="' + arr.Sex + '">' + '</td>';
+                  html += '<td>' + arr.Age + '</td>';
                   html += '<td>' + arr.Address + '</td>';
                   html += '<td>' + arr.AcceptDate + '</td>';
                   html += '</tr>';
-                  $('#searchResult').append(html);
+                  $('#searchResult')
+                    .append(html)
+                    .localize();
                   rs.createDispImage(arr.CellURL, arrNo);
                 });
                 var toDoubleDigits = function(num) {
@@ -328,14 +324,22 @@ $(document).ready(function() {
             }
           }
         }
-        $('#issue,#targetCnt').text(sessionStorage.getItem("SearchSeq"));
+        var candidateCount = sessionStorage.getItem("SearchSeq");
+        $('#issue,#targetCnt').text(candidateCount);
+        $('#resultText')
+            .attr("data-i18n", "candidateFilter:searchResult")
+            .localize({
+                count: parseInt(candidateCount)
+            }); // convert to integer explicitly to make use of the pluralize function
         $('#accept').text(acceptCnt);
         $('#reject').text(rejectCnt);
-        $('#pending').text(parseInt(sessionStorage.getItem("SearchSeq")) - (acceptCnt + rejectCnt));
+        $('#pending').text(parseInt(candidateCount) - (acceptCnt + rejectCnt));
         if (!dispFlag) {
           $('#searchResult').empty();
-          var html = '<tr><td colspan=5><label>提供に同意されている保持者が見つかりません。</label></td></tr>';
-          $('#searchResult').append(html);
+          var html = '<tr><td colspan=5><label data-i18n="msg.error.failedToReceiveApproval"></label></td></tr>';
+          $('#searchResult')
+            .append(html)
+            .localize();
         }
       });
       $('#resultPanel').css("display", "block");
@@ -556,8 +560,6 @@ rs.getReceivedMessageAPI = function() {
 rs.getReceivedDateAPI = function() {
   return $.ajax({
     type: "GET",
-    //url: Common.cellUrl + '__ctl/ReceivedMessage?$filter=From+eq+%27' + cellUrl + '%27+and+substringof%28%27承認%27,Body%29&$inlinecount=allpages',
-    //                url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages',
     url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages&$filter=InReplyTo%20eq%20%27' + sessionStorage.getItem("RQmessageId") + '%27&$filter=From%20eq%20%27' + cellUrl + '%27',
     headers: {
       'Authorization':'Bearer ' + Common.token,

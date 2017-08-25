@@ -15,7 +15,6 @@
     "accessTo": "Access to {{value}}",
     "createSurvey": "Create survey",
     "confirm": "Confirm",
-    "surveyContents": "Survey Template",
     "confirmSurveyContents_title": "Survey Contents",
     "confirmSurveyContents_button": "Confirm",
     "requestSent": {
@@ -49,7 +48,8 @@
             "refreshTokenExpiryDateMissing": "Refresh token's expiry date is not set.",
             "failedToRetrieveData": "Failed to retrieve data.",
             "dataNotFound": "Data not found.",
-            "failedToRefreshToken": "Failed to refresh token.<br>Please reload page."
+            "failedToRefreshToken": "Failed to refresh token.<br>Please reload page.",
+            "failedToReceiveApproval": "There are no approval yet."
         }
     },
     "label": {

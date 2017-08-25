@@ -52,40 +52,40 @@
           <div class="sub-info">
             <span class="item-label" data-i18n="glossary:survey.periodWithColon"></span>
             <span id ="refSearchTerm" data-i18n="glossary:surveyPeriod" data-i18n-options='{ "startDate": "2017/01/10", "endDate": "2017/03/31" }'></span>
-            <span class="item-label">発行日：</span>
+            <span class="item-label" data-i18n="glossary:survey.dateOfIssueWithColon"></span>
             <span id="refSearchSentDate"></span>
           </div>
           <div class="current-status-boxes">
-            <div class="lime">収集中</div>
+            <div class="lime" data-i18n="glossary:survey.status.collecting"></div>
             <div class="gray">
               <div>
                 <span class="fa fa-user colorFa-user fa-user-icon"></span>
               </div>
               <div class="status-number-box">
                 <div class="status-number gray"><span id="issue">0</span></div>
-                <div>発行人数</div>
+                <div data-i18n="glossary:survey.candidate"></div>
               </div>
             </div>
             <div class="status-number-box">
               <div class="status-number consent-text"><span id="accept">0</span></div>
-              <div>許諾</div>
+              <div data-i18n="glossary:survey.replyStatus.approved"></div>
             </div>
             <div class="status-number-box">
               <div class="status-number rejection-text"><span id="reject">0</span></div>
-              <div>拒否</div>
+              <div data-i18n="glossary:survey.replyStatus.denied"></div>
             </div>
             <div class="status-number-box">
               <div class="status-number"><span id="pending">0</span></div>
-              <div>未回答</div>
+              <div data-i18n="glossary:survey.replyStatus.unanswered"></div>
             </div>
           </div>
         </div>
         <ul class="tab">
           <li class="current">
-            <a href="#tab1" data-i18n="surveyContents"></a>
+            <a href="#tab1" data-i18n="glossary:survey.surveyContents.title"></a>
           </li>
           <li>
-            <a href="#tab2">収集データ</a>
+            <a href="#tab2" data-i18n="glossary:survey.collectedData.title"></a>
           </li>
         </ul>
         <div id="tab1" class="tab-content">
@@ -94,7 +94,7 @@
               <div class="target-summary">
                 <span class="fa fa-user colorFa-user fa-user-icon"></span>
                 <span class="numberOfPeople" id="targetCnt">0</span>
-                <span>人の対象者</span>
+                <span id="resultText"></span>
               </div>
               <table class="no-border-table">
                 <thead>
@@ -177,15 +177,15 @@
         </div>
         <div id="tab2" class="tab-content" style="display: none;">
           <div id="list-view" class="switch-pages">
-            <div style="margin-bottom: 20px;">「許諾」して頂いた方々</div>
+            <div style="margin-bottom: 20px;" data-i18n="glossary:survey.collectedData.message"></div>
             <table class="sortable-table" style="width: 100%;">
               <thead>
                 <tr>
                   <th class="sortable">No</th>
                   <th class="sortable" data-i18n="candidateFilter:gender.label"></th>
                   <th class="sortable" data-i18n="candidateFilter:age.label"></th>
-                  <th class="sortable">地域</th>
-                  <th class="sortable">承諾日</th>
+                  <th class="sortable" data-i18n="candidateFilter:location.label"></th>
+                  <th class="sortable" data-i18n="glossary:survey.consentDate"></th>
                 </tr>
               </thead>
               <tbody id="searchResult">
