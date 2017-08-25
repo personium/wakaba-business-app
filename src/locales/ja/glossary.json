@@ -8,6 +8,8 @@
     "comment": "コメント",
     "pdsLifeBeat": "ストレスデータ",
     "backToList": "一覧へ",
+    "listOfApproved": "すべて",
+    "dataItem": "{{value}}さんのデータ",
     "requestDetails": "依頼詳細",
     "sessionExpiredDialog": {
         "title": "セッション期限切れ",

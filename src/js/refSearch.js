@@ -141,21 +141,16 @@ $(document).ready(function() {
     var ageStr = "";
     for (i=0; i<age.length; i++){
       if (i !== 0) {
-        ageStr += "、";
+        ageStr += i18next.t("comma");
       }
-      //$(':checkbox[name="inputAge"][value=' + age[i] + ']').prop('checked',true);
-      if (age[i] < 100) {
-        ageStr += age[i] + "代";
-      } else {
-        ageStr += age[i] + "歳以上";
-      }
+      ageStr += i18next.t(["candidateFilter:age.options.", age[i], "s"].join(""));
     }
     $("#targetAge").html(ageStr);
 
     var sexStr = "";
     for (i=0; i<sex.length; i++){
       if (i !== 0) {
-        sexStr += "、";
+        sexStr += i18next.t("comma");
       }
       switch (sex[i]) {
         case "1":
@@ -187,7 +182,9 @@ $(document).ready(function() {
     // イメージ画像
     var imgUrl = bodyarr.ImgUrl;
     if (imgUrl === null) {
-      $("#imgName").html("なし");
+      $("#imgName")
+          .attr("data-i18n", "noImageAvailable")
+          .localize();
       $("#imgPreview").css("display","none");
     } else {
       var imgNm = rs.getName(imgUrl);
@@ -238,10 +235,10 @@ $(document).ready(function() {
             });
             if (newLine.length > 0) {
               var pLine = newLine.filter(function(item, index) {
-                if (item.Body.indexOf("承認") >= 0) return true;
+                if ((item.Body.indexOf("承認") >= 0) || (item.Body.indexOf("approved") >= 0)) return true;
               });
               var nLine = newLine.filter(function(item, index) {
-                if (item.Body.indexOf("キャンセル") >= 0) return true;
+                if ((item.Body.indexOf("キャンセル") >= 0) || (item.Body.indexOf("canceled") >= 0)) return true;
               });
               // 0:対象外 1:承認 2:キャンセル
               var statusType = 0;
@@ -381,10 +378,12 @@ rs.createDispImage = function(cellUrl, no) {
   var id = "detail" + no;
   var html = '<div id="' + id + '" class="switch-pages" style="display:none;">';
   html += '<div class="bread">';
-  html += '<a href="#list-view" class="switch-trigger">すべて</a>';
-  html += '<span>＞</span><span>' + no + 'さんのデータ</span>';
+  html += '<a href="#list-view" class="switch-trigger" data-i18n="glossary:listOfApproved"></a>';
+  html += '<span>＞</span><span data-i18n="glossary:dataItem" data-i18n-options=\'{ "value": "' + no +'" }\'></span>';
   html += '</div></div>';
-  $('#resultData').append(html);
+  $('#resultData')
+    .append(html)
+    .localize();
   Common.getTargetToken(cellUrl).done(function(extData) {
     rs.getShokujiImageAPI(cellUrl, extData.access_token).done(function(data) {
       var dataList = data.d.results;
@@ -429,15 +428,19 @@ rs.createDispImage = function(cellUrl, no) {
       }
     }).fail(function(data) {
       html = '<section class="meal-section">';
-      html += '<h4>データがありません。</h4>';
+      html += '<h4 data-i18n="msg.error.dataNotFound"></h4>';
       html += '</section>';
-      $('#' + id).append(html);
+      $('#' + id)
+        .append(html)
+        .localize();
     });
   }).fail(function(extData) {
     html = '<section class="meal-section">';
-    html += '<h4>データが取得出来ません。</h4>';
+    html += '<h4 data-i18n="msg.error.failedToRetrieveData"></h4>';
     html += '</section>';
-    $('#' + id).append(html);
+    $('#' + id)
+      .append(html)
+      .localize();
   });
 };
 
@@ -492,12 +495,10 @@ console.log(data);
 
   switch (data) {
     case "1":
-    $('#selectData').text('食事データの提供に同意頂いた方')
     //var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/genkikun-users-info/DemoData?$inlinecount=allpages&$top=0&$filter=MealPhotoFlag+eq+true';
     var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
     break;
     case "2":
-    $('#selectData').text('ストレスデータの提供に同意頂いた方')
     var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=substringof(%27hn-app-neurosky%27,Services)';
     break;
   }
@@ -521,17 +522,7 @@ rs.getUserInfo = function(extToken, cellUrl) {
   if (data > 0) {
     sessionStorage.setItem("appType", data);
   }
-  switch (data) {
-    case "1":
-    $('#selectData').text('食事データの提供に同意頂いた方')
-    break;
-    case "2":
-    $('#selectData').text('ストレスデータの提供に同意頂いた方')
-    var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=CellURL+eq+\'' + cellUrl.substr( 0, cellUrl.length-1 ) + '\'';
-    break;
-  }
 
-  //var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/genkikun-users-info/DemoData?$inlinecount=allpages&$top=0&$filter=MealPhotoFlag+eq+true';
   var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=CellURL+eq+\'' + cellUrl.substr( 0, cellUrl.length-1 ) + '\'';
 
   return $.ajax({
@@ -547,8 +538,6 @@ rs.getUserInfo = function(extToken, cellUrl) {
 rs.getReceivedMessageAPI = function() {
   return $.ajax({
     type: "GET",
-    //url: Common.cellUrl + '__ctl/ReceivedMessage?$filter=From+eq+%27' + cellUrl + '%27+and+substringof%28%27承認%27,Body%29&$inlinecount=allpages',
-    //                url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages',
     url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages&$filter=InReplyTo%20eq%20%27' + sessionStorage.getItem("RQmessageId") + '%27',
     headers: {
       'Authorization':'Bearer ' + Common.token,

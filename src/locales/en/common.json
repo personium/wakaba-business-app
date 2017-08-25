@@ -1,4 +1,5 @@
 {
+    "comma": ",",
     "menu": "Menu",
     "release": "Ungrant",
     "approve": "Approve",
@@ -29,6 +30,7 @@
     "readResponseApprovedBody": "Read permission is granted.",
     "readResponseDeclinedBody": "Read permission is not granted.",
     "me": "Me",
+    "noImageAvailable": "No image available",
     "sessionExpiredDialog": {
         "title": "$t(glossary:sessionExpiredDialog.title)",
         "message": "Session has expired.<br>$t(glossary:sessionExpiredDialog.action)"
@@ -49,7 +51,8 @@
             "failedToRetrieveData": "Failed to retrieve data.",
             "dataNotFound": "Data not found.",
             "failedToRefreshToken": "Failed to refresh token.<br>Please reload page.",
-            "failedToReceiveApproval": "There are no approval yet."
+            "failedToReceiveApproval": "There are no approval yet.",
+            "failedToSendRequest": "Succeeded in sending {{succeed}} out of {{total}} request(s)\nFailed to send {{failed}} out of {{total}} request(s)"
         }
     },
     "label": {

@@ -198,15 +198,17 @@ additionalCallback = function() {
           token = Common.token;
           var type = sessionStorage.getItem("SearchData");
           var name = "ShokujiViewer";
+          var appCellUrl = "https://demo.personium.io/hn-app-genki/"
           if (type !== "1") {
-            name = "StressViewer"
+            name = "StressViewer";
+            appCellUrl = "https://demo.personium.io/hn-app-neurosky/";
           }
 
           var messageBody = {};
-          messageBody.BoxBound = true;
+          messageBody.BoxBound = false; // hot fixes
           messageBody.To = sendTo;
           messageBody.Type = "req.relation.build";
-          messageBody.RequestRelation = cellUrl + "__relation/__/" + name;
+          messageBody.RequestRelation = appCellUrl + "__relation/__/" + name;
           messageBody.RequestRelationTarget = cellUrl;
           messageBody.Title = $('#iMassageTitle').val();
           //messageBody.Body = $('#iPurpose').val();

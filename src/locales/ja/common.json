@@ -1,4 +1,5 @@
 {
+    "comma": "、",
     "menu": "メニュー",
     "release": "解除",
     "approve": "承諾",
@@ -29,6 +30,7 @@
     "readResponseApprovedBody": "承認しました。",
     "readResponseDeclinedBody": "拒否しました。",
     "me": "自分",
+    "noImageAvailable": "なし",
     "sessionExpiredDialog": {
         "title": "$t(glossary:sessionExpiredDialog.title)",
         "message": "セッションの期限が切れています。<br>$t(glossary:sessionExpiredDialog.action)"
@@ -49,7 +51,8 @@
             "failedToRetrieveData": "データの取得に失敗しました。",
             "dataNotFound": "データがありません。",
             "failedToRefreshToken": "リフレッシュトークンの更新に失敗しました。<br>画面をリロードしてください。",
-            "failedToReceiveApproval": "提供に同意されている保持者が見つかりません。"
+            "failedToReceiveApproval": "提供に同意されている保持者が見つかりません。",
+            "failedToSendRequest": "{{total}}件中 {{succeed}}件の送信に成功しました\n{{total}}件中 {{failed}}件の送信に失敗しました"
         }
     },
     "label": {

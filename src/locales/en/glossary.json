@@ -8,6 +8,8 @@
     "comment": "Comment",
     "pdsLifeBeat": "Life Beat (Stress Data)",
     "backToList": "Request status list",
+    "listOfApproved": "Collected data list",
+    "dataItem": "{{value}}'s data",
     "requestDetails": "Request details",
     "sessionExpiredDialog": {
         "title": "Session Expired",
