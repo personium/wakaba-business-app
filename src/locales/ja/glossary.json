@@ -1,0 +1,74 @@
+{
+    "title": "わかば市情報バンク",
+    "pdsCalorieSmile": "Calorie Smile（$t(glossary:nutritionData)）",
+    "nutritionData": "食事データ",
+    "photosOfMeals": "食事写真",
+    "photo": "写真",
+    "date": "日時",
+    "comment": "コメント",
+    "pdsLifeBeat": "ストレスデータ",
+    "backToList": "一覧へ",
+    "listOfApproved": "すべて",
+    "dataItem": "{{value}}さんのデータ",
+    "requestDetails": "依頼詳細",
+    "sessionExpiredDialog": {
+        "title": "セッション期限切れ",
+        "action": "アプリを再起動して下さい。"
+    },
+    "survey": {
+        "title": {
+            "noTitle": "(件名なし)",
+            "calorieSmile": "お食事写真提供のお願い",
+            "lifeBeat": "ストレスデータ提供のお願い",
+            "dummy": "購入嗜好調査への協力のお願い"
+        },
+        "messageBody": {
+            "value": {
+                "calorieSmile": "新商品企画のために、お食事データの提供をお願いします。",
+                "lifeBeat": "新商品企画のために、ストレスデータの提供をお願いします。"
+            }
+        },
+        "purpose": {
+            "placeholder": {
+                "storeB": "○○スーパーの・・・",
+                "hospitalC": "○○病院の・・・"
+            },
+            "value": {
+                "default": "新商品企画のため"
+            }
+        },
+        "targetData": {
+            "title": "対象データ",
+            "calorieSmile": "食事記録（写真）、撮影日時、コメント",
+            "lifeBeat": "ストレスデータ、コメント"
+        },
+        "generalParameters": "一般属性",
+        "period": "募集期間",
+        "periodWithColon": "$t(glossary:survey.period)：",
+        "dateOfIssueWithColon": "発行日：",
+        "status": {
+            "title": "状況",
+            "collecting": "収集中",
+            "finished": "終了"
+        },
+        "replyStatus": {
+            "approved": "許諾",
+            "denied": "拒否",
+            "unanswered": "未回答"
+        },
+        "requestName": "リクエスト名",
+        "candidate": "対象者",
+        "dateOfIssue": "発行日",
+        "deadline": "受付終了日",
+        "surveyContents": {
+            "title": "依頼内容"
+        },
+        "collectedData": {
+            "title": "収集データ",
+            "message": "「許諾」して頂いた方々"
+        },
+        "consentDate": "承諾日",
+        "tilde": "～",
+        "surveyPeriod": "{{startDate}} $t(glossary:survey.tilde) {{endDate}}"
+    }
+}

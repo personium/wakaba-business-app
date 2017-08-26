@@ -52,7 +52,7 @@ $(document).ready(function() {
     }
   }
 
-  if (rs.checkParam()) {
+  if (Common.checkParam()) {
 
   }
   Common.setIdleTime();
@@ -108,7 +108,7 @@ $(document).ready(function() {
     var bodyarr = JSON.parse(body);
     var sTerm = bodyarr.TermStart;
     var eTerm = bodyarr.TermEnd;
-    $("#refSearchTerm").html(sTerm + " ～ " + eTerm);
+    $("#refSearchTerm").attr("data-i18n","[html]glossary:survey.surveyPeriod").localize({ startDate: sTerm, endDate: eTerm });
     if (sTerm) {
       $("#inputTermS").val(sTerm.replace(/\//g, "-"));
     }
@@ -121,18 +121,18 @@ $(document).ready(function() {
     if ( bodyarr.Type == null ) {
       var type = 1;
       var typeStr = "CalorieSmile";
-      var offerStr = "食事記録（写真）、撮影日時、コメント";
+      var offerStr = "glossary:survey.targetData.calorieSmile";
     } else {
       var type = bodyarr.Type;
       
       switch (type) {
         case "1":
-          var typeStr = "CalorieSmile（食事データ）";
-          var offerStr = "食事記録（写真）、撮影日時、コメント";
+          var typeStr = "glossary:pdsCalorieSmile";
+          var offerStr = "glossary:survey.targetData.calorieSmile";
           break;
         case "2":
-          var typeStr = "ストレスデータ";
-          var offerStr = "ストレスデータ、コメント";
+          var typeStr = "glossary:pdsLifeBeat";
+          var offerStr = "glossary:survey.targetData.lifeBeat";
           break;
       }
     }
@@ -141,29 +141,23 @@ $(document).ready(function() {
     var ageStr = "";
     for (i=0; i<age.length; i++){
       if (i !== 0) {
-        ageStr += "、";
+        ageStr += i18next.t("comma");
       }
-      //$(':checkbox[name="inputAge"][value=' + age[i] + ']').prop('checked',true);
-      if (age[i] < 100) {
-        ageStr += age[i] + "代";
-      } else {
-        ageStr += age[i] + "歳以上";
-      }
+      ageStr += i18next.t(["candidateFilter:age.options.", age[i], "s"].join(""));
     }
     $("#targetAge").html(ageStr);
 
     var sexStr = "";
     for (i=0; i<sex.length; i++){
       if (i !== 0) {
-        sexStr += "、";
+        sexStr += i18next.t("comma");
       }
-      //$(':checkbox[name="inputSex"][value=' + sex[i] + ']').prop('checked',true);
       switch (sex[i]) {
         case "1":
-          sexStr += "男性";
+          sexStr += i18next.t("candidateFilter:gender.options.male");
           break;
         case "2":
-          sexStr += "女性";
+          sexStr += i18next.t("candidateFilter:gender.options.female");
           break;
       }
     }
@@ -179,8 +173,8 @@ $(document).ready(function() {
     }
     $("#targetArea").html(areaStr);
 
-    $("#targetData,#targetAttribute").html(typeStr);
-    $("#targetOffer").html(offerStr);
+    $("#targetData,#targetAttribute").attr("data-i18n", typeStr).localize();
+    $("#targetOffer").attr("data-i18n", offerStr).localize();
 
     // 依頼内容
     // タイトル
@@ -188,7 +182,9 @@ $(document).ready(function() {
     // イメージ画像
     var imgUrl = bodyarr.ImgUrl;
     if (imgUrl === null) {
-      $("#imgName").html("なし");
+      $("#imgName")
+          .attr("data-i18n", "noImageAvailable")
+          .localize();
       $("#imgPreview").css("display","none");
     } else {
       var imgNm = rs.getName(imgUrl);
@@ -231,12 +227,6 @@ $(document).ready(function() {
         var acceptCnt = 0;
         var rejectCnt = 0;
         if (cnt > 0) {
-          //var html = '<td width="20%" align="center">No</td>';
-          //html = html + '<td width="20%" align="center">年齢</td>';
-          //html = html + '<td width="20%" align="center">性別</td>';
-          //html = html + '<td width="20%" align="center">地域</td>';
-          //html = html + '<td width="20%" align="center">承諾日</td></tr>';
-          //$('#searchResult').append(html);
           for (var i in results) {
             console.log(results[i].CellURL);
             var cellUrl = results[i].CellURL + '/';
@@ -245,10 +235,10 @@ $(document).ready(function() {
             });
             if (newLine.length > 0) {
               var pLine = newLine.filter(function(item, index) {
-                if (item.Body.indexOf("承認") >= 0) return true;
+                if ((item.Body.indexOf("承認") >= 0) || (item.Body.indexOf("approved") >= 0)) return true;
               });
               var nLine = newLine.filter(function(item, index) {
-                if (item.Body.indexOf("キャンセル") >= 0) return true;
+                if ((item.Body.indexOf("キャンセル") >= 0) || (item.Body.indexOf("canceled") >= 0)) return true;
               });
               // 0:対象外 1:承認 2:キャンセル
               var statusType = 0;
@@ -284,9 +274,9 @@ $(document).ready(function() {
                   arr['CellURL'] = userInfo[0].d.results[0].CellURL + '/';
                   console.log(arr.CellURL);
                   if (userInfo[0].d.results[0].Sex == 1 ){
-                    var sex = "男性";
+                    var sex = "candidateFilter:gender.options.male";
                   } else {
-                    var sex = "女性";
+                    var sex = "candidateFilter:gender.options.female";
                   }
                   arr['Sex'] = sex;
                   var birthday = userInfo[0].d.results[0].Birthday;
@@ -304,20 +294,17 @@ $(document).ready(function() {
                   var minutes = toDoubleDigits(d.getMinutes());
                   date = year + '/' + month + '/' + day + ' ' + hour + ':' + minutes;
                   arr['AcceptDate'] = date;
-                  //var html = '<tr><td width="20%" align="center"><a class="allToggle" href="javascript:void(0)" onClick="rs.moveDispImage(\'' + arr.CellURL + '\');return false;">' + ("00" + arr.No).slice(-3) + '</a></td>';
-                  //html = html + '<td width="10%" align="center">' + arr.Age + '</td>'
-                  //html = html + '<td width="10%" align="center">' + arr.Sex + '</td>'
-                  //html = html + '<td width="20%" align="center">' + arr.Address + '</td>'
-                  //html = html + '<td width="20%" align="center">' + arr.AcceptDate + '</td></tr>';
                   var arrNo = ("00" + arr.No).slice(-3);
                   var html = '<tr>';
                   html += '<td><a href="#detail' + arrNo + '" class="switch-trigger">' + arrNo + '</a></td>';
-                  html += '<td>' + arr.Sex + '</td>';
-                  html += '<td>' + arr.Age + '歳</td>';
+                  html += '<td data-i18n="' + arr.Sex + '">' + '</td>';
+                  html += '<td>' + arr.Age + '</td>';
                   html += '<td>' + arr.Address + '</td>';
                   html += '<td>' + arr.AcceptDate + '</td>';
                   html += '</tr>';
-                  $('#searchResult').append(html);
+                  $('#searchResult')
+                    .append(html)
+                    .localize();
                   rs.createDispImage(arr.CellURL, arrNo);
                 });
                 var toDoubleDigits = function(num) {
@@ -334,20 +321,27 @@ $(document).ready(function() {
             }
           }
         }
-        $('#issue,#targetCnt').text(sessionStorage.getItem("SearchSeq"));
+        var candidateCount = sessionStorage.getItem("SearchSeq");
+        $('#issue,#targetCnt').text(candidateCount);
+        $('#resultText')
+            .attr("data-i18n", "candidateFilter:searchResult")
+            .localize({
+                count: parseInt(candidateCount)
+            }); // convert to integer explicitly to make use of the pluralize function
         $('#accept').text(acceptCnt);
         $('#reject').text(rejectCnt);
-        $('#pending').text(parseInt(sessionStorage.getItem("SearchSeq")) - (acceptCnt + rejectCnt));
+        $('#pending').text(parseInt(candidateCount) - (acceptCnt + rejectCnt));
         if (!dispFlag) {
           $('#searchResult').empty();
-          var html = '<tr><td colspan=5><label>提供に同意されている保持者が見つかりません。</label></td></tr>';
-          $('#searchResult').append(html);
+          var html = '<tr><td colspan=5><label data-i18n="msg.error.failedToReceiveApproval"></label></td></tr>';
+          $('#searchResult')
+            .append(html)
+            .localize();
         }
       });
       $('#resultPanel').css("display", "block");
     }).fail(function(data) {
-      $('#errorMsg').html("検索権限がありません。");
-      $('#errorMsg').css("display", "block");
+        Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
     }).always(function() {
       $(document.body).css("cursor", "auto");
     });
@@ -384,10 +378,12 @@ rs.createDispImage = function(cellUrl, no) {
   var id = "detail" + no;
   var html = '<div id="' + id + '" class="switch-pages" style="display:none;">';
   html += '<div class="bread">';
-  html += '<a href="#list-view" class="switch-trigger">すべて</a>';
-  html += '<span>＞</span><span>' + no + 'さんのデータ</span>';
+  html += '<a href="#list-view" class="switch-trigger" data-i18n="glossary:listOfApproved"></a>';
+  html += '<span>＞</span><span data-i18n="glossary:dataItem" data-i18n-options=\'{ "value": "' + no +'" }\'></span>';
   html += '</div></div>';
-  $('#resultData').append(html);
+  $('#resultData')
+    .append(html)
+    .localize();
   Common.getTargetToken(cellUrl).done(function(extData) {
     rs.getShokujiImageAPI(cellUrl, extData.access_token).done(function(data) {
       var dataList = data.d.results;
@@ -432,15 +428,19 @@ rs.createDispImage = function(cellUrl, no) {
       }
     }).fail(function(data) {
       html = '<section class="meal-section">';
-      html += '<h4>データがありません。</h4>';
+      html += '<h4 data-i18n="msg.error.dataNotFound"></h4>';
       html += '</section>';
-      $('#' + id).append(html);
+      $('#' + id)
+        .append(html)
+        .localize();
     });
   }).fail(function(extData) {
     html = '<section class="meal-section">';
-    html += '<h4>データが取得出来ません。</h4>';
+    html += '<h4 data-i18n="msg.error.failedToRetrieveData"></h4>';
     html += '</section>';
-    $('#' + id).append(html);
+    $('#' + id)
+      .append(html)
+      .localize();
   });
 };
 
@@ -478,42 +478,6 @@ rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName
     oReq.send();
 };
 
-rs.checkParam = function() {
-  var msg = "";
-  if (Common.target === null) {
-    msg = '対象セルが設定されていません。';
-  } else if (Common.token === null) {
-    msg = 'トークンが設定されていません。';
-  } else if (Common.refToken === null) {
-    msg = 'リフレッシュトークンが設定されていません。';
-  } else if (Common.expires === null) {
-    msg = 'トークンの有効期限が設定されていません。';
-  } else if (Common.refExpires === null) {
-    msg = 'リフレッシュトークンの有効期限が設定されていません。';
-  }
-
-  if (msg.length > 0) {
-    $('#errorMsg').html(msg);
-    $('#errorMsg').css("display", "block");
-    $("#exeSearch").prop('disabled', true);
-    return false;
-  }
-
-  return true;
-};
-
-rs.checkAreaLength = function() {
-  var area = $('#inputArea').val();
-  if (area.length === 1) {
-    $("#exeSearch").prop('disabled', true);
-    $('#errorMsg').html("地域の条件には2文字以上の文字を入力して下さい。");
-    $('#errorMsg').css("display", "block");
-  } else {
-    $("#exeSearch").prop('disabled', false);
-    $('#errorMsg').css("display", "none");
-  }
-};
-
 rs.getProfile = function(url) {
   return $.ajax({
     type: "GET",
@@ -529,87 +493,17 @@ rs.getSearchUserInfo = function(extToken) {
 var data = sessionStorage.getItem("appType");
 console.log(data);
 
-/*
-  var filter = "";
-
-  var data = $('#inputData').val();
-  var age = $('#inputAge').val();
-  var sex = $('#inputSex').val();
-  var area = $('#inputArea').val();
-  if (data > 0) {
-    sessionStorage.setItem("SearchData", data);
-  }
-  if (age > 0) {
-    sessionStorage.setItem("SearchAge", age);
-
-    var nowDate = new Date();
-    var nowYear = nowDate.getFullYear();
-    var enYear = nowYear - age;
-    var enMonth = nowDate.getMonth() + 1;
-    enMonth = ("0" + enMonth).slice(-2);
-    var enDay = ("0" + nowDate.getDate()).slice(-2);
-
-    var enBirth = enYear + "-" + enMonth + "-" + enDay;
-    var stDate = new Date(enYear, nowDate.getMonth(), nowDate.getDate());
-    stDate.setFullYear(stDate.getFullYear() - 10);
-    stDate.setDate(stDate.getDate() + 1);
-    var stMonth = stDate.getMonth() + 1;
-    stMonth = ("0" + stMonth).slice(-2);
-    var stDay = ("0" + stDate.getDate()).slice(-2);
-    var stBirth = stDate.getFullYear() + "-" + stMonth + "-" + stDay;
-
-    sessionStorage.setItem("SearchStBirth", stBirth);
-    sessionStorage.setItem("SearchEnBirth", enBirth);
-
-    if (age < 100) {
-      filter = "Birth+ge+%27" + stBirth + "%27+and+Birth+le+%27" + enBirth + "%27";
-    } else {
-      filter = "Birth+le+%27" + enBirth + "%27";
-    }
-  } else {
-    sessionStorage.removeItem("SearchAge");
-    sessionStorage.removeItem("SearchStBirth");
-    sessionStorage.removeItem("SearchEnBirth");
-  }
-  if (sex !== "0") {
-    sessionStorage.setItem("SearchSex", sex);
-    if (filter.length > 0) {
-      filter += "+and+";
-    }
-    filter += "Sex+eq+" + sex;
-  } else {
-    sessionStorage.removeItem("SearchSex");
-    //sessionStorage.setItem("SearchSex", null);
-  }
-  if (area.length > 0) {
-    sessionStorage.setItem("SearchArea", area);
-    if (filter.length > 0) {
-      filter += "+and+";
-    }
-    filter += "substringof%28%27" + area + "%27,Address%29";
-  } else {
-    sessionStorage.removeItem("SearchArea");
-    //sessionStorage.setItem("SearchArea", null);
-  }
-*/
   switch (data) {
     case "1":
-    $('#selectData').text('食事データの提供に同意頂いた方')
     //var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/genkikun-users-info/DemoData?$inlinecount=allpages&$top=0&$filter=MealPhotoFlag+eq+true';
     var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=substringof(%27hn-app-genki%27,Services)';
     break;
     case "2":
-    $('#selectData').text('ストレスデータの提供に同意頂いた方')
     var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=substringof(%27hn-app-neurosky%27,Services)';
     break;
   }
   console.log(url);
 
-/*
-  if (filter.length > 0) {
-    url += '+and+' + filter;
-  }
-*/
   return $.ajax({
     type: "GET",
     url: url,
@@ -628,17 +522,7 @@ rs.getUserInfo = function(extToken, cellUrl) {
   if (data > 0) {
     sessionStorage.setItem("appType", data);
   }
-  switch (data) {
-    case "1":
-    $('#selectData').text('食事データの提供に同意頂いた方')
-    break;
-    case "2":
-    $('#selectData').text('ストレスデータの提供に同意頂いた方')
-    var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=CellURL+eq+\'' + cellUrl.substr( 0, cellUrl.length-1 ) + '\'';
-    break;
-  }
 
-  //var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/genkikun-users-info/DemoData?$inlinecount=allpages&$top=0&$filter=MealPhotoFlag+eq+true';
   var url = 'https://demo.personium.io/hn-ll/io_personium_demo_hn-ll-app/OData/User?$top=10000&$filter=CellURL+eq+\'' + cellUrl.substr( 0, cellUrl.length-1 ) + '\'';
 
   return $.ajax({
@@ -654,8 +538,6 @@ rs.getUserInfo = function(extToken, cellUrl) {
 rs.getReceivedMessageAPI = function() {
   return $.ajax({
     type: "GET",
-    //url: Common.cellUrl + '__ctl/ReceivedMessage?$filter=From+eq+%27' + cellUrl + '%27+and+substringof%28%27承認%27,Body%29&$inlinecount=allpages',
-    //                url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages',
     url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages&$filter=InReplyTo%20eq%20%27' + sessionStorage.getItem("RQmessageId") + '%27',
     headers: {
       'Authorization':'Bearer ' + Common.token,
@@ -667,8 +549,6 @@ rs.getReceivedMessageAPI = function() {
 rs.getReceivedDateAPI = function() {
   return $.ajax({
     type: "GET",
-    //url: Common.cellUrl + '__ctl/ReceivedMessage?$filter=From+eq+%27' + cellUrl + '%27+and+substringof%28%27承認%27,Body%29&$inlinecount=allpages',
-    //                url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages',
     url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages&$filter=InReplyTo%20eq%20%27' + sessionStorage.getItem("RQmessageId") + '%27&$filter=From%20eq%20%27' + cellUrl + '%27',
     headers: {
       'Authorization':'Bearer ' + Common.token,

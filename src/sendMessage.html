@@ -1,30 +1,31 @@
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>わかば市情報バンク</title>
+  <title data-i18n="glossary:title"></title>
 
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,200" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link href="./css/pc.css" rel="stylesheet">
-  <script src="./js/sample.js"></script>
-  <script src="./js/is-common.js"></script>
-  <script src="./js/sendMessage.js"></script>
-  <script type="text/javascript">
-      $(document).ready(function() {
-          sm.initTarget();
-      });
-  </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.4.3/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/2.0.0/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <script src="./js/sample.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/sendMessage.js"></script>
 </head>
 <body>
   <header>
-    <h1>わかば市情報バンク</h1>
+    <h1 data-i18n="glossary:title"></h1>
     <div class="login-user">
         <img id="loginUserIcon">
         <span id=loginUserName></span>
@@ -34,10 +35,10 @@
     <nav class="side-nav">
       <ul>
         <li class="current">
-          <a href="./imageSearch.html">新規依頼</a>
+          <a href="./imageSearch.html" data-i18n="newRequest"></a>
         </li>
         <li>
-          <a href="./reqStatus.html">依頼状況 / データ確認</a>
+          <a href="./reqStatus.html" data-i18n="requestStatusNConfirmData"></a>
         </li>
       </ul>
     </nav>
@@ -47,27 +48,25 @@
         <ul class="step">
           <li>
             <h5>Step1</h5>
-            <div>依頼対象の設定</div>
+            <div data-i18n="candidateFilter:selectCandidates"></div>
           </li>
           <li class="current">
             <h5>Step2</h5>
-            <div>依頼内容の入力</div>
+            <div data-i18n="createSurvey"></div>
           </li>
           <li>
             <h5>Step3</h5>
-            <div>確認</div>
+            <div data-i18n="confirm"></div>
           </li>
         </ul>
         <!-- /step -->
         <section class="fixed-width-form">
-          <h2>依頼内容</h2>
+          <h2 data-i18n="glossary:survey.surveyContents.title"></h2>
           <div>
-            <h4>タイトル<span class="explain">（30文字以内）</span></h4>
-            <input id="iMassageTitle" type="text" value="" placeholder="タイトルを入力してください。">
+            <h4 data-i18n="[html]label.title.message"></h4>
+            <input id="iMassageTitle" maxlength="30" type="text" value="" data-i18n="[placeholder]label.title.placeholder">
             <div>
-            <h4>イメージ画像<span class="explain">（形式： jpg, png）</span>
-                <a href="./doc/sample.pdf" id="preview-image-text">表示サンプル</a>
-            </h4>
+            <h4 data-i18n="[html]label.imageWithLink"></h4>
             <input type="file" id="attachImgFile"><br>
 <!--            <div id="no-image-sample">
               No Image
@@ -78,21 +77,17 @@
             </figure>
             </div>
 
-            <h4>本文<span class="explain">（200文字以内）</span></h4>
-            <textarea id="iMassageBody" type="text" value="" placeholder="提供依頼内容の本文を入力してください。"></textarea>
+            <h4 data-i18n="[html]label.messageBody.message"></h4>
+            <textarea id="iMassageBody" maxlength="200" type="text" value="" data-i18n="[placeholder]label.messageBody.placeholder"></textarea>
 
-            <h4>利用目的<span class="explain">（200文字以内）</span></h4>
-            <textarea id="iPurpose" type="text" value="" placeholder="提供依頼内容の利用目的を入力してください。"></textarea>
+            <h4 data-i18n="[html]label.purpose.message"></h4>
+            <textarea id="iPurpose" maxlength="200" type="text" value="" data-i18n="[placeholder]label.purpose.placeholder"></textarea>
 
-            <h4>対象データ</h4>
+            <h4 data-i18n="glossary:survey.targetData.title"></h4>
             <table class="row-table" style="width: 100%;">
               <tr>
-                <th>
-                  一般属性
-                </th>
-                <td>
-                  性別、年齢、地域
-                </td>
+                <th data-i18n="glossary:survey.generalParameters"></th>
+                <td data-i18n="candidateFilter:searchParameters"></td>
               </tr>
               <tr>
                 <th id="targetItem">
@@ -102,23 +97,23 @@
               </tr>
             </table>
 
-            <h4>募集期間</h4>
+            <h4 data-i18n="glossary:survey.period"></h4>
             <div>
               <input type="date" readonly="true" id="termStart">
-              <span>～</span>
+              <span data-i18n="glossary:survey.tilde"></span>
               <input type="date" id="termEnd">
             </div>
 
           </div>
         </section>
-        <!-- メインセクション -->
+        <!-- main section -->
         <footer>
           <ul class="button-group">
             <li>
-              <button formaction="./imageSearch.html">戻る</button>
+              <button formaction="./imageSearch.html" data-i18n="back"></button>
             </li>
             <li>
-              <button type="button" class="highlight" id="b-send-message">依頼内容確認</button>
+              <button type="button" class="highlight" id="b-send-message" data-i18n="confirmSurveyContents" data-i18n-options='{ "context": "button" }'></button>
             </li>
           </ul>
         </footer>

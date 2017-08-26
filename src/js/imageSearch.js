@@ -1,22 +1,6 @@
 var is = {};
 
-is.getName = function(path) {
-  var collectionName = path;
-  var recordsCount = 0;
-  if (collectionName != undefined) {
-    recordsCount = collectionName.length;
-    var lastIndex = collectionName.lastIndexOf("/");
-    if (recordsCount - lastIndex === 1) {
-      collectionName = path.substring(0, recordsCount - 1);
-      recordsCount = collectionName.length;
-      lastIndex = collectionName.lastIndexOf("/");
-    }
-    collectionName = path.substring(lastIndex + 1, recordsCount);
-  }
-  return collectionName;
-};
-
-$(document).ready(function() {
+additionalCallback = function() {
   var appUrlMatch = location.href.split("#");
   var appUrlSplit = appUrlMatch[0].split("/");
   is.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
@@ -31,29 +15,29 @@ $(document).ready(function() {
     var id = param[0];
     switch (id) {
       case "target":
-      ISCommon.target = param[1];
+      Common.target = param[1];
       sessionStorage.setItem("ISTarget", param[1]);
       var urlSplit = param[1].split("/");
-      ISCommon.cellUrl = urlSplit[0] + "//" + urlSplit[2] + "/" + urlSplit[3] + "/";
-      sessionStorage.setItem("ISCellUrl", ISCommon.cellUrl);
-      var split = ISCommon.target.split("/");
+      Common.cellUrl = urlSplit[0] + "//" + urlSplit[2] + "/" + urlSplit[3] + "/";
+      sessionStorage.setItem("ISCellUrl", Common.cellUrl);
+      var split = Common.target.split("/");
       is.boxName = split[split.length - 1];
       case "token":
-      ISCommon.token = param[1];
+      Common.token = param[1];
       sessionStorage.setItem("ISToken", param[1]);
       case "ref":
-      ISCommon.refToken = param[1];
+      Common.refToken = param[1];
       sessionStorage.setItem("ISRefToken", param[1]);
       case "expires":
-      ISCommon.expires = param[1];
+      Common.expires = param[1];
       sessionStorage.setItem("ISExpires", param[1]);
       case "refexpires":
-      ISCommon.refExpires = param[1];
+      Common.refExpires = param[1];
       sessionStorage.setItem("ISRefExpires", param[1]);
     }
   }
 
-  if (is.checkParam()) {
+  if (Common.checkParam()) {
     if (sessionStorage.getItem("SearchData") != null) {
       $('#inputData').val(sessionStorage.getItem("SearchData"));
     }
@@ -77,61 +61,52 @@ $(document).ready(function() {
     }
   }
 
-  ISCommon.setIdleTime();
+  Common.setIdleTime();
 
-  //初期表示
-  ISCommon.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
+  //Initial rendering
+  Common.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
     sessionStorage.setItem("ISExtToken", data.access_token);
     $(document.body).css("cursor", "wait");
     is.getDefaultSearchUserInfo(data.access_token).done(function(res) {
       var cnt = res.d.__count;
       if (cnt > 10) {
-        $('#searchResult').html(cnt);
-        $('#resultText').html("人の対象者");
-        $('#exeSend').css("display", "none");
+          is.displaySearchResult(cnt);
+          $('#exeSend').hide();
       } else if (cnt > 0) {
-        $('#searchResult').html("該当人数が少なすぎます。");
-        $('#exeSend').css("display", "none");
+          is.displaySearchResultFew();
       } else {
-        $('#searchResult').html("該当する保持者はいません。");
-        $('#exeSend').css("display", "none");
+          is.displaySearchResultNone();
       }
       $('#resultPanel').css("display", "block");
+      $('#errorMsg').hide();
     }).fail(function(data) {
-      $('#errorMsg').html("検索権限がありません。");
-      $('#errorMsg').css("display", "block");
+      Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
     }).always(function() {
         $(document.body).css("cursor", "auto");
-        ISCommon.dispUserName(ISCommon.cellUrl);
+        Common.dispUserName(Common.cellUrl);
     });
   });
 
   $('#exeSearch').on('click', function () {
     if (is.checkSearchParam()) {
         $('#resultPanel').css("display", "none");
-        ISCommon.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
+        Common.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
           sessionStorage.setItem("ISExtToken", data.access_token);
           $(document.body).css("cursor", "wait");
           is.getSearchUserInfo(data.access_token).done(function(res) {
             var cnt = res.d.__count;
             if (cnt > 10) {
-              $('#searchResult').html(cnt);
-              $('#resultText').html("人の対象者");
-              $('#exeSend').css("display", "block");
-              $('#errorMsg').css("display", "none");
+              is.displaySearchResult(cnt);
+              $('#exeSend').show();
             } else if (cnt > 0) {
-              $('#searchResult').html("該当人数が少なすぎます。");
-              $('#exeSend').css("display", "none");
-              $('#errorMsg').css("display", "none");
+                is.displaySearchResultFew();
             } else {
-              $('#searchResult').html("該当する保持者はいません。");
-              $('#exeSend').css("display", "none");
-              $('#errorMsg').css("display", "none");
+                is.displaySearchResultNone();
             }
             $('#resultPanel').css("display", "block");
+            $('#errorMsg').hide();
           }).fail(function(data) {
-            $('#errorMsg').html("検索権限がありません。");
-            $('#errorMsg').css("display", "block");
+            Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
           }).always(function() {
             $(document.body).css("cursor", "auto");
           });
@@ -144,28 +119,23 @@ $(document).ready(function() {
     is.relAllCheckAge();
     is.relAllCheckSex();
     is.relAllCheckArea();
-    ISCommon.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
+    Common.getTargetToken('https://demo.personium.io/hn-ll/').done(function(data) {
       sessionStorage.setItem("ISExtToken", data.access_token);
       $(document.body).css("cursor", "wait");
       is.getDefaultSearchUserInfo(data.access_token).done(function(res) {
         var cnt = res.d.__count;
         if (cnt > 10) {
-          $('#searchResult').html(cnt);
-          $('#exeSend').css("display", "none");
-          $('#errorMsg').css("display", "none");
+            is.displaySearchResult(cnt);
+            $('#exeSend').hide();
         } else if (cnt > 0) {
-          $('#searchResult').html("該当人数が少なすぎます。");
-          $('#exeSend').css("display", "none");
-          $('#errorMsg').css("display", "none");
+            is.displaySearchResultFew();
         } else {
-          $('#searchResult').html("該当する保持者はいません。");
-          $('#exeSend').css("display", "none");
-          $('#errorMsg').css("display", "none");
+            is.displaySearchResultNone();
         }
         $('#resultPanel').css("display", "block");
+        $('#errorMsg').hide();
       }).fail(function(data) {
-        $('#errorMsg').html("検索権限がありません。");
-        $('#errorMsg').css("display", "block");
+        Common.displayMessageByKey("candidateFilter:msg.error.noSearchPermission");
       }).always(function() {
         $(document.body).css("cursor", "auto");
       });
@@ -175,42 +145,6 @@ $(document).ready(function() {
   $('#exeSend').on('click', function () {
     location.href = "./sendMessage.html";
   });
-});
-
-is.checkParam = function() {
-  var msg = "";
-  if (ISCommon.target === null) {
-    msg = '対象セルが設定されていません。';
-  } else if (ISCommon.token === null) {
-    msg = 'トークンが設定されていません。';
-  } else if (ISCommon.refToken === null) {
-    msg = 'リフレッシュトークンが設定されていません。';
-  } else if (ISCommon.expires === null) {
-    msg = 'トークンの有効期限が設定されていません。';
-  } else if (ISCommon.refExpires === null) {
-    msg = 'リフレッシュトークンの有効期限が設定されていません。';
-  }
-
-  if (msg.length > 0) {
-    $('#errorMsg').html(msg);
-    $('#errorMsg').css("display", "block");
-    $("#exeSearch").prop('disabled', true);
-    return false;
-  }
-
-  return true;
-};
-
-is.checkAreaLength = function() {
-  var area = $('#inputArea').val();
-  if (area.length === 1) {
-    $("#exeSearch").prop('disabled', true);
-    $('#errorMsg').html("地域の条件には2文字以上の文字を入力して下さい。");
-    $('#errorMsg').css("display", "block");
-  } else {
-    $("#exeSearch").prop('disabled', false);
-    $('#errorMsg').css("display", "none");
-  }
 };
 
 is.allCheckAge = function() {
@@ -239,21 +173,18 @@ is.relAllCheckSex = function() {
 
 is.checkSearchParam = function() {
     if ($('.inputAge :checked').length <= 0) {
-        $('#errorMsg').html("年齢を指定して下さい。");
-        $('#errorMsg').css("display", "block");
-        $('#exeSend').css("display", "none");
+        Common.displayMessageByKey("candidateFilter:msg.info.specifyAge");
+        $('#exeSend').hide();
         return false;
     }
     if ($('.inputSex :checked').length <= 0) {
-        $('#errorMsg').html("性別を指定して下さい。");
-        $('#errorMsg').css("display", "block");
-        $('#exeSend').css("display", "none");
+        Common.displayMessageByKey("candidateFilter:msg.info.specifyGender");
+        $('#exeSend').hide();
         return false;
     }
     if ($('.inputArea :checked').length <= 0) {
-        $('#errorMsg').html("地域を指定して下さい。");
-        $('#errorMsg').css("display", "block");
-        $('#exeSend').css("display", "none");
+        Common.displayMessageByKey("candidateFilter:msg.info.specifyLocation");
+        $('#exeSend').hide();
         return false;
     }
 
@@ -264,9 +195,6 @@ is.getSearchUserInfo = function(extToken) {
   var filter = "";
 
   var data = $('#inputData').val();
-  //var age = $('#inputAge').val();
-  var sex = $('#inputSex').val();
-  var area = $('#inputArea').val();
   if (data > 0) {
     sessionStorage.setItem("SearchData", data);
   }
@@ -385,4 +313,32 @@ is.getDefaultSearchUserInfo = function(extToken) {
       'Accept':'application/json'
     }
   });
+};
+
+is.displaySearchResult = function(candidateCount) {
+    $('#searchResult').html(candidateCount);
+    $('#resultText')
+        .attr("data-i18n", "candidateFilter:searchResult")
+        .localize({
+            count: parseInt(candidateCount)
+        })
+        .show(); // convert to integer explicitly to make use of the pluralize function
+};
+
+is.displaySearchResultFew = function() {
+    $('#searchResult')
+        .attr("data-i18n", "candidateFilter:searchResult_few")
+        .localize();
+    $('#resultText').hide();
+
+    $('#exeSend').hide();
+};
+
+is.displaySearchResultNone = function() {
+    $('#searchResult')
+        .attr("data-i18n", "candidateFilter:searchResult_none")
+        .localize();
+    $('#resultText').hide();
+
+    $('#exeSend').hide();
 };

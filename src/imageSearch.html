@@ -1,204 +1,190 @@
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>わかば市情報バンク</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="glossary:title"></title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,200" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,200" rel="stylesheet" type="text/css">
+  
+  <link href="./css/pc.css" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/8.4.3/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/2.0.0/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link href="./css/pc.css" rel="stylesheet">
-    <script src="./js/is-common.js"></script>
-    <script src="./js/imageSearch.js"></script>
-    <script src="./js/sample.js"></script>
-
+  <script src="./js/common.js"></script>
+  <script src="./js/imageSearch.js"></script>
+  <script src="./js/sample.js"></script>
 </head>
 <body>
-    <header>
-        <h1>わかば市情報バンク</h1>
-        <div class="login-user">
-            <img id="loginUserIcon">
-            <span id=loginUserName></span>
-        </div>
-    </header>
-    <div class="contents">
-        <nav class="side-nav">
-            <ul>
-                <li class="current">
-                    <a href="./imageSearch.html">新規依頼</a>
+  <header>
+    <h1 data-i18n="glossary:title"></h1>
+    <div class="login-user">
+      <img id="loginUserIcon">
+      <span id=loginUserName></span>
+    </div>
+  </header>
+  <div class="contents">
+    <nav class="side-nav">
+      <ul>
+        <li class="current">
+          <a href="./imageSearch.html" data-i18n="newRequest"></a>
+        </li>
+        <li>
+          <a href="./reqStatus.html" data-i18n="requestStatusNConfirmData"></a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <form>
+      <!-- step -->
+        <ul class="step">
+          <li class="current">
+            <h5>Step1</h5>
+            <div data-i18n="candidateFilter:selectCandidates"></div>
+          </li>
+          <li>
+            <h5>Step2</h5>
+            <div data-i18n="createSurvey"></div>
+          </li>
+          <li>
+            <h5>Step3</h5>
+            <div data-i18n="confirm"></div>
+          </li>
+        </ul>
+        <!-- /step -->
+        <section>
+          <h2 id="messageTitle" data-i18n="candidateFilter:candidates"></h2>
+          <div>
+            <div data-i18n="candidateFilter:msg.info.description"></div>
+            <div class="form-style">
+              <div class="target-summary">
+                <span class="fa fa-user colorFa-user fa-user-icon"></span>
+                <span class="numberOfPeople" id="searchResult"></span>
+                <span id="resultText"></span>
+              </div>
+              <table style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th data-i18n="candidateFilter:category"></th>
+                    <th data-i18n="candidateFilter:condition"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th data-i18n="candidateFilter:target"></th>
+                    <td>
+                      <select id="inputData">
+                        <option value="1" data-i18n="glossary:pdsCalorieSmile"></option>
+                        <option value="2" data-i18n="glossary:pdsLifeBeat"></option>
+                      </select>
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                  <tr>
+                    <th data-i18n="candidateFilter:age.label"></th>
+                    <td>
+                      <div class="inputAge">
+                        <input type="checkbox" value="10" name="inputAge" id="inputAge10">
+                        <label for="inputAge10" data-i18n="candidateFilter:age.options.10s"></label>
+                        <input type="checkbox" value="20" name="inputAge" id="inputAge20">
+                        <label for="inputAge20" data-i18n="candidateFilter:age.options.20s"></label>
+                        <input type="checkbox" value="30" name="inputAge" id="inputAge30">
+                        <label for="inputAge30" data-i18n="candidateFilter:age.options.30s"></label>
+                        <input type="checkbox" value="40" name="inputAge" id="inputAge40">
+                        <label for="inputAge40" data-i18n="candidateFilter:age.options.40s"></label>
+                        <input type="checkbox" value="50" name="inputAge" id="inputAge50">
+                        <label for="inputAge50" data-i18n="candidateFilter:age.options.50s"></label>
+                        <input type="checkbox" value="60" name="inputAge" id="inputAge60">
+                        <label for="inputAge60" data-i18n="candidateFilter:age.options.60s"></label>
+                        <input type="checkbox" value="70" name="inputAge" id="inputAge70">
+                        <label for="inputAge70" data-i18n="candidateFilter:age.options.70s"></label>
+                        <input type="checkbox" value="80" name="inputAge" id="inputAge80">
+                        <label for="inputAge80" data-i18n="candidateFilter:age.options.80s"></label>
+                        <input type="checkbox" value="90" name="inputAge" id="inputAge90">
+                        <label for="inputAge90" data-i18n="candidateFilter:age.options.90s"></label>
+                        <input type="checkbox" value="100" name="inputAge" id="inputAge100">
+                        <label for="inputAge100" data-i18n="candidateFilter:age.options.100s"></label>
+                      </div>
+                      <div>
+                        <button onclick="is.allCheckAge();return false;" data-i18n="candidateFilter:selectAll"></button>
+                        <button onclick="is.relAllCheckAge();return false;" data-i18n="candidateFilter:unselectAll"></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                  <tr>
+                    <th data-i18n="candidateFilter:gender.label"></th>
+                    <td>
+                      <div class="inputSex">
+                        <input type="checkbox" value="1" name="inputSex" id="inputSexM">
+                        <label for="inputSexM" data-i18n="candidateFilter:gender.options.male"></label>
+                        <input type="checkbox" value="2" name="inputSex" id="inputSexF">
+                        <label for="inputSexF" data-i18n="candidateFilter:gender.options.female"></label>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                  <tr>
+                    <th data-i18n="candidateFilter:location.label"></th>
+                    <td>
+                      <div class="inputArea">
+                        <!-- Demo WebDAVs store location in Japanese -->
+                        <input type="checkbox" value="中央区" name="inputArea" id="inputArea0">
+                        <label for="inputArea0" data-i18n="candidateFilter:location.options.area0"></label>
+                        <input type="checkbox" value="東区" name="inputArea" id="inputArea1">
+                        <label for="inputArea1" data-i18n="candidateFilter:location.options.area1"></label>
+                        <input type="checkbox" value="西区" name="inputArea" id="inputArea2">
+                        <label for="inputArea2" data-i18n="candidateFilter:location.options.area2"></label>
+                        <input type="checkbox" value="南区" name="inputArea" id="inputArea3">
+                        <label for="inputArea3" data-i18n="candidateFilter:location.options.area3"></label>
+                        <input type="checkbox" value="北区" name="inputArea" id="inputArea4">
+                        <label for="inputArea4" data-i18n="candidateFilter:location.options.area4"></label>
+                      </div>
+                      <div>
+                        <button onclick="is.allCheckArea();return false;" data-i18n="candidateFilter:selectAll"></button>
+                        <button onclick="is.relAllCheckArea();return false;" data-i18n="candidateFilter:unselectAll"></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- /1line -->
+                </tbody>
+              </table>
+              <ul class="button-group">
+                <li>
+                  <button type="button" class="highlight" id="exeSearch" data-i18n="candidateFilter:search"></button>
                 </li>
                 <li>
-                    <a href="./reqStatus.html">依頼状況 / データ確認</a>
+                  <button type="button" id="exeReset" data-i18n="candidateFilter:reset"></button>
                 </li>
-            </ul>
-        </nav>
-        <main>
-            <form>
-            <!-- step -->
-                <ul class="step">
-                    <li class="current">
-                        <h5>Step1</h5>
-                        <div>依頼対象の設定</div>
-                    </li>
-                    <li>
-                        <h5>Step2</h5>
-                        <div>依頼内容の入力</div>
-                    </li>
-                    <li>
-                        <h5>Step3</h5>
-                        <div>確認</div>
-                    </li>
-                </ul>
-                <!-- /step -->
-                <section>
-                    <h2 id="messageTitle">依頼対象</h2>
-                    <div>
-                        <div>条件を選択し、対象者を検索してください。</div>
-                        <div class="form-style">
-                            <div class="target-summary">
-                                <span class="fa fa-user colorFa-user fa-user-icon"></span>
-                                <span class="numberOfPeople" id="searchResult"></span>
-                                <span id="resultText"></span>
-                            </div>
-                            <table style="width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            検索項目
-                                        </th>
-                                        <th>
-                                            条件
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            対象情報
-                                        </th>
-                                        <td>
-                                            <select id="inputData">
-                                                <option value="1">CalorieSmile（食事データ）</option>
-                                                <option value="2">ストレスデータ</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <!-- /1line -->
-                                    <tr>
-                                        <th>
-                                            年齢
-                                        </th>
-                                        <td>
-                                            <div class="inputAge">
-                                                <input type="checkbox" value="10" name="inputAge" id="inputAge10">
-                                                <label for="inputAge10">10代</label>
-                                                <input type="checkbox" value="20" name="inputAge" id="inputAge20">
-                                                <label for="inputAge20">20代</label>
-                                                <input type="checkbox" value="30" name="inputAge" id="inputAge30">
-                                                <label for="inputAge30">30代</label>
-                                                <input type="checkbox" value="40" name="inputAge" id="inputAge40">
-                                                <label for="inputAge40">40代</label>
-                                                <input type="checkbox" value="50" name="inputAge" id="inputAge50">
-                                                <label for="inputAge50">50代</label>
-                                                <input type="checkbox" value="60" name="inputAge" id="inputAge60">
-                                                <label for="inputAge60">60代</label>
-                                                <input type="checkbox" value="70" name="inputAge" id="inputAge70">
-                                                <label for="inputAge70">70代</label>
-                                                <input type="checkbox" value="80" name="inputAge" id="inputAge80">
-                                                <label for="inputAge80">80代</label>
-                                                <input type="checkbox" value="90" name="inputAge" id="inputAge90">
-                                                <label for="inputAge90">90代</label>
-                                                <input type="checkbox" value="100" name="inputAge" id="inputAge100">
-                                                <label for="inputAge100">100歳以上</label>
-                                            </div>
-                                            <div>
-                                                <button onclick="is.allCheckAge();return false;">全選択</button>
-                                                <button onclick="is.relAllCheckAge();return false;">全解除</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <!-- /1line -->
-                                    <tr>
-                                        <th>
-                                            性別
-                                        </th>
-                                        <td>
-                                            <div class="inputSex">
-                                                <input type="checkbox" value="1" name="inputSex" id="inputSexM">
-                                                <label for="inputSexM">男性</label>
-                                                <input type="checkbox" value="2" name="inputSex" id="inputSexF">
-                                                <label for="inputSexF">女性</label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- /1line -->
-                                    <tr>
-                                        <th>
-                                            地域
-                                        </th>
-                                        <td>
-                                            <div class="inputArea">
-                                                <input type="checkbox" value="中央区" name="inputArea" id="inputArea0">
-                                                <label for="inputArea0">中央区</label>
-                                                <input type="checkbox" value="東区" name="inputArea" id="inputArea1">
-                                                <label for="inputArea1">東区</label>
-                                                <input type="checkbox" value="西区" name="inputArea" id="inputArea2">
-                                                <label for="inputArea2">西区</label>
-                                                <input type="checkbox" value="南区" name="inputArea" id="inputArea3">
-                                                <label for="inputArea3">南区</label>
-                                                <input type="checkbox" value="北区" name="inputArea" id="inputArea4">
-                                                <label for="inputArea4">北区</label>
-                                            </div>
-                                            <div>
-                                                <button onclick="is.allCheckArea();return false;">全選択</button>
-                                                <button onclick="is.relAllCheckArea();return false;">全解除</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- /1line -->
-                                </tbody>
-                            </table>
-                            <ul class="button-group">
-                                <li>
-                                    <button type="button" class="highlight" id="exeSearch">
-                                        検索
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="button" id="exeReset">
-                                        条件リセット
-                                    </button>
-                                </li>
-                            </ul>
-                            <!-- /button-group -->
-                        </div>
-                        <!-- /form-style -->
-                    </div>
-                </section>
-                <!-- メインセクション -->
-                <footer>
-                    <ul class="button-group">
-                        <li>
-                            <div id="resultPanel" style="display:none;">
-<!--
-                            <button class="highlight" formaction="./0102.html" >提供依頼</button>
--->
-                                <button type="button" class="highlight" id="exeSend">
-                                    提供依頼
-                                </button>
-                                <div id="errorMsg">
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- /button-group -->
-                </footer>
-            </form>
-        </main>
-    </div>
+              </ul>
+              <!-- /button-group -->
+            </div>
+            <!-- /form-style -->
+          </div>
+        </section>
+        <!-- main section -->
+        <footer>
+          <ul class="button-group">
+            <li>
+              <div id="resultPanel" style="display:none;">
+                <button type="button" class="highlight" id="exeSend" data-i18n="candidateFilter:step1Next"></button>
+                <div id="errorMsg">
+                </div>
+              </div>
+            </li>
+          </ul>
+          <!-- /button-group -->
+        </footer>
+      </form>
+    </main>
+  </div>
 </body>
 </html>

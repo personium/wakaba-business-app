@@ -1,0 +1,74 @@
+{
+    "title": "Wakaba Municipal Info Bank",
+    "pdsCalorieSmile": "Calorie Smile ($t(glossary:nutritionData))",
+    "nutritionData": "Nutrition Data",
+    "photosOfMeals": "Photos of Meals",
+    "photo": "Photo",
+    "date": "Date",
+    "comment": "Comment",
+    "pdsLifeBeat": "Life Beat (Stress Data)",
+    "backToList": "Request status list",
+    "listOfApproved": "Collected data list",
+    "dataItem": "{{value}}'s data",
+    "requestDetails": "Request details",
+    "sessionExpiredDialog": {
+        "title": "Session Expired",
+        "action": "Please restart the application."
+    },
+    "survey": {
+        "title": {
+            "noTitle": "(No subject)",
+            "calorieSmile": "Food Diary Survey",
+            "lifeBeat": "Stress Data Survey",
+            "dummy": "Online Shopping Patterns Survey"
+        },
+        "messageBody": {
+            "value": {
+                "calorieSmile": "For new product planning, we would like you to provide your food diaries.",
+                "lifeBeat": "For new product planning, we would like you to provide your stress data."
+            }
+        },
+        "purpose": {
+            "placeholder": {
+                "storeB": "Store B ...",
+                "hospitalC": "Hospital C ..."
+            },
+            "value": {
+                "default": "For new product planning."
+            }
+        },
+        "targetData": {
+            "title": "Survey Data",
+            "calorieSmile": "Food diary (photo), date & time taken, comments",
+            "lifeBeat": "Stress data, comments"
+        },
+        "generalParameters": "Common Data",
+        "period": "Survey Period",
+        "periodWithColon": "$t(glossary:survey.period):",
+        "dateOfIssue": "Date of Issue",
+        "status": {
+            "title": "Status",
+            "collecting": "In prog.",
+            "finished": "Fin."
+        },
+        "replyStatus": {
+            "approved": "Approved",
+            "denied": "Denied",
+            "unanswered": "Unanswered"
+        },
+        "requestName": "Request Name",
+        "candidate": "Candidate(s)",
+        "dateOfIssueWithColon": "Date of Issue:",
+        "deadline": "Application Deadline",
+        "surveyContents": {
+            "title": "Survey Template"
+        },
+        "collectedData": {
+            "title": "Collected Data",
+            "message": "List of data approved by the candidates."
+        },
+        "consentDate": "Consent Date",
+        "tilde": "~",
+        "surveyPeriod": "{{startDate}} $t(glossary:survey.tilde) {{endDate}}"
+    }
+}

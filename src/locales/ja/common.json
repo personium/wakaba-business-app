@@ -1,0 +1,74 @@
+{
+    "comma": "、",
+    "menu": "メニュー",
+    "release": "解除",
+    "approve": "承諾",
+    "decline": "拒否",
+    "reLogin": "再ログイン",
+    "close": "閉じる",
+    "back": "戻る",
+    "send": "送信",
+    "newRequest": "新規依頼",
+    "requestStatus": "依頼状況",
+    "confirmData": "データ確認",
+    "requestStatusNConfirmData": "$t(requestStatus) / $t(confirmData)",
+    "requestData": "データ提供依頼",
+    "accessTo": "{{value}}参照",
+    "createSurvey": "依頼内容の入力",
+    "confirm": "確認",
+    "confirmSurveyContents_title": "依頼内容確認",
+    "confirmSurveyContents_button": "依頼内容確認",
+    "requestSent": {
+        "title": "発行完了",
+        "message": "$t(requestData)が発行されました。",
+        "checkRequestStatus": "$t(requestStatus)を確認する",
+        "sendMoreRequest": "発行を続ける"
+    },
+    "readRequestTitle": "$t(glossary:readRequestTarget)_閲覧許可依頼",
+    "readRequestBody": "$t(glossary:readRequestTarget)の閲覧許可をお願いします。",
+    "readResponseTitle": "$t(glossary:readRequestTarget)_登録依頼返信",
+    "readResponseApprovedBody": "承認しました。",
+    "readResponseDeclinedBody": "拒否しました。",
+    "me": "自分",
+    "noImageAvailable": "なし",
+    "sessionExpiredDialog": {
+        "title": "$t(glossary:sessionExpiredDialog.title)",
+        "message": "セッションの期限が切れています。<br>$t(glossary:sessionExpiredDialog.action)"
+    },
+    "msg": {
+        "info": {
+            "collaboratingData": "データ連携中です...",
+            "pleaseSelectTargetCell": "対象セルを選択して下さい。",
+            "messageSent": "メッセージを送信しました。"
+        },
+        "error": {
+            "failedToSendMessage": "メッセージの送信に失敗しました。",
+            "targetCellNotSelected": "対象セルが設定されていません。",
+            "tokenMissing": "トークンが設定されていません。",
+            "refreshTokenMissing": "リフレッシュ$t(msg.error.tokenMissing)",
+            "tokenExpiryDateMissing": "トークンの有効期限が設定されていません。",
+            "refreshTokenExpiryDateMissing": "リフレッシュ$t(msg.error.tokenExpiryDateMissing)",
+            "failedToRetrieveData": "データの取得に失敗しました。",
+            "dataNotFound": "データがありません。",
+            "failedToRefreshToken": "リフレッシュトークンの更新に失敗しました。<br>画面をリロードしてください。",
+            "failedToReceiveApproval": "提供に同意されている保持者が見つかりません。",
+            "failedToSendRequest": "{{total}}件中 {{succeed}}件の送信に成功しました\n{{total}}件中 {{failed}}件の送信に失敗しました"
+        }
+    },
+    "label": {
+        "title": {
+            "message": "タイトル<span class=\"explain\">（30文字以内）</span>",
+            "placeholder": "タイトルを入力してください。"
+        },
+        "image": "イメージ画像<span class=\"explain\">（形式： jpg, png）</span>",
+        "imageWithLink": "イメージ画像<span class=\"explain\">（形式： jpg, png）</span><a href=\"./doc/sample.pdf\" id=\"preview-image-text\" target=\"_blank\">表示サンプル</a>",
+        "messageBody": {
+            "message": "本文<span class=\"explain\">（200文字以内）</span>",
+            "placeholder": "提供依頼内容の本文を入力してください。"
+        },
+        "purpose": {
+            "message": "利用目的<span class=\"explain\">（200文字以内）</span>",
+            "placeholder": "提供依頼内容の利用目的を入力してください。"
+        }
+    }
+}

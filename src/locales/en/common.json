@@ -1,0 +1,74 @@
+{
+    "comma": ",",
+    "menu": "Menu",
+    "release": "Ungrant",
+    "approve": "Approve",
+    "decline": "Decline",
+    "reLogin": "Re-Login",
+    "close": "Close",
+    "back": "Back",
+    "send": "Send",
+    "newRequest": "New request",
+    "requestStatus": "Request status",
+    "confirmData": "Confirm data",
+    "requestStatusNConfirmData": "$t(requestStatus)/$t(confirmData)",
+    "requestData": "Request Data",
+    "accessTo": "Access to {{value}}",
+    "createSurvey": "Create survey",
+    "confirm": "Confirm",
+    "confirmSurveyContents_title": "Survey Contents",
+    "confirmSurveyContents_button": "Confirm",
+    "requestSent": {
+        "title": "Request Sent",
+        "message": "Request for data enquiry is sent.",
+        "checkRequestStatus": "Check request status",
+        "sendMoreRequest": "Send more"
+    },
+    "readRequestTitle": "$t(glossary:readRequestTarget)_Read Permission Request",
+    "readRequestBody": "Please grant read permission for your $t(glossary:readRequestTarget).",
+    "readResponseTitle": "$t(glossary:readRequestTarget)_Read Permission Reply",
+    "readResponseApprovedBody": "Read permission is granted.",
+    "readResponseDeclinedBody": "Read permission is not granted.",
+    "me": "Me",
+    "noImageAvailable": "No image available",
+    "sessionExpiredDialog": {
+        "title": "$t(glossary:sessionExpiredDialog.title)",
+        "message": "Session has expired.<br>$t(glossary:sessionExpiredDialog.action)"
+    },
+    "msg": {
+        "info": {
+            "collaboratingData": "Synchronizing data ...",
+            "pleaseSelectTargetCell": "Please select a cell.",
+            "messageSent": "Succeeded in sending the message."
+        },
+        "error": {
+            "failedToSendMessage": "Failed to send message.",
+            "targetCellNotSelected": "Target cell not selected.",
+            "tokenMissing": "Token is missing.",
+            "refreshTokenMissing": "Refresh token is missing.",
+            "tokenExpiryDateMissing": "Token's expiry date is not set.",
+            "refreshTokenExpiryDateMissing": "Refresh token's expiry date is not set.",
+            "failedToRetrieveData": "Failed to retrieve data.",
+            "dataNotFound": "Data not found.",
+            "failedToRefreshToken": "Failed to refresh token.<br>Please reload page.",
+            "failedToReceiveApproval": "There are no approval yet.",
+            "failedToSendRequest": "Succeeded in sending {{succeed}} out of {{total}} request(s)\nFailed to send {{failed}} out of {{total}} request(s)"
+        }
+    },
+    "label": {
+        "title": {
+            "message": "Title<span class=\"explain\"> (within 30 characters)</span>",
+            "placeholder": "Please enter a title."
+        },
+        "image": "Image<span class=\"explain\"> (format: jpg, png)</span>",
+        "imageWithLink": "Image<span class=\"explain\"> (format: jpg, png)</span><a href=\"./doc/sample.pdf\" id=\"preview-image-text\" target=\"_blank\">Example</a>",
+        "messageBody": {
+            "message": "Message<span class=\"explain\"> (within 200 characters)</span>",
+            "placeholder": "Please explain what your want."
+        },
+        "purpose": {
+            "message": "Purpose<span class=\"explain\"> (within 200 characters)</span>",
+            "placeholder": "Please write the reason of this survey."
+        }
+    }
+}
