@@ -63,7 +63,7 @@ additionalCallback = function() {
         }
 
         $("#targetNumberOfPeople").html(sendCount);
-        $("#targetArea").html(areas);
+        $("#targetArea").html(Common.translateLocations(areas));
 
         $("#iMassageTitle").attr("value",title);
         $("#iMassageBody").html(message);

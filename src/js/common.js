@@ -5,6 +5,7 @@ $(document).ready(function() {
     .use(i18nextXHRBackend)
     .use(i18nextBrowserLanguageDetector)
     .init({
+        preload: ['ja'],
         fallbackLng: 'en',
         ns: ['common', 'glossary', 'candidateFilter'],
         defaultNS: 'common',
@@ -234,4 +235,41 @@ Common.displayMessageByKey = function(msg_key) {
     } else {
         $('#errorMsg').hide();
     }
+};
+
+/*
+ * For demo to display English location since the WebDAV is in Japanese
+ */
+Common.translateLocations = function(locations) {
+    var strList = locations.split(",");
+    strList = $.map(strList, function(location){
+        return Common.japanese2EnglishLocation(location);
+    });
+
+    return strList.join(",");
+};
+
+Common.japanese2EnglishLocation = function(location) {
+    var str;
+    switch (location) {
+    case i18next.t("candidateFilter:location.options.area0", { lng: 'ja' }):
+        str = i18next.t("candidateFilter:location.options.area0");
+        break;
+    case i18next.t("candidateFilter:location.options.area1", { lng: 'ja' }):
+        str = i18next.t("candidateFilter:location.options.area1");
+        break;
+    case i18next.t("candidateFilter:location.options.area2", { lng: 'ja' }):
+        str = i18next.t("candidateFilter:location.options.area2");
+        break;
+    case i18next.t("candidateFilter:location.options.area3", { lng: 'ja' }):
+        str = i18next.t("candidateFilter:location.options.area3");
+        break;
+    case i18next.t("candidateFilter:location.options.area4", { lng: 'ja' }):
+        str = i18next.t("candidateFilter:location.options.area4");
+        break;
+    default:
+        str = location;
+    }
+
+    return str;
 };
