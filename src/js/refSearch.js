@@ -16,7 +16,7 @@ rs.getName = function(path) {
   return collectionName;
 };
 
-$(document).ready(function() {
+additionalCallback = function() {
   var appUrlMatch = location.href.split("#");
   var appUrlSplit = appUrlMatch[0].split("/");
   rs.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
@@ -171,7 +171,7 @@ $(document).ready(function() {
       //$(':checkbox[name="inputArea"][value=' + area[i] + ']').prop('checked',true);
       areaStr += area[i];
     }
-    $("#targetArea").html(areaStr);
+    $("#targetArea").html(Common.translateLocations(areaStr));
 
     $("#targetData,#targetAttribute").attr("data-i18n", typeStr).localize();
     $("#targetOffer").attr("data-i18n", offerStr).localize();
@@ -354,7 +354,7 @@ $(document).ready(function() {
     }
    return num;
   };
-});
+};
 
 rs.dispUserName = function(userCellUrl) {
     rs.getProfile(userCellUrl).done(function(prof) {

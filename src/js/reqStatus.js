@@ -16,7 +16,12 @@ rq.getName = function(path) {
   return collectionName;
 };
 
-$(document).ready(function() {
+additionalCallback = function() {
+    rq.additionalCallback1();
+    rq.additionalCallback2();
+};
+
+rq.additionalCallback1 = function() {
     var appUrlMatch = location.href.split("#");
     var appUrlSplit = appUrlMatch[0].split("/");
     rq.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
@@ -67,7 +72,7 @@ $(document).ready(function() {
     var cellUrl = sessionStorage.getItem("ISCellUrl");
     Common.dispUserName(cellUrl);
     Common.setIdleTime();
-});
+};
 
 rq.moveDispImage = function(cellUrl) {
     sessionStorage.setItem("RSImageCellUrl", cellUrl);
@@ -83,7 +88,7 @@ rq.getProfile = function(url) {
     })
 };
 
-$(document).ready(function() {
+rq.additionalCallback2 = function() {
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -161,7 +166,7 @@ $(document).ready(function() {
       }
      return num;
     };
-});
+};
 
 rq.getReceivedMessageAPI = function() {
   return $.ajax({
