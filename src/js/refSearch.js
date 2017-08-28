@@ -166,7 +166,7 @@ additionalCallback = function() {
     var areaStr = "";
     for (i=0; i<area.length; i++){
       if (i !== 0) {
-        areaStr += "、";
+        areaStr += ",";
       }
       //$(':checkbox[name="inputArea"][value=' + area[i] + ']').prop('checked',true);
       areaStr += area[i];
@@ -270,7 +270,7 @@ additionalCallback = function() {
                   console.log(userInfo);
                   var arr = {};
                   arr['No'] = $("#searchResult").children().length + 1;
-                  arr['Address'] = userInfo[0].d.results[0].Address;
+                  arr['Address'] = Common.japanese2EnglishLocation(userInfo[0].d.results[0].Address);
                   arr['CellURL'] = userInfo[0].d.results[0].CellURL + '/';
                   console.log(arr.CellURL);
                   if (userInfo[0].d.results[0].Sex == 1 ){

@@ -36,11 +36,11 @@
     "location": {
         "label": "Location",
         "options": {
-            "area0": "Central",
-            "area1": "East District",
-            "area2": "West District",
-            "area3": "South District",
-            "area4": "North District"
+            "area0": "Central District",
+            "area1": "Eastern District",
+            "area2": "Western District",
+            "area3": "Southern District",
+            "area4": "Northern District"
         }
     },
     "search": "Search",
