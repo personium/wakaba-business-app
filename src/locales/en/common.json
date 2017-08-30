@@ -33,7 +33,8 @@
     "noImageAvailable": "No image available",
     "sessionExpiredDialog": {
         "title": "$t(glossary:sessionExpiredDialog.title)",
-        "message": "Session has expired.<br>$t(glossary:sessionExpiredDialog.action)"
+        "message": "Session has expired.<br>$t(glossary:sessionExpiredDialog.action)",
+        "btnOk": "$t(glossary:sessionExpiredDialog.btnOk)"
     },
     "msg": {
         "info": {

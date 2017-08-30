@@ -12,7 +12,8 @@
     "requestDetails": "Request details",
     "sessionExpiredDialog": {
         "title": "Session Expired",
-        "action": "Please restart the application."
+        "action": "Please restart the application.",
+        "btnOk": "OK"
     },
     "survey": {
         "title": {
