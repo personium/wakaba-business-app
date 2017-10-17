@@ -546,17 +546,6 @@ rs.getReceivedMessageAPI = function() {
   });
 };
 
-rs.getReceivedDateAPI = function() {
-  return $.ajax({
-    type: "GET",
-    url: Common.cellUrl + '__ctl/ReceivedMessage?&$inlinecount=allpages&$filter=InReplyTo%20eq%20%27' + sessionStorage.getItem("RQmessageId") + '%27&$filter=From%20eq%20%27' + cellUrl + '%27',
-    headers: {
-      'Authorization':'Bearer ' + Common.token,
-      'Accept':'application/json'
-    }
-  });
-};
-
 rs.getSentMessageAPI = function(){
   return $.ajax({
     type: "GET",
