@@ -127,8 +127,15 @@ rq.additionalCallback2 = function() {
             var body = arr[i]['Body'].replace( /"\"/g ,"" );
             body = body.substr( 1 );
             body = body.substr( 0, body.length-1 );
-            var termStart = JSON.parse(body).TermStart;
-            var termEnd = JSON.parse(body).TermEnd;
+            var bodyJSON;
+            try {
+                bodyJSON = JSON.parse(body);
+            } catch(ex) {
+                console.log(ex);
+                continue;
+            }
+            var termStart = bodyJSON.TermStart;
+            var termEnd = bodyJSON.TermEnd;
             console.log(messageTitel);
             console.log(messageId);
             listUrl = listUrl + [
