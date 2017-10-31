@@ -33,7 +33,8 @@
     "noImageAvailable": "なし",
     "sessionExpiredDialog": {
         "title": "$t(glossary:sessionExpiredDialog.title)",
-        "message": "セッションの期限が切れています。<br>$t(glossary:sessionExpiredDialog.action)"
+        "message": "セッションの期限が切れています。<br>$t(glossary:sessionExpiredDialog.action)",
+        "btnOk": "$t(glossary:sessionExpiredDialog.btnOk)"
     },
     "msg": {
         "info": {
