@@ -17,44 +17,6 @@ rs.getName = function(path) {
 };
 
 additionalCallback = function() {
-  var appUrlMatch = location.href.split("#");
-  var appUrlSplit = appUrlMatch[0].split("/");
-  rs.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
-  if (appUrlSplit[0].indexOf("file:") == 0) {
-    rs.appUrl = "https://demo.personium.io/hn-ll-app/";
-  }
-  var hash = location.hash.substring(1);
-  var params = hash.split("&");
-  for (var i in params) {
-    var param = params[i].split("=");
-    var id = param[0];
-    switch (id) {
-      case "target":
-      Common.target = param[1];
-      sessionStorage.setItem("ISTarget", param[1]);
-      var urlSplit = param[1].split("/");
-      Common.cellUrl = urlSplit[0] + "//" + urlSplit[2] + "/" + urlSplit[3] + "/";
-      sessionStorage.setItem("ISCellUrl", Common.cellUrl);
-      var split = Common.target.split("/");
-      rs.boxName = split[split.length - 1];
-      case "token":
-      Common.token = param[1];
-      sessionStorage.setItem("ISToken", param[1]);
-      case "ref":
-      Common.refToken = param[1];
-      sessionStorage.setItem("ISRefToken", param[1]);
-      case "expires":
-      Common.expires = param[1];
-      sessionStorage.setItem("ISExpires", param[1]);
-      case "refexpires":
-      Common.refExpires = param[1];
-      sessionStorage.setItem("ISRefExpires", param[1]);
-    }
-  }
-
-  if (Common.checkParam()) {
-
-  }
   Common.setIdleTime();
 
   // Tabの動作設定
@@ -129,10 +91,12 @@ additionalCallback = function() {
         case "1":
           var typeStr = "glossary:pdsCalorieSmile";
           var offerStr = "glossary:survey.targetData.calorieSmile";
+          rs.appCellUrl = "https://demo.personium.io/hn-app-genki/";
           break;
         case "2":
           var typeStr = "glossary:pdsLifeBeat";
           var offerStr = "glossary:survey.targetData.lifeBeat";
+          rs.appCellUrl = "https://demo.personium.io/hn-app-neurosky/";
           break;
       }
     }
@@ -363,17 +327,6 @@ rs.dispUserName = function(userCellUrl) {
     });
 };
 
-rs.moveDispImage = function(cellUrl) {
-  sessionStorage.setItem("RSImageCellUrl", cellUrl);
-  sessionStorage.getItem("appType");
-  if (sessionStorage.getItem("appType") == 1){
-      location.href = "./imageView.html";
-  } else {
-    location.href = "./dataView.html";
-  }
-
-};
-
 rs.createDispImage = function(cellUrl, no) {
   var id = "detail" + no;
   var html = '<div id="' + id + '" class="switch-pages" style="display:none;">';
@@ -385,54 +338,57 @@ rs.createDispImage = function(cellUrl, no) {
     .append(html)
     .localize();
   Common.getTargetToken(cellUrl).done(function(extData) {
-    rs.getShokujiImageAPI(cellUrl, extData.access_token).done(function(data) {
-      var dataList = data.d.results;
-      html = "";
-      var nowDate = "";
-      for (var i in dataList) {
-          var imageSrc = dataList[i].photo;
-          var imageName = "";
-          if (imageSrc) {
-              imageName = imageSrc.match(".+/(.+?)([\?#;].*)?$")[1];
-          }
-          var shokujiDate = dataList[i].shokuji_date;
-          var dateId = shokujiDate.replace(/\/|\-/g, "");
-          var shokujiTime = dataList[i].time;
-          var timeId = shokujiTime.replace(/:/g, "");
-          var dispTimeS = shokujiTime.split(':');
-          var dispTime = dispTimeS[0] + ":" + dispTimeS[1];
-          var noId = dataList[i].no;
-
-          var html = '';
-          if (nowDate !== shokujiDate) {
-              nowDate = shokujiDate;
-              html = '<section class="meal-section"><h4>' + nowDate.replace(/\/|\-/g, ".") + '</h4><div class="daily-meal" id="td' + no + dateId + '"></div></section>';
-
-              $('#' + id).append(html);
-          }
-
-          html = '<div class="meal">';
-          html += '<div class="picture">';
-          html += '<img id="im' + no + dateId + timeId + noId + '" alt="食べ物">';
-          html += '</div>';
-          html += '<div class="time">' + dispTime + '</div>';
-          var comm = dataList[i].shokuji_comment;
-          if (!comm) {
-              comm = "";
-          }
-          html += '<div class="comment">' + comm + '</div>';
-          html += '</div>';
-
-          $("#td" + no + dateId).append(html);
-          rs.setPhoto(cellUrl, extData.access_token, no, dateId, timeId, noId, imageName);
-      }
-    }).fail(function(data) {
-      html = '<section class="meal-section">';
-      html += '<h4 data-i18n="msg.error.dataNotFound"></h4>';
-      html += '</section>';
-      $('#' + id)
-        .append(html)
-        .localize();
+    // BoxURL 取得
+    Common.getTargetBoxURL(cellUrl, extData.access_token, rs.appCellUrl, function(boxUrl) {
+      rs.getShokujiImageAPI(boxUrl, extData.access_token).done(function(data) {
+        var dataList = data.d.results;
+        html = "";
+        var nowDate = "";
+        for (var i in dataList) {
+            var imageSrc = dataList[i].photo;
+            var imageName = "";
+            if (imageSrc) {
+                imageName = imageSrc.match(".+/(.+?)([\?#;].*)?$")[1];
+            }
+            var shokujiDate = dataList[i].shokuji_date;
+            var dateId = shokujiDate.replace(/\/|\-/g, "");
+            var shokujiTime = dataList[i].time;
+            var timeId = shokujiTime.replace(/:/g, "");
+            var dispTimeS = shokujiTime.split(':');
+            var dispTime = dispTimeS[0] + ":" + dispTimeS[1];
+            var noId = dataList[i].no;
+  
+            var html = '';
+            if (nowDate !== shokujiDate) {
+                nowDate = shokujiDate;
+                html = '<section class="meal-section"><h4>' + nowDate.replace(/\/|\-/g, ".") + '</h4><div class="daily-meal" id="td' + no + dateId + '"></div></section>';
+  
+                $('#' + id).append(html);
+            }
+  
+            html = '<div class="meal">';
+            html += '<div class="picture">';
+            html += '<img id="im' + no + dateId + timeId + noId + '" alt="食べ物">';
+            html += '</div>';
+            html += '<div class="time">' + dispTime + '</div>';
+            var comm = dataList[i].shokuji_comment;
+            if (!comm) {
+                comm = "";
+            }
+            html += '<div class="comment">' + comm + '</div>';
+            html += '</div>';
+  
+            $("#td" + no + dateId).append(html);
+            rs.setPhoto(boxUrl, extData.access_token, no, dateId, timeId, noId, imageName);
+        }
+      }).fail(function(data) {
+        html = '<section class="meal-section">';
+        html += '<h4 data-i18n="msg.error.dataNotFound"></h4>';
+        html += '</section>';
+        $('#' + id)
+          .append(html)
+          .localize();
+      });
     });
   }).fail(function(extData) {
     html = '<section class="meal-section">';
@@ -444,7 +400,7 @@ rs.createDispImage = function(cellUrl, no) {
   });
 };
 
-rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName) {
+rs.setPhoto = function(boxUrl, extToken, arrNo, dateId, timeId, noId, imageName) {
     var ext = imageName.split('.')[1];
     var contentType = "image/jpeg";
     switch (ext) {
@@ -455,7 +411,7 @@ rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName
             contentType = "image/gif";
             break;
     }
-    var filePath = cellUrl + 'io_personium_demo_hn-app-genki/Images/' + imageName;
+    var filePath = boxUrl + 'Images/' + imageName;
     var oReq = new XMLHttpRequest();
     oReq.open("GET", filePath);
     oReq.responseType = "blob";
@@ -568,11 +524,11 @@ rs.getRecievedMessageAPI = function(){
   });
 }
 
-rs.getShokujiImageAPI = function(cellUrl, extToken) {
+rs.getShokujiImageAPI = function(boxUrl, extToken) {
   return $.ajax({
     type: "GET",
     dataType: "json",
-    url: cellUrl + "io_personium_demo_hn-app-genki/GenkiKunData/shokuji_info?$top=10000&$orderby=shokuji_date%20desc,time%20asc",
+    url: boxUrl + "GenkiKunData/shokuji_info?$top=10000&$orderby=shokuji_date%20desc,time%20asc",
     headers: {
         'Authorization':'Bearer ' + extToken,
         'Accept':'application/json'

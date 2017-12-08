@@ -22,61 +22,19 @@ additionalCallback = function() {
 };
 
 rq.additionalCallback1 = function() {
-    var appUrlMatch = location.href.split("#");
-    var appUrlSplit = appUrlMatch[0].split("/");
-    rq.appUrl = appUrlSplit[0] + "//" + appUrlSplit[2] + "/" + appUrlSplit[3] + "/";
-    if (appUrlSplit[0].indexOf("file:") == 0) {
-        rq.appUrl = "https://demo.personium.io/hn-ll-app/";
+    if (sessionStorage.getItem("SearchAge") != null) {
+        $('#inputAge').val(sessionStorage.getItem("SearchAge"));
     }
-
-    var hash = location.hash.substring(1);
-    var params = hash.split("&");
-    for (var i in params) {
-        var param = params[i].split("=");
-        var id = param[0];
-        switch (id) {
-            case "target":
-                Common.target = param[1];
-                sessionStorage.setItem("ISTarget", param[1]);
-                var urlSplit = param[1].split("/");
-                Common.cellUrl = urlSplit[0] + "//" + urlSplit[2] + "/" + urlSplit[3] + "/";
-                sessionStorage.setItem("ISCellUrl", Common.cellUrl);
-                var split = Common.target.split("/");
-                rq.boxName = split[split.length - 1];
-            case "token":
-                Common.token = param[1];
-                sessionStorage.setItem("ISToken", param[1]);
-            case "ref":
-                Common.refToken = param[1];
-                sessionStorage.setItem("ISRefToken", param[1]);
-            case "expires":
-                Common.expires = param[1];
-                sessionStorage.setItem("ISExpires", param[1]);
-            case "refexpires":
-                Common.refExpires = param[1];
-                sessionStorage.setItem("ISRefExpires", param[1]);
-        }
+    if (sessionStorage.getItem("SearchSex") != null) {
+        $('#inputSex').val(sessionStorage.getItem("SearchSex"));
     }
-
-    if (Common.checkParam()) {
-       if (sessionStorage.getItem("SearchAge") != null) {
-           $('#inputAge').val(sessionStorage.getItem("SearchAge"));
-       }
-       if (sessionStorage.getItem("SearchSex") != null) {
-           $('#inputSex').val(sessionStorage.getItem("SearchSex"));
-       }
-       if (sessionStorage.getItem("SearchArea") != null) {
-           $('#inputArea').val(sessionStorage.getItem("SearchArea"));
-       }
+    if (sessionStorage.getItem("SearchArea") != null) {
+        $('#inputArea').val(sessionStorage.getItem("SearchArea"));
     }
+    
     var cellUrl = sessionStorage.getItem("ISCellUrl");
     Common.dispUserName(cellUrl);
     Common.setIdleTime();
-};
-
-rq.moveDispImage = function(cellUrl) {
-    sessionStorage.setItem("RSImageCellUrl", cellUrl);
-    location.href = "./imageView.html";
 };
 
 rq.getProfile = function(url) {
