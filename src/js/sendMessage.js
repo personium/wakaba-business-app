@@ -146,7 +146,7 @@ additionalCallback = function() {
               var nowMonth = nowDate.getMonth() + 1;
               var nowDay = ("0" + nowDate.getDate()).slice(-2);
               sessionStorage.setItem("ImageFileName", file.name);
-              imgFilePath = Common.target + "/AttachImage/" + nowYear + nowMonth + nowDay + "_" + file.name;
+              imgFilePath = Common.boxUrl + "AttachImage/" + nowYear + nowMonth + nowDay + "_" + file.name;
               putImageFile(imgFilePath, file.name, file).done(function(response) {
                   console.log(response);
                   sendMessage(imgFilePath);
