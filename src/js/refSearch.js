@@ -91,10 +91,12 @@ additionalCallback = function() {
         case "1":
           var typeStr = "glossary:pdsCalorieSmile";
           var offerStr = "glossary:survey.targetData.calorieSmile";
+          rs.appCellUrl = "https://demo.personium.io/hn-app-genki/";
           break;
         case "2":
           var typeStr = "glossary:pdsLifeBeat";
           var offerStr = "glossary:survey.targetData.lifeBeat";
+          rs.appCellUrl = "https://demo.personium.io/hn-app-neurosky/";
           break;
       }
     }
@@ -337,8 +339,8 @@ rs.createDispImage = function(cellUrl, no) {
     .localize();
   Common.getTargetToken(cellUrl).done(function(extData) {
     // BoxURL 取得
-    //Common.getTargetBoxURL(cellUrl, extData.access_token, function(boxURL) {
-      rs.getShokujiImageAPI(cellUrl, extData.access_token).done(function(data) {
+    Common.getTargetBoxURL(cellUrl, extData.access_token, rs.appCellUrl, function(boxUrl) {
+      rs.getShokujiImageAPI(boxUrl, extData.access_token).done(function(data) {
         var dataList = data.d.results;
         html = "";
         var nowDate = "";
@@ -377,7 +379,7 @@ rs.createDispImage = function(cellUrl, no) {
             html += '</div>';
   
             $("#td" + no + dateId).append(html);
-            rs.setPhoto(cellUrl, extData.access_token, no, dateId, timeId, noId, imageName);
+            rs.setPhoto(boxUrl, extData.access_token, no, dateId, timeId, noId, imageName);
         }
       }).fail(function(data) {
         html = '<section class="meal-section">';
@@ -387,7 +389,7 @@ rs.createDispImage = function(cellUrl, no) {
           .append(html)
           .localize();
       });
-    //});
+    });
   }).fail(function(extData) {
     html = '<section class="meal-section">';
     html += '<h4 data-i18n="msg.error.failedToRetrieveData"></h4>';
@@ -398,7 +400,7 @@ rs.createDispImage = function(cellUrl, no) {
   });
 };
 
-rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName) {
+rs.setPhoto = function(boxUrl, extToken, arrNo, dateId, timeId, noId, imageName) {
     var ext = imageName.split('.')[1];
     var contentType = "image/jpeg";
     switch (ext) {
@@ -409,7 +411,7 @@ rs.setPhoto = function(cellUrl, extToken, arrNo, dateId, timeId, noId, imageName
             contentType = "image/gif";
             break;
     }
-    var filePath = cellUrl + 'io_personium_demo_hn-app-genki/Images/' + imageName;
+    var filePath = boxUrl + 'Images/' + imageName;
     var oReq = new XMLHttpRequest();
     oReq.open("GET", filePath);
     oReq.responseType = "blob";
@@ -522,11 +524,11 @@ rs.getRecievedMessageAPI = function(){
   });
 }
 
-rs.getShokujiImageAPI = function(cellUrl, extToken) {
+rs.getShokujiImageAPI = function(boxUrl, extToken) {
   return $.ajax({
     type: "GET",
     dataType: "json",
-    url: cellUrl + "io_personium_demo_hn-app-genki/GenkiKunData/shokuji_info?$top=10000&$orderby=shokuji_date%20desc,time%20asc",
+    url: boxUrl + "GenkiKunData/shokuji_info?$top=10000&$orderby=shokuji_date%20desc,time%20asc",
     headers: {
         'Authorization':'Bearer ' + extToken,
         'Accept':'application/json'

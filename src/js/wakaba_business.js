@@ -86,12 +86,21 @@ Common.setAccessData = function() {
     }
 };
 
-Common.getBoxUrlAPI = function() {
+Common.getBoxUrlAPI = function(toCellUrl, toAccToken) {
+    let cellUrl = toCellUrl;
+    if (!cellUrl) {
+        cellUrl = Common.cellUrl;
+    }
+    let token = toAccToken;
+    if (!token) {
+        token = Common.token;
+    }
+
     return $.ajax({
         type: "GET",
-        url: Common.cellUrl + "__box",
+        url: cellUrl + "__box",
         headers: {
-            'Authorization':'Bearer ' + Common.token,
+            'Authorization':'Bearer ' + token,
             'Accept':'application/json'
         }
     });
@@ -112,7 +121,7 @@ Common.refExpires = sessionStorage.getItem("ISRefExpires");
 
 Common.IDLE_TIMEOUT =  3600000;
 Common.LASTACTIVITY = new Date().getTime();
-const APP_URL = "https://demo.personium.io/hn-ll-user-app/";
+const APP_URL = "https://demo.personium.io/hn-ll-app/";
 
 // This method checks idle time
 Common.setIdleTime = function() {
@@ -174,7 +183,7 @@ Common.checkIdleTime = function() {
 
 Common.refreshToken = function(callback) {
     Common.getLaunchJson().done(function(launchObj){
-        Common.getAppToken(launchObj.personal).done(function(appToken) {
+        Common.getAppToken(launchObj.personal, Common.appUrl).done(function(appToken) {
             Common.refreshTokenAPI(appToken.access_token).done(function(data) {
                 Common.token = data.access_token;
                 Common.refToken = data.refresh_token;
@@ -195,16 +204,34 @@ Common.refreshToken = function(callback) {
     });
 };
 
-Common.getTargetBoxURL = function(toCellUrl, toTransAccToken, callback) {
-    Common.appGetTargetToken(toCellUrl).done(function(appToken){
-        Common.getToAppAuthToken(toTransAccToken, appToken.access_token).done(function(data){
-
+Common.getTargetBoxURL = function(toCellUrl, toTransAccToken, appCellUrl, callback) {
+    Common.getLaunchJson(appCellUrl).done(function(launchObj){
+        Common.getAppToken(launchObj.personal, appCellUrl, toCellUrl).done(function(appToken){
+            Common.getToAppAuthToken(toCellUrl, toTransAccToken, appCellUrl, appToken.access_token).done(function(toAppAuthToken){
+                Common.getBoxUrlAPI(toCellUrl, toAppAuthToken.access_token).done(function(data, textStatus, request) {
+                    let boxUrl = request.getResponseHeader("Location");
+                    if ((typeof callback !== "undefined") && $.isFunction(callback)) {
+                        callback(boxUrl + "/");
+                    };
+                })
+            })
         })
-    })
+    });
+    
 }
 
-Common.getToAppAuthToken = function(transAccToken, appAccToken) {
-
+Common.getToAppAuthToken = function(cellUrl, transAccToken, appCellUrl, appCellToken) {
+    return $.ajax({
+        type: "POST",
+        url: cellUrl + "__token",
+        data: {
+            grant_type: "urn:ietf:params:oauth:grant-type:saml2-bearer",
+            assertion: transAccToken,
+            client_id: appCellUrl,
+            client_secret: appCellToken
+        },
+        header: {'Accept':'application/json'}
+    });
 }
 
 Common.refreshTokenAPI = function(appCellToken) {
@@ -216,17 +243,21 @@ Common.refreshTokenAPI = function(appCellToken) {
         data: {
                grant_type: "refresh_token",
                refresh_token: Common.refToken,
-               client_id: "https://demo.personium.io/hn-ll-app/",
+               client_id: Common.appUrl,
                client_secret: appCellToken
         },
         headers: {'Accept':'application/json'}
     })
 };
 
-Common.getLaunchJson = function() {
+Common.getLaunchJson = function(appCellUrl) {
+    let appUrl = appCellUrl;
+    if (!appUrl) {
+        appUrl = Common.appUrl;
+    }
     return $.ajax({
         type: "GET",
-        url: Common.appUrl + "__/launch.json",
+        url: appUrl + "__/launch.json",
         headers: {
             'Authorization':'Bearer ' + Common.token,
             'Accept':'application/json'
@@ -234,14 +265,14 @@ Common.getLaunchJson = function() {
     });
 }
 
-Common.getAppToken = function(personalInfo, toCellUrl) {
+Common.getAppToken = function(personalInfo, appCellUrl, toCellUrl) {
     let cellUrl = toCellUrl;
     if (!cellUrl) {
         cellUrl = Common.cellUrl
     }
     return $.ajax({
           type: "POST",
-          url: Common.appUrl + "__token",
+          url: appCellUrl + "__token",
           processData: true,
 		  dataType: 'json',
           data: {
