@@ -122,6 +122,9 @@ Common.refExpires = sessionStorage.getItem("ISRefExpires");
 Common.IDLE_TIMEOUT =  3600000;
 Common.LASTACTIVITY = new Date().getTime();
 const APP_URL = "https://demo.personium.io/hn-ll-app/";
+getEngineEndPoint = function() {
+    return Common.appUrl + "__/src-debug/Engine/getAppAuthToken";
+};
 
 // This method checks idle time
 Common.setIdleTime = function() {
@@ -182,43 +185,51 @@ Common.checkIdleTime = function() {
 };
 
 Common.refreshToken = function(callback) {
-    Common.getLaunchJson().done(function(launchObj){
-        Common.getAppToken(launchObj.personal, Common.appUrl).done(function(appToken) {
-            Common.refreshTokenAPI(appToken.access_token).done(function(data) {
-                Common.token = data.access_token;
-                Common.refToken = data.refresh_token;
-                Common.expires = data.expires_in;
-                Common.refExpires = data.refresh_token_expires_in;
-                sessionStorage.setItem("ISToken", data.access_token);
-                sessionStorage.setItem("ISRefToken", data.refresh_token);
-                sessionStorage.setItem("ISExpires", data.expires_in);
-                sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
+    Common.getAppAuthToken(Common.cellUrl, getEngineEndPoint()).done(function(appToken) {
+        Common.refreshTokenAPI(appToken.access_token).done(function(data) {
+            Common.token = data.access_token;
+            Common.refToken = data.refresh_token;
+            Common.expires = data.expires_in;
+            Common.refExpires = data.refresh_token_expires_in;
+            sessionStorage.setItem("ISToken", data.access_token);
+            sessionStorage.setItem("ISRefToken", data.refresh_token);
+            sessionStorage.setItem("ISExpires", data.expires_in);
+            sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
 
-                if ((typeof callback !== "undefined") && $.isFunction(callback)) {
-                    callback();
-                };
-            }).fail(function(data) {
-                $('#modal-session-expired').modal('show');
-            });
+            if ((typeof callback !== "undefined") && $.isFunction(callback)) {
+                callback();
+            };
+        }).fail(function(data) {
+            $('#modal-session-expired').modal('show');
         });
     });
 };
 
 Common.getTargetBoxURL = function(toCellUrl, toTransAccToken, appCellUrl, callback) {
-    Common.getLaunchJson(appCellUrl).done(function(launchObj){
-        Common.getAppToken(launchObj.personal, appCellUrl, toCellUrl).done(function(appToken){
-            Common.getToAppAuthToken(toCellUrl, toTransAccToken, appCellUrl, appToken.access_token).done(function(toAppAuthToken){
-                Common.getBoxUrlAPI(toCellUrl, toAppAuthToken.access_token).done(function(data, textStatus, request) {
-                    let boxUrl = request.getResponseHeader("Location");
-                    if ((typeof callback !== "undefined") && $.isFunction(callback)) {
-                        callback(boxUrl + "/");
-                    };
-                })
+    let engineEndPoint = appCellUrl + "__/html/Engine/getAppAuthToken";
+    Common.getAppAuthToken(toCellUrl, engineEndPoint).done(function(appToken){
+        Common.getToAppAuthToken(toCellUrl, toTransAccToken, appCellUrl, appToken.access_token).done(function(toAppAuthToken){
+            Common.getBoxUrlAPI(toCellUrl, toAppAuthToken.access_token).done(function(data, textStatus, request) {
+                let boxUrl = request.getResponseHeader("Location");
+                if ((typeof callback !== "undefined") && $.isFunction(callback)) {
+                    callback(boxUrl + "/");
+                };
             })
         })
-    });
-    
+    })
 }
+
+// Get App Authentication Token
+Common.getAppAuthToken = function(cellUrl, engineEndPoint) {
+    return $.ajax({
+        type: "POST",
+        url: engineEndPoint,
+        data: {
+                p_target: cellUrl
+        },
+        headers: {'Accept':'application/json'}
+    });
+};
 
 Common.getToAppAuthToken = function(cellUrl, transAccToken, appCellUrl, appCellToken) {
     return $.ajax({
@@ -249,41 +260,6 @@ Common.refreshTokenAPI = function(appCellToken) {
         headers: {'Accept':'application/json'}
     })
 };
-
-Common.getLaunchJson = function(appCellUrl) {
-    let appUrl = appCellUrl;
-    if (!appUrl) {
-        appUrl = Common.appUrl;
-    }
-    return $.ajax({
-        type: "GET",
-        url: appUrl + "__/launch.json",
-        headers: {
-            'Authorization':'Bearer ' + Common.token,
-            'Accept':'application/json'
-        }
-    });
-}
-
-Common.getAppToken = function(personalInfo, appCellUrl, toCellUrl) {
-    let cellUrl = toCellUrl;
-    if (!cellUrl) {
-        cellUrl = Common.cellUrl
-    }
-    return $.ajax({
-          type: "POST",
-          url: appCellUrl + "__token",
-          processData: true,
-		  dataType: 'json',
-          data: {
-                  grant_type: "password",
-                  username: personalInfo.appTokenId,
-                  password: personalInfo.appTokenPw,
-                  p_target: cellUrl
-          },
-		  headers: {'Accept':'application/json'}
-    });
-}
 
 Common.getTargetToken = function(extCellUrl) {
   return $.ajax({
