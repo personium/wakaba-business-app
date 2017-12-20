@@ -123,7 +123,7 @@ Common.IDLE_TIMEOUT =  3600000;
 Common.LASTACTIVITY = new Date().getTime();
 const APP_URL = "https://demo.personium.io/hn-ll-app/";
 getEngineEndPoint = function() {
-    return Common.appUrl + "__/src-debug/Engine/getAppAuthToken";
+    return Common.appUrl + "__/src/Engine/getAppAuthToken";
 };
 
 // This method checks idle time
