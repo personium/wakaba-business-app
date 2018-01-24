@@ -1,9 +1,7 @@
 {
   "personal": {
      "web": "https://demo.personium.io/hn-ll-app/__/src/imageSearch.html",
-     "android": "wakabaBusinessApp:",
-     "ios": "wakabaBusinessApp:",
-     "appTokenId": "tokenAcc",
-     "appTokenPw": "personiumtoken"
+     "android": "***:",
+     "ios": "***:"
   }
 }
