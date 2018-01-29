@@ -108,7 +108,7 @@ additionalCallback = function() {
         }).done(function(response){
           sendTo = "";
           for ( var i = 0; i < response.d.results.length; i ++ ) {
-            sendTo = sendTo + response.d.results[i].CellURL + ",";
+            sendTo = sendTo + ut.cellUrlWithEndingSlash(response.d.results[i].CellURL) + ",";
           }
 
           sendCount = response.d.results.length;
@@ -207,10 +207,15 @@ additionalCallback = function() {
           var messageBody = {};
           messageBody.BoxBound = false; // hot fixes
           messageBody.To = sendTo;
-          messageBody.Type = "req.relation.build";
-          messageBody.RequestRelation = appCellUrl + "__relation/__/" + name;
-          messageBody.RequestRelationTarget = cellUrl;
+          messageBody.Type = "request";
           messageBody.Title = $('#iMassageTitle').val();
+
+          messageBody.RequestObjects = [];
+          var objArray = {};
+          objArray.RequestType = "relation.add";
+          objArray.Name = name;
+          objArray.TargetUrl = cellUrl;
+          messageBody.RequestObjects.push(objArray);
           //messageBody.Body = $('#iPurpose').val();
 
           var mBody = {};
