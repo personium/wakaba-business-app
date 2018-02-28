@@ -30,7 +30,7 @@ $(document).ready(function() {
             Common.getBoxUrlAPI().done(function(data, textStatus, request) {
                 let boxUrl = request.getResponseHeader("Location");
                 console.log(boxUrl);
-                Common.boxUrl = boxUrl + "/";
+                Common.boxUrl = Common.preparePersoniumUrl(boxUrl);
                 if ((typeof additionalCallback !== "undefined") && $.isFunction(additionalCallback)) {
                     additionalCallback();
                 }
@@ -126,6 +126,17 @@ getEngineEndPoint = function() {
     return Common.appUrl + "__/src/Engine/getAppAuthToken";
 };
 
+// Make sure Unit/Cell/Box URL contains ending slash ('/')  
+Common.preparePersoniumUrl = function(url) {  
+    let tempUrl = url;  
+  
+    if (url.slice(-1) != '/') {  
+        tempUrl = url + '/';  
+    }  
+  
+    return tempUrl;  
+};
+
 // This method checks idle time
 Common.setIdleTime = function() {
     // Create Session Expired Modal
@@ -212,7 +223,7 @@ Common.getTargetBoxURL = function(toCellUrl, toTransAccToken, appCellUrl, callba
             Common.getBoxUrlAPI(toCellUrl, toAppAuthToken.access_token).done(function(data, textStatus, request) {
                 let boxUrl = request.getResponseHeader("Location");
                 if ((typeof callback !== "undefined") && $.isFunction(callback)) {
-                    callback(boxUrl + "/");
+                    callback(Common.preparePersoniumUrl(boxUrl));
                 };
             })
         })
