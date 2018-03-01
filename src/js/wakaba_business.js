@@ -28,7 +28,12 @@ $(document).ready(function() {
         
         Common.refreshToken(function() {
             Common.getBoxUrlAPI().done(function(data, textStatus, request) {
-                let boxUrl = request.getResponseHeader("Location");
+                let tempInfo = {
+                    data: data,
+                    request: request,
+                    targetCellUrl: Common.cellUrl
+                };
+                let boxUrl = Common.getBoxUrlFromResponse(tempInfo);
                 console.log(boxUrl);
                 Common.boxUrl = Common.preparePersoniumUrl(boxUrl);
                 if ((typeof additionalCallback !== "undefined") && $.isFunction(additionalCallback)) {
@@ -54,6 +59,19 @@ function initJqueryI18next() {
         useOptionsAttr: true
     });
 }
+
+/*
+ * Currently the REST API does not support CORS.
+ * Therefore, for CORS case, the default Box name is used.
+ */
+Common.getBoxUrlFromResponse = function(info) {
+    let urlFromHeader = info.request.getResponseHeader("Location");
+    let urlFromBody = info.data.Url;
+    let urlDefaultBox = info.targetCellUrl + APP_BOX_NAME;
+    let boxUrl = urlFromHeader || urlFromBody || urlDefaultBox;
+    
+    return boxUrl;
+};
 
 Common.setAppCellUrl = function() {
     var appUrlSplit = _.first(location.href.split("#")).split("/");
@@ -221,7 +239,12 @@ Common.getTargetBoxURL = function(toCellUrl, toTransAccToken, appCellUrl, callba
     Common.getAppAuthToken(toCellUrl, engineEndPoint).done(function(appToken){
         Common.getToAppAuthToken(toCellUrl, toTransAccToken, appCellUrl, appToken.access_token).done(function(toAppAuthToken){
             Common.getBoxUrlAPI(toCellUrl, toAppAuthToken.access_token).done(function(data, textStatus, request) {
-                let boxUrl = request.getResponseHeader("Location");
+                let tempInfo = {
+                    data: data,
+                    request: request,
+                    targetCellUrl: toCellUrl
+                };
+                let boxUrl = Common.getBoxUrlFromResponse(tempInfo);
                 if ((typeof callback !== "undefined") && $.isFunction(callback)) {
                     callback(Common.preparePersoniumUrl(boxUrl));
                 };
