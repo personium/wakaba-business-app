@@ -1,4 +1,5 @@
 var Common = {};
+const APP_BOX_NAME = 'io_personium_demo_hn-ll-app';
 
 $(document).ready(function() {
     i18next
