@@ -27,7 +27,7 @@ $(document).ready(function() {
             return;
         }
         
-        Common.refreshToken(function() {
+        Common.startOAuth2(function() {
             Common.getBoxUrlAPI().done(function(data, textStatus, request) {
                 let tempInfo = {
                     data: data,
@@ -68,8 +68,7 @@ function initJqueryI18next() {
 Common.getBoxUrlFromResponse = function(info) {
     let urlFromHeader = info.request.getResponseHeader("Location");
     let urlFromBody = info.data.Url;
-    let urlDefaultBox = info.targetCellUrl + APP_BOX_NAME;
-    let boxUrl = urlFromHeader || urlFromBody || urlDefaultBox;
+    let boxUrl = urlFromHeader || urlFromBody;
     
     return boxUrl;
 };
@@ -144,6 +143,9 @@ const APP_URL = "https://demo.personium.io/hn-ll-app/";
 getEngineEndPoint = function() {
     return Common.appUrl + "__/src/Engine/getAppAuthToken";
 };
+getStartOAuth2EngineEndPoint = function() {
+    return Common.appUrl + "__/src/Engine/start_oauth2";
+};
 
 // Make sure Unit/Cell/Box URL contains ending slash ('/')  
 Common.preparePersoniumUrl = function(url) {  
@@ -214,17 +216,35 @@ Common.checkIdleTime = function() {
   }
 };
 
+Common.startOAuth2 = function(callback) {
+    let endPoint = getStartOAuth2EngineEndPoint();
+    let cellUrl = Common.cellUrl;
+    let params = $.param({
+        cellUrl: cellUrl
+    });
+    $.ajax({
+        type: "POST",
+        xhrFields: {
+            withCredentials: true
+        },
+        url: endPoint + "?" + params,
+        headers: {
+            'Accept':'application/json'
+        }
+    }).done(function(appCellToken) {
+        // update sessionStorage
+        Common.updateSessionStorage(appCellToken);
+        if ((typeof callback !== "undefined") && $.isFunction(callback)) {
+            callback();
+        };
+    }).fail(function(error) {
+        console.log(error.responseJSON);
+    });
+}
 Common.refreshToken = function(callback) {
     Common.getAppAuthToken(Common.cellUrl, getEngineEndPoint()).done(function(appToken) {
         Common.refreshTokenAPI(appToken.access_token).done(function(data) {
-            Common.token = data.access_token;
-            Common.refToken = data.refresh_token;
-            Common.expires = data.expires_in;
-            Common.refExpires = data.refresh_token_expires_in;
-            sessionStorage.setItem("ISToken", data.access_token);
-            sessionStorage.setItem("ISRefToken", data.refresh_token);
-            sessionStorage.setItem("ISExpires", data.expires_in);
-            sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
+            Common.updateSessionStorage(data);
 
             if ((typeof callback !== "undefined") && $.isFunction(callback)) {
                 callback();
@@ -234,6 +254,16 @@ Common.refreshToken = function(callback) {
         });
     });
 };
+Common.updateSessionStorage = function(data) {
+    Common.token = data.access_token;
+    Common.refToken = data.refresh_token;
+    Common.expires = data.expires_in;
+    Common.refExpires = data.refresh_token_expires_in;
+    sessionStorage.setItem("ISToken", data.access_token);
+    sessionStorage.setItem("ISRefToken", data.refresh_token);
+    sessionStorage.setItem("ISExpires", data.expires_in);
+    sessionStorage.setItem("ISRefExpires", data.refresh_token_expires_in);
+}
 
 Common.getTargetBoxURL = function(toCellUrl, toTransAccToken, appCellUrl, callback) {
     let engineEndPoint = appCellUrl + "__/html/Engine/getAppAuthToken";
