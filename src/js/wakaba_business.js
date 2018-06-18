@@ -239,6 +239,7 @@ Common.startOAuth2 = function(callback) {
         };
     }).fail(function(error) {
         console.log(error.responseJSON);
+        $('#modal-session-expired').modal('show');
     });
 }
 Common.refreshToken = function(callback) {
