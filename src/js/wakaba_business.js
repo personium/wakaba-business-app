@@ -307,7 +307,10 @@ Common.getToAppAuthToken = function(cellUrl, transAccToken, appCellUrl, appCellT
             client_id: appCellUrl,
             client_secret: appCellToken
         },
-        header: {'Accept':'application/json'}
+        header: {
+            'Accept':'application/json',
+            'content-type': 'application/x-www-form-urlencoded'
+        }
     });
 }
 
@@ -323,7 +326,10 @@ Common.refreshTokenAPI = function(appCellToken) {
                client_id: Common.appUrl,
                client_secret: appCellToken
         },
-        headers: {'Accept':'application/json'}
+        headers: {
+            'Accept':'application/json',
+            'content-type': 'application/x-www-form-urlencoded'
+        }
     })
 };
 
@@ -338,7 +344,10 @@ Common.getTargetToken = function(extCellUrl) {
                         refresh_token: Common.refToken,
                         p_target: extCellUrl
                 },
-		headers: {'Accept':'application/json'}
+		headers: {
+            'Accept':'application/json',
+            'content-type': 'application/x-www-form-urlencoded'
+        }
          });
 };
 
